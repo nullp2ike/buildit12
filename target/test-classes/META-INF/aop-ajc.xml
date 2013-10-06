@@ -1,5 +1,17 @@
 <aspectj>
 <aspects>
+<aspect name="cs.ut.domain.PlantHireRequestIntegrationTest_Roo_Configurable"/>
+<aspect name="cs.ut.domain.PlantDataOnDemand_Roo_DataOnDemand"/>
+<aspect name="cs.ut.domain.SiteEngineerDataOnDemand_Roo_DataOnDemand"/>
+<aspect name="cs.ut.domain.PlantIntegrationTest_Roo_Configurable"/>
+<aspect name="cs.ut.domain.PlantHireRequestIntegrationTest_Roo_IntegrationTest"/>
+<aspect name="cs.ut.domain.PlantIntegrationTest_Roo_IntegrationTest"/>
+<aspect name="cs.ut.domain.PlantHireRequestDataOnDemand_Roo_DataOnDemand"/>
+<aspect name="cs.ut.domain.SiteEngineerIntegrationTest_Roo_Configurable"/>
+<aspect name="cs.ut.domain.PlantHireRequestDataOnDemand_Roo_Configurable"/>
+<aspect name="cs.ut.domain.PlantDataOnDemand_Roo_Configurable"/>
+<aspect name="cs.ut.domain.SiteEngineerDataOnDemand_Roo_Configurable"/>
+<aspect name="cs.ut.domain.SiteEngineerIntegrationTest_Roo_IntegrationTest"/>
 </aspects>
 </aspectj>
 

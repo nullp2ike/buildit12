@@ -4,3 +4,26 @@ project --topLevelPackage cs.ut --projectName Buildit --java 7 --packaging JAR
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-03 12:31:36
 jpa setup --database POSTGRES --provider HIBERNATE --databaseName myDB --userName postgres --password q1w2e3r4
 web mvc setup
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-03 14:03:34
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-06 14:44:38
+entity jpa --class ~.domain.SiteEngineer --testAutomatically
+field string --fieldName name
+field number --fieldName vatNumber --type int
+entity jpa --class ~.domain.Plant --testAutomatically
+field string --fieldName name
+field string --fieldName description
+field number --fieldName identifier --type int --notNull 
+field number --fieldName pricePerDay --type float
+entity jpa --class ~.domain.PlantHireRequest --testAutomatically
+field date --fieldName startDate --type java.util.Date
+field date --fieldName endDate --type java.util.Date
+field number --fieldName totalCost --type float 
+field string --fieldName supplier 
+field string --fieldName siteName
+field string --fieldName siteEngineerName
+field reference --fieldName siteEngineer --type ~.domain.SiteEngineer --cardinality MANY_TO_ONE 
+// [failed] field reference --fieldName plant --type ~.domain.Plant --cardinality ONE_TO_MANY
+// [failed] field reference --fieldName plant --type ~.domain.Plant --cardinality ONE_TO_MANY 
+field reference --fieldName plant --type ~.domain.Plant --cardinality MANY_TO_ONE
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 15:26:28
