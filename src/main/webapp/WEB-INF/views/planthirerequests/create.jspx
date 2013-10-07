@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_cs_ut_domain_PlantHireRequest" modelAttribute="plantHireRequest" path="/planthirerequests" render="${empty dependencies}" z="g/4BZG5pF40gHrmjvh19GFsRrvQ=">
+        <field:datetime dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="c_cs_ut_domain_PlantHireRequest_startDate" z="hJHybbaZ1pVV0nijIi0M8Mwmxhk="/>
+        <field:datetime dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="c_cs_ut_domain_PlantHireRequest_endDate" z="NG/uXVe0Dw6gSkXn1iR1U3hMNwY="/>
+        <field:input field="totalCost" id="c_cs_ut_domain_PlantHireRequest_totalCost" z="lrYkRaAozm9TDlR2fJcrIVhNok4="/>
+        <field:input field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" z="FX+jJx/ajALT9XhjzApDNqiNovo="/>
+        <field:input field="siteName" id="c_cs_ut_domain_PlantHireRequest_siteName" z="KJLl8uYNJEgCNGr1wXBwKtHMTFk="/>
+        <field:select field="siteEngineer" id="c_cs_ut_domain_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" z="At4ObGVBXaXbMwUKd2MRQYzI//o="/>
+        <field:select field="plant" id="c_cs_ut_domain_PlantHireRequest_plant" itemValue="id" items="${plants}" path="/plants" z="PMu/i//PJ9uNfDvD3pCwp1wq7Zk="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_cs_ut_domain_PlantHireRequest" render="${not empty dependencies}" z="shLeCRbq6YOqAVqqd1/pcNyNj98="/>
+</div>

@@ -5,14 +5,11 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import java.util.Date;
 
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString

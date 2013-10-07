@@ -27,3 +27,39 @@ field reference --fieldName siteEngineer --type ~.domain.SiteEngineer --cardinal
 field reference --fieldName plant --type ~.domain.Plant --cardinality MANY_TO_ONE
 perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 15:26:28
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-06 20:14:45
+perform tests
+perform tests
+// [failed] database introspect --schema public
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.wrapping.postgresql-jdbc4
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+addon install id --searchResultId 01
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 23:20:18
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-06 23:20:44
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+database introspect --schema public
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-07 00:27:56
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-07 00:29:13
+perform tests
+database introspect --schema public
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-07 01:09:16
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-07 20:27:16
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-07 22:22:55
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-07 22:42:11
+perform tests
+perform tests
+web mvc scaffold --class ~.domain.PlantController --backingType ~.domain.Plant
+web mvc scaffold --class ~.domain.PlantHireRequestController --backingType ~.domain.PlantHireRequest
+web mvc scaffold --class ~.domain.SiteEngineerController --backingType ~.domain.SiteEngineer

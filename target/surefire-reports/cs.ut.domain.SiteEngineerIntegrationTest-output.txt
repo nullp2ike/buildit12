@@ -1,4 +1,4 @@
-2013-10-06 15:23:46,506 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@137ab64]
+2013-10-07 22:53:14,127 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@df7236]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -46,7 +46,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,570 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@f6d704]
+2013-10-07 22:53:14,162 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@1e33a04]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -94,7 +94,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,627 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@101baf8]
+2013-10-07 22:53:14,199 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@1a7014d]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -142,7 +142,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,676 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@c20307]
+2013-10-07 22:53:14,251 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@199f6e4]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -190,7 +190,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,737 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@190949b]
+2013-10-07 22:53:14,288 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@1076445]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -238,7 +238,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,782 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@177068f]
+2013-10-07 22:53:14,323 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@87ce27]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -286,7 +286,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,835 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@308be6]
+2013-10-07 22:53:14,355 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@1cc8fa3]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -334,7 +334,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,893 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@261c14]
+2013-10-07 22:53:14,388 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@10a35db]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -382,7 +382,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-2013-10-06 15:23:46,980 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@628999] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@ecbb6e]
+2013-10-07 22:53:14,420 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@18eb834] to prepare test instance [cs.ut.domain.SiteEngineerIntegrationTest@1465dd5]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)

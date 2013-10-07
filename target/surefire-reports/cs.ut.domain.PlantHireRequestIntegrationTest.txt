@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cs.ut.domain.PlantHireRequestIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 1.429 sec <<< FAILURE!
-testFlush(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.624 sec  <<< ERROR!
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 0.874 sec <<< FAILURE!
+testFlush(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.372 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -50,7 +50,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testPersist(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.096 sec  <<< ERROR!
+testPersist(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.06 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -98,7 +98,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testFindPlantHireRequestEntries(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.07 sec  <<< ERROR!
+testFindPlantHireRequestEntries(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.051 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -146,7 +146,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testMarkerMethod(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.08 sec  <<< ERROR!
+testMarkerMethod(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.047 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -194,7 +194,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testCountPlantHireRequests(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.083 sec  <<< ERROR!
+testCountPlantHireRequests(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.044 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -242,7 +242,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testMergeUpdate(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.072 sec  <<< ERROR!
+testMergeUpdate(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.045 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -290,7 +290,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testFindPlantHireRequest(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.058 sec  <<< ERROR!
+testFindPlantHireRequest(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.044 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -338,7 +338,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testFindAllPlantHireRequests(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.073 sec  <<< ERROR!
+testFindAllPlantHireRequests(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.042 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -386,7 +386,7 @@ Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Inval
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContextInternal(CacheAwareContextLoaderDelegate.java:64)
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:91)
 	... 31 more
-testRemove(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.07 sec  <<< ERROR!
+testRemove(cs.ut.domain.PlantHireRequestIntegrationTest)  Time elapsed: 0.042 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)

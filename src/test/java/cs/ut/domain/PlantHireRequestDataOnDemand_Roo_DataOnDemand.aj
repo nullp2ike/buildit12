@@ -3,6 +3,7 @@
 
 package cs.ut.domain;
 
+import cs.ut.domain.PlantDataOnDemand;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.SiteEngineerDataOnDemand;
@@ -26,6 +27,9 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     private Random PlantHireRequestDataOnDemand.rnd = new SecureRandom();
     
     private List<PlantHireRequest> PlantHireRequestDataOnDemand.data;
+    
+    @Autowired
+    PlantDataOnDemand PlantHireRequestDataOnDemand.plantDataOnDemand;
     
     @Autowired
     SiteEngineerDataOnDemand PlantHireRequestDataOnDemand.siteEngineerDataOnDemand;
