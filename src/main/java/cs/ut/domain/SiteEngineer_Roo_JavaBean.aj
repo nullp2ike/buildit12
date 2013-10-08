@@ -15,12 +15,4 @@ privileged aspect SiteEngineer_Roo_JavaBean {
         this.name = name;
     }
     
-    public int SiteEngineer.getVatNumber() {
-        return this.vatNumber;
-    }
-    
-    public void SiteEngineer.setVatNumber(int vatNumber) {
-        this.vatNumber = vatNumber;
-    }
-    
 }

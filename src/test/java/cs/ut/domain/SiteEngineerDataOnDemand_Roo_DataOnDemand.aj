@@ -25,18 +25,12 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
     public SiteEngineer SiteEngineerDataOnDemand.getNewTransientSiteEngineer(int index) {
         SiteEngineer obj = new SiteEngineer();
         setName(obj, index);
-        setVatNumber(obj, index);
         return obj;
     }
     
     public void SiteEngineerDataOnDemand.setName(SiteEngineer obj, int index) {
         String name = "name_" + index;
         obj.setName(name);
-    }
-    
-    public void SiteEngineerDataOnDemand.setVatNumber(SiteEngineer obj, int index) {
-        int vatNumber = index;
-        obj.setVatNumber(vatNumber);
     }
     
     public SiteEngineer SiteEngineerDataOnDemand.getSpecificSiteEngineer(int index) {

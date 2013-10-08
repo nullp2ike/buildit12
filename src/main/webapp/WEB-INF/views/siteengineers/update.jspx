@@ -3,7 +3,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cs_ut_domain_SiteEngineer" modelAttribute="siteEngineer" path="/siteengineers" versionField="Version" z="S+mMvjNBNKUUFs0RYHzKoGuytRE=">
-        <field:input field="name" id="c_cs_ut_domain_SiteEngineer_name" z="TgvwugrPAR/MZvvrE/4PUJimmww="/>
-        <field:input field="vatNumber" id="c_cs_ut_domain_SiteEngineer_vatNumber" z="v6aw7pUkFvSrUK3HBUBcMtvlwfY="/>
+        <field:input field="name" id="c_cs_ut_domain_SiteEngineer_name" required="true" z="uUmHCXVQc5fyLcICbGk9ExAutqc="/>
     </form:update>
 </div>

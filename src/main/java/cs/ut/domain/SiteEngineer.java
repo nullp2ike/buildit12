@@ -15,10 +15,4 @@ public class SiteEngineer {
      */
     @NotNull
     private String name;
-
-    /**
-     */
-    @NotNull
-    @Column(unique = true)
-    private int vatNumber;
 }

@@ -4,6 +4,5 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_cs_ut_domain_SiteEngineer" object="${siteengineer}" path="/siteengineers" z="yJp0/wnfo2Y36B3vcKtPgPpCMMo=">
         <field:display field="name" id="s_cs_ut_domain_SiteEngineer_name" object="${siteengineer}" z="ALZltwQ8A2lN9aOaBD/xxZM2bL8="/>
-        <field:display field="vatNumber" id="s_cs_ut_domain_SiteEngineer_vatNumber" object="${siteengineer}" z="7pEuzHCZk8law/RBVQkfkFToxfg="/>
     </page:show>
 </div>

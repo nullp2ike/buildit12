@@ -5,7 +5,6 @@
     <page:list id="pl_cs_ut_domain_SiteEngineer" items="${siteengineers}" z="qj4z4YytOc1mvH3OVjsM1jJZXZI=">
         <table:table data="${siteengineers}" id="l_cs_ut_domain_SiteEngineer" path="/siteengineers" z="5DxUFxsOA4g/vSBPadAbndp+/Bg=">
             <table:column id="c_cs_ut_domain_SiteEngineer_name" property="name" z="lPCeMswG0aUhqidRWwLWeSEi+e8="/>
-            <table:column id="c_cs_ut_domain_SiteEngineer_vatNumber" property="vatNumber" z="CnbPFkZjjHyapa+5yny/66Ud/U8="/>
         </table:table>
     </page:list>
 </div>

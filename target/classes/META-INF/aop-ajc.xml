@@ -1,24 +1,24 @@
 <aspectj>
 <aspects>
 <aspect name="cs.ut.domain.SiteEngineerController_Roo_Controller"/>
-<aspect name="cs.ut.domain.Plant_Roo_Jpa_Entity"/>
 <aspect name="cs.ut.domain.SiteEngineer_Roo_Jpa_ActiveRecord"/>
-<aspect name="cs.ut.domain.Plant_Roo_ToString"/>
 <aspect name="cs.ut.domain.SiteEngineer_Roo_JavaBean"/>
-<aspect name="cs.ut.domain.SiteEngineer_Roo_Configurable"/>
 <aspect name="cs.ut.domain.PlantHireRequestController_Roo_Controller"/>
 <aspect name="cs.ut.domain.PlantController_Roo_Controller"/>
+<aspect name="cs.ut.domain.SiteEngineer_Roo_ToString"/>
+<aspect name="cs.ut.domain.Plant_Roo_Jpa_Entity"/>
+<aspect name="cs.ut.domain.Plant_Roo_ToString"/>
+<aspect name="cs.ut.domain.SiteEngineer_Roo_Configurable"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_JavaBean"/>
 <aspect name="cs.ut.domain.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_Jpa_ActiveRecord"/>
-<aspect name="cs.ut.domain.SiteEngineer_Roo_ToString"/>
 <aspect name="cs.ut.domain.Plant_Roo_Configurable"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_ToString"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_Configurable"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_Jpa_Entity"/>
-<aspect name="cs.ut.domain.SiteEngineer_Roo_Jpa_Entity"/>
-<aspect name="cs.ut.domain.Plant_Roo_JavaBean"/>
 <aspect name="cs.ut.domain.Plant_Roo_Jpa_ActiveRecord"/>
+<aspect name="cs.ut.domain.Plant_Roo_JavaBean"/>
+<aspect name="cs.ut.domain.SiteEngineer_Roo_Jpa_Entity"/>
 </aspects>
 </aspectj>
 
