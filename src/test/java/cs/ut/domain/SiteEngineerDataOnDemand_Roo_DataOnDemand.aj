@@ -24,13 +24,19 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
     
     public SiteEngineer SiteEngineerDataOnDemand.getNewTransientSiteEngineer(int index) {
         SiteEngineer obj = new SiteEngineer();
-        setName(obj, index);
+        setFirstName(obj, index);
+        setLastName(obj, index);
         return obj;
     }
     
-    public void SiteEngineerDataOnDemand.setName(SiteEngineer obj, int index) {
-        String name = "name_" + index;
-        obj.setName(name);
+    public void SiteEngineerDataOnDemand.setFirstName(SiteEngineer obj, int index) {
+        String firstName = "firstName_" + index;
+        obj.setFirstName(firstName);
+    }
+    
+    public void SiteEngineerDataOnDemand.setLastName(SiteEngineer obj, int index) {
+        String lastName = "lastName_" + index;
+        obj.setLastName(lastName);
     }
     
     public SiteEngineer SiteEngineerDataOnDemand.getSpecificSiteEngineer(int index) {

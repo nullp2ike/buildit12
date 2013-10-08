@@ -7,12 +7,20 @@ import cs.ut.domain.SiteEngineer;
 
 privileged aspect SiteEngineer_Roo_JavaBean {
     
-    public String SiteEngineer.getName() {
-        return this.name;
+    public String SiteEngineer.getFirstName() {
+        return this.firstName;
     }
     
-    public void SiteEngineer.setName(String name) {
-        this.name = name;
+    public void SiteEngineer.setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String SiteEngineer.getLastName() {
+        return this.lastName;
+    }
+    
+    public void SiteEngineer.setLastName(String lastName) {
+        this.lastName = lastName;
     }
     
 }

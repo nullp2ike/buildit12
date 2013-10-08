@@ -14,5 +14,8 @@ public class SiteEngineer {
     /**
      */
     @NotNull
-    private String name;
+    private String firstName;
+    
+    @NotNull
+    private String lastName;
 }
