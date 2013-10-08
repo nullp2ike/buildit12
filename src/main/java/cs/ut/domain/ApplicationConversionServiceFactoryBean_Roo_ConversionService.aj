@@ -18,7 +18,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Plant, String> ApplicationConversionServiceFactoryBean.getPlantToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.Plant, java.lang.String>() {
             public String convert(Plant plant) {
-                return new StringBuilder().append(plant.getName()).append(' ').append(plant.getDescription()).append(' ').append(plant.getIdentifier()).append(' ').append(plant.getPricePerDay()).toString();
+                return new StringBuilder().append(plant.getName()).append(' ').append(plant.getDescription()).append(' ').append(plant.getPricePerDay()).toString();
             }
         };
     }

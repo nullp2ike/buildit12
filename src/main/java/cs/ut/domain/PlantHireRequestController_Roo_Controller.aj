@@ -8,6 +8,8 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestController;
 import cs.ut.domain.SiteEngineer;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -37,6 +39,14 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String PlantHireRequestController.createForm(Model uiModel) {
         populateEditForm(uiModel, new PlantHireRequest());
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (SiteEngineer.countSiteEngineers() == 0) {
+            dependencies.add(new String[] { "siteengineer", "siteengineers" });
+        }
+        if (Plant.countPlants() == 0) {
+            dependencies.add(new String[] { "plant", "plants" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "planthirerequests/create";
     }
     

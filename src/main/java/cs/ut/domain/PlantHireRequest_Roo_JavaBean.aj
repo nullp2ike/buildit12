@@ -6,6 +6,7 @@ package cs.ut.domain;
 import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.SiteEngineer;
+import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect PlantHireRequest_Roo_JavaBean {
@@ -26,11 +27,11 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.endDate = endDate;
     }
     
-    public float PlantHireRequest.getTotalCost() {
+    public BigDecimal PlantHireRequest.getTotalCost() {
         return this.totalCost;
     }
     
-    public void PlantHireRequest.setTotalCost(float totalCost) {
+    public void PlantHireRequest.setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
     }
     

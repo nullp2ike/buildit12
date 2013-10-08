@@ -3,10 +3,13 @@
 
 package cs.ut.domain;
 
+import cs.ut.domain.Plant;
 import cs.ut.domain.PlantDataOnDemand;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
+import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +40,8 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public PlantHireRequest PlantHireRequestDataOnDemand.getNewTransientPlantHireRequest(int index) {
         PlantHireRequest obj = new PlantHireRequest();
         setEndDate(obj, index);
+        setPlant(obj, index);
+        setSiteEngineer(obj, index);
         setSiteName(obj, index);
         setStartDate(obj, index);
         setSupplier(obj, index);
@@ -47,6 +52,16 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setEndDate(PlantHireRequest obj, int index) {
         Date endDate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setEndDate(endDate);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setPlant(PlantHireRequest obj, int index) {
+        Plant plant = plantDataOnDemand.getSpecificPlant(index);
+        obj.setPlant(plant);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setSiteEngineer(PlantHireRequest obj, int index) {
+        SiteEngineer siteEngineer = siteEngineerDataOnDemand.getSpecificSiteEngineer(index);
+        obj.setSiteEngineer(siteEngineer);
     }
     
     public void PlantHireRequestDataOnDemand.setSiteName(PlantHireRequest obj, int index) {
@@ -65,7 +80,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PlantHireRequestDataOnDemand.setTotalCost(PlantHireRequest obj, int index) {
-        float totalCost = new Integer(index).floatValue();
+        BigDecimal totalCost = BigDecimal.valueOf(index);
         obj.setTotalCost(totalCost);
     }
     

@@ -63,3 +63,11 @@ perform tests
 web mvc scaffold --class ~.domain.PlantController --backingType ~.domain.Plant
 web mvc scaffold --class ~.domain.PlantHireRequestController --backingType ~.domain.PlantHireRequest
 web mvc scaffold --class ~.domain.SiteEngineerController --backingType ~.domain.SiteEngineer
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-07 23:27:41
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-08 12:31:59
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-08 13:12:07
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-08 21:56:17
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-08 22:20:01
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-08 22:20:20
+perform tests

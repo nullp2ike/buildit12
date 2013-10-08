@@ -3,12 +3,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cs_ut_domain_PlantHireRequest" modelAttribute="plantHireRequest" path="/planthirerequests" versionField="Version" z="nuswRKeeHVGv4Rp4TWylM8eIAQU=">
-        <field:datetime dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="c_cs_ut_domain_PlantHireRequest_startDate" z="hJHybbaZ1pVV0nijIi0M8Mwmxhk="/>
-        <field:datetime dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="c_cs_ut_domain_PlantHireRequest_endDate" z="NG/uXVe0Dw6gSkXn1iR1U3hMNwY="/>
-        <field:input field="totalCost" id="c_cs_ut_domain_PlantHireRequest_totalCost" z="lrYkRaAozm9TDlR2fJcrIVhNok4="/>
-        <field:input field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" z="FX+jJx/ajALT9XhjzApDNqiNovo="/>
-        <field:input field="siteName" id="c_cs_ut_domain_PlantHireRequest_siteName" z="KJLl8uYNJEgCNGr1wXBwKtHMTFk="/>
-        <field:select field="siteEngineer" id="c_cs_ut_domain_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" z="At4ObGVBXaXbMwUKd2MRQYzI//o="/>
-        <field:select field="plant" id="c_cs_ut_domain_PlantHireRequest_plant" itemValue="id" items="${plants}" path="/plants" z="PMu/i//PJ9uNfDvD3pCwp1wq7Zk="/>
+        <field:datetime dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="c_cs_ut_domain_PlantHireRequest_startDate" required="true" z="fceFkKtPe8Tz9fsMQ8mc1nw2fgE="/>
+        <field:datetime dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="c_cs_ut_domain_PlantHireRequest_endDate" required="true" z="LUqEwy9rjkvF6lYue9S27kJg5ps="/>
+        <field:input field="totalCost" id="c_cs_ut_domain_PlantHireRequest_totalCost" required="true" validationMessageCode="field_invalid_number" z="zMQtjQrqcM9PHp4gEvzA3VO8UAQ="/>
+        <field:input field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" required="true" z="0yvBGfoL6gfCt1NCl5QoTyTiC6A="/>
+        <field:input field="siteName" id="c_cs_ut_domain_PlantHireRequest_siteName" required="true" z="miZz8f7VLllACtVRXADEbxjtAuE="/>
+        <field:select field="siteEngineer" id="c_cs_ut_domain_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" required="true" z="Q+IbkA2c5Nzeoka89pTYZfQLJX4="/>
+        <field:select field="plant" id="c_cs_ut_domain_PlantHireRequest_plant" itemValue="id" items="${plants}" path="/plants" required="true" z="KXyA2yMe4oTdV7/rdD/87Q1YB7I="/>
     </form:update>
 </div>
