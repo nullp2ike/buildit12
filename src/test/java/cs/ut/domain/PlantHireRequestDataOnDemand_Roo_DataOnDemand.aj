@@ -7,8 +7,10 @@ import cs.ut.domain.Plant;
 import cs.ut.domain.PlantDataOnDemand;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
+import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
+import cs.ut.domain.Supplier;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -41,8 +43,8 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         PlantHireRequest obj = new PlantHireRequest();
         setEndDate(obj, index);
         setPlant(obj, index);
+        setSite(obj, index);
         setSiteEngineer(obj, index);
-        setSiteName(obj, index);
         setStartDate(obj, index);
         setSupplier(obj, index);
         setTotalCost(obj, index);
@@ -59,14 +61,14 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         obj.setPlant(plant);
     }
     
+    public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {
+        Site site = null;
+        obj.setSite(site);
+    }
+    
     public void PlantHireRequestDataOnDemand.setSiteEngineer(PlantHireRequest obj, int index) {
         SiteEngineer siteEngineer = siteEngineerDataOnDemand.getSpecificSiteEngineer(index);
         obj.setSiteEngineer(siteEngineer);
-    }
-    
-    public void PlantHireRequestDataOnDemand.setSiteName(PlantHireRequest obj, int index) {
-        String siteName = "siteName_" + index;
-        obj.setSiteName(siteName);
     }
     
     public void PlantHireRequestDataOnDemand.setStartDate(PlantHireRequest obj, int index) {
@@ -75,7 +77,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PlantHireRequestDataOnDemand.setSupplier(PlantHireRequest obj, int index) {
-        String supplier = "supplier_" + index;
+        Supplier supplier = null;
         obj.setSupplier(supplier);
     }
     

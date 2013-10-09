@@ -29,6 +29,7 @@ C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Plant_Roo_JavaBean.aj
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Plant_Roo_Jpa_ActiveRecord.aj
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Plant_Roo_Jpa_Entity.aj
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Plant_Roo_ToString.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Site.java
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineer.java
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineerController.java
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineerController_Roo_Controller.aj
@@ -37,3 +38,14 @@ C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineer_Roo_JavaBean.aj
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineer_Roo_Jpa_ActiveRecord.aj
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineer_Roo_Jpa_Entity.aj
 C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\SiteEngineer_Roo_ToString.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Site_Roo_Configurable.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Site_Roo_JavaBean.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Site_Roo_Jpa_ActiveRecord.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Site_Roo_Jpa_Entity.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Site_Roo_ToString.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Supplier.java
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Supplier_Roo_Configurable.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Supplier_Roo_JavaBean.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Supplier_Roo_Jpa_ActiveRecord.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Supplier_Roo_Jpa_Entity.aj
+C:\STSworkspace\Buildit\src\main\java\cs\ut\domain\Supplier_Roo_ToString.aj

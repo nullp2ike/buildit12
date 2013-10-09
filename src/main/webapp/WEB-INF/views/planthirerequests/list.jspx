@@ -8,8 +8,8 @@
             <table:column date="true" dateTimePattern="${plantHireRequest_enddate_date_format}" id="c_cs_ut_domain_PlantHireRequest_endDate" property="endDate" z="xqI4nB2hubLx9D+oM+ooMtZgvT8="/>
             <table:column id="c_cs_ut_domain_PlantHireRequest_totalCost" property="totalCost" z="9d/t+raLkpf3OCREvYoP0s1q6Ck="/>
             <table:column id="c_cs_ut_domain_PlantHireRequest_supplier" property="supplier" z="cCqdfqlm0m+cdy6XM2vOp6XZrYE="/>
-            <table:column id="c_cs_ut_domain_PlantHireRequest_siteName" property="siteName" z="Q+CovBeW0kwHNYqSA9wyuX36QhY="/>
             <table:column id="c_cs_ut_domain_PlantHireRequest_siteEngineer" property="siteEngineer" z="JVUavfV+t+Pims+sxpwyhd1RKvA="/>
+            <table:column id="c_cs_ut_domain_PlantHireRequest_site" property="site" z="8Ro/D9jUoQDrq8a4P1v9kub7QRU="/>
         </table:table>
     </page:list>
 </div>

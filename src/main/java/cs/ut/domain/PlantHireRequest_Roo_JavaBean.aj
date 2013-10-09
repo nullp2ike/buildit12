@@ -5,7 +5,9 @@ package cs.ut.domain;
 
 import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
+import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
+import cs.ut.domain.Supplier;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -35,20 +37,20 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.totalCost = totalCost;
     }
     
-    public String PlantHireRequest.getSupplier() {
+    public Supplier PlantHireRequest.getSupplier() {
         return this.supplier;
     }
     
-    public void PlantHireRequest.setSupplier(String supplier) {
+    public void PlantHireRequest.setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
     
-    public String PlantHireRequest.getSiteName() {
-        return this.siteName;
+    public Site PlantHireRequest.getSite() {
+        return this.site;
     }
     
-    public void PlantHireRequest.setSiteName(String siteName) {
-        this.siteName = siteName;
+    public void PlantHireRequest.setSite(Site site) {
+        this.site = site;
     }
     
     public SiteEngineer PlantHireRequest.getSiteEngineer() {

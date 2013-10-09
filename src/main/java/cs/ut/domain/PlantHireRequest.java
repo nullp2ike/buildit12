@@ -40,12 +40,12 @@ public class PlantHireRequest {
     /**
      */
     @NotNull
-    private String supplier;
+    private Supplier supplier;
 
     /**
      */
     @NotNull
-    private String siteName;
+    private Site site;
 
     /**
      */

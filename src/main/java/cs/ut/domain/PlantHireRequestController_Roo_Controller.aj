@@ -6,7 +6,9 @@ package cs.ut.domain;
 import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestController;
+import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
+import cs.ut.domain.Supplier;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,12 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     public String PlantHireRequestController.createForm(Model uiModel) {
         populateEditForm(uiModel, new PlantHireRequest());
         List<String[]> dependencies = new ArrayList<String[]>();
+        if (Supplier.countSuppliers() == 0) {
+            dependencies.add(new String[] { "supplier", "suppliers" });
+        }
+        if (Site.countSites() == 0) {
+            dependencies.add(new String[] { "site", "sites" });
+        }
         if (SiteEngineer.countSiteEngineers() == 0) {
             dependencies.add(new String[] { "siteengineer", "siteengineers" });
         }
@@ -109,7 +117,9 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("plants", Plant.findAllPlants());
+        uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
+        uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());
     }
     
     String PlantHireRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
