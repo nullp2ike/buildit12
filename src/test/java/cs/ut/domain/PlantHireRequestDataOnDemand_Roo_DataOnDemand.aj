@@ -8,9 +8,11 @@ import cs.ut.domain.PlantDataOnDemand;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.Site;
+import cs.ut.domain.SiteDataOnDemand;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
 import cs.ut.domain.Supplier;
+import cs.ut.domain.SupplierDataOnDemand;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -37,7 +39,13 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     PlantDataOnDemand PlantHireRequestDataOnDemand.plantDataOnDemand;
     
     @Autowired
+    SiteDataOnDemand PlantHireRequestDataOnDemand.siteDataOnDemand;
+    
+    @Autowired
     SiteEngineerDataOnDemand PlantHireRequestDataOnDemand.siteEngineerDataOnDemand;
+    
+    @Autowired
+    SupplierDataOnDemand PlantHireRequestDataOnDemand.supplierDataOnDemand;
     
     public PlantHireRequest PlantHireRequestDataOnDemand.getNewTransientPlantHireRequest(int index) {
         PlantHireRequest obj = new PlantHireRequest();
@@ -62,7 +70,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {
-        Site site = null;
+        Site site = siteDataOnDemand.getSpecificSite(index);
         obj.setSite(site);
     }
     
@@ -77,7 +85,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PlantHireRequestDataOnDemand.setSupplier(PlantHireRequest obj, int index) {
-        Supplier supplier = null;
+        Supplier supplier = supplierDataOnDemand.getSpecificSupplier(index);
         obj.setSupplier(supplier);
     }
     

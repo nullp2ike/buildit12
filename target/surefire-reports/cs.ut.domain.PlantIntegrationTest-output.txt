@@ -1,4 +1,4 @@
-2013-10-10 02:07:42,087 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@10d1462]
+2013-10-10 02:53:17,156 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@18caa19]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -70,7 +70,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:42,321 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@1b74334]
+2013-10-10 02:53:17,377 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@139a76]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -142,7 +142,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:42,514 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@a2314d]
+2013-10-10 02:53:17,566 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@1e9cc0e]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -214,7 +214,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:42,701 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@192f6c3]
+2013-10-10 02:53:17,759 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@c1f860]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -286,7 +286,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:42,893 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@280206]
+2013-10-10 02:53:17,957 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@9685ab]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -358,7 +358,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:43,077 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@1c69d74]
+2013-10-10 02:53:18,179 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@273e89]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -430,7 +430,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:43,270 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@178d5c1]
+2013-10-10 02:53:18,375 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@13ab162]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -502,7 +502,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:43,455 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@1bd0bd4]
+2013-10-10 02:53:18,563 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@ab39e5]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -574,7 +574,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-2013-10-10 02:07:43,674 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@de7dad] to prepare test instance [cs.ut.domain.PlantIntegrationTest@1ac978a]
+2013-10-10 02:53:18,747 [main] ERROR org.springframework.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@79d110] to prepare test instance [cs.ut.domain.PlantIntegrationTest@17ec23b]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)

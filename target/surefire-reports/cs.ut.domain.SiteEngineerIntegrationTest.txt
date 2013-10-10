@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cs.ut.domain.SiteEngineerIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 1.685 sec <<< FAILURE!
-testCountSiteEngineers(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.181 sec  <<< ERROR!
+Tests run: 9, Failures: 0, Errors: 9, Skipped: 0, Time elapsed: 1.772 sec <<< FAILURE!
+testCountSiteEngineers(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.183 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -74,7 +74,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testFindAllSiteEngineers(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.185 sec  <<< ERROR!
+testFindAllSiteEngineers(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.182 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -146,7 +146,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testFlush(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.185 sec  <<< ERROR!
+testFlush(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.219 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -218,7 +218,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testPersist(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.217 sec  <<< ERROR!
+testPersist(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.184 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -290,7 +290,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testMarkerMethod(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.177 sec  <<< ERROR!
+testMarkerMethod(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.183 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -362,7 +362,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testFindSiteEngineer(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.179 sec  <<< ERROR!
+testFindSiteEngineer(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.184 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -434,7 +434,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testMergeUpdate(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.187 sec  <<< ERROR!
+testMergeUpdate(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.204 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -506,7 +506,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testFindSiteEngineerEntries(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.19 sec  <<< ERROR!
+testFindSiteEngineerEntries(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.244 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)
@@ -578,7 +578,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: cs.ut.d
 	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
 	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
 	... 52 more
-testRemove(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.183 sec  <<< ERROR!
+testRemove(cs.ut.domain.SiteEngineerIntegrationTest)  Time elapsed: 0.186 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.CacheAwareContextLoaderDelegate.loadContext(CacheAwareContextLoaderDelegate.java:99)
 	at org.springframework.test.context.TestContext.getApplicationContext(TestContext.java:122)

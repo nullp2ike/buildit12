@@ -39,11 +39,13 @@ public class PlantHireRequest {
 
     /**
      */
+    @OneToOne
     @NotNull
     private Supplier supplier;
 
     /**
      */
+    @OneToOne
     @NotNull
     private Site site;
 

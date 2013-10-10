@@ -6,7 +6,9 @@ package cs.ut.domain;
 import cs.ut.domain.ApplicationConversionServiceFactoryBean;
 import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
+import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
+import cs.ut.domain.Supplier;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -63,6 +65,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Site, String> ApplicationConversionServiceFactoryBean.getSiteToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cs.ut.domain.Site, java.lang.String>() {
+            public String convert(Site site) {
+                return new StringBuilder().append(site.getName()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Site> ApplicationConversionServiceFactoryBean.getIdToSiteConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.domain.Site>() {
+            public cs.ut.domain.Site convert(java.lang.Long id) {
+                return Site.findSite(id);
+            }
+        };
+    }
+    
+    public Converter<String, Site> ApplicationConversionServiceFactoryBean.getStringToSiteConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cs.ut.domain.Site>() {
+            public cs.ut.domain.Site convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Site.class);
+            }
+        };
+    }
+    
     public Converter<SiteEngineer, String> ApplicationConversionServiceFactoryBean.getSiteEngineerToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.SiteEngineer, java.lang.String>() {
             public String convert(SiteEngineer siteEngineer) {
@@ -87,6 +113,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Supplier, String> ApplicationConversionServiceFactoryBean.getSupplierToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cs.ut.domain.Supplier, java.lang.String>() {
+            public String convert(Supplier supplier) {
+                return new StringBuilder().append(supplier.getName()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Supplier> ApplicationConversionServiceFactoryBean.getIdToSupplierConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.domain.Supplier>() {
+            public cs.ut.domain.Supplier convert(java.lang.Long id) {
+                return Supplier.findSupplier(id);
+            }
+        };
+    }
+    
+    public Converter<String, Supplier> ApplicationConversionServiceFactoryBean.getStringToSupplierConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cs.ut.domain.Supplier>() {
+            public cs.ut.domain.Supplier convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Supplier.class);
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getPlantToStringConverter());
         registry.addConverter(getIdToPlantConverter());
@@ -94,9 +144,15 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPlantHireRequestToStringConverter());
         registry.addConverter(getIdToPlantHireRequestConverter());
         registry.addConverter(getStringToPlantHireRequestConverter());
+        registry.addConverter(getSiteToStringConverter());
+        registry.addConverter(getIdToSiteConverter());
+        registry.addConverter(getStringToSiteConverter());
         registry.addConverter(getSiteEngineerToStringConverter());
         registry.addConverter(getIdToSiteEngineerConverter());
         registry.addConverter(getStringToSiteEngineerConverter());
+        registry.addConverter(getSupplierToStringConverter());
+        registry.addConverter(getIdToSupplierConverter());
+        registry.addConverter(getStringToSupplierConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

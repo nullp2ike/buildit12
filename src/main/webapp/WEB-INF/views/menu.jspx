@@ -15,5 +15,13 @@
             <menu:item id="i_siteengineer_new" messageCode="global_menu_new" url="/siteengineers?form" z="73MDcGEekK1/OA5vq9yOzuGF2bw="/>
             <menu:item id="i_siteengineer_list" messageCode="global_menu_list" url="/siteengineers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+9FMZynjARRy/GppxBem/QpLUFc="/>
         </menu:category>
+        <menu:category id="c_site" z="5Z1+wiUVSVPmsN5fCUOfHNSOnaE=">
+            <menu:item id="i_site_new" messageCode="global_menu_new" url="/sites?form" z="ewAqg8Z+CTUpvmsxXaCRBnq6+TU="/>
+            <menu:item id="i_site_list" messageCode="global_menu_list" url="/sites?page=1&amp;size=${empty param.size ? 10 : param.size}" z="vhoCo6kXZ4paxcavA4SM71sw7EQ="/>
+        </menu:category>
+        <menu:category id="c_supplier" z="8IYgP9HBdyozOk+Ymf37zKa+fNc=">
+            <menu:item id="i_supplier_new" messageCode="global_menu_new" url="/suppliers?form" z="48D4zeaX6ENxXujfvnWrtY5odlQ="/>
+            <menu:item id="i_supplier_list" messageCode="global_menu_list" url="/suppliers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="m3iWO9PZ5+HPrY21osNhms/WqIE="/>
+        </menu:category>
     </menu:menu>
 </div>
