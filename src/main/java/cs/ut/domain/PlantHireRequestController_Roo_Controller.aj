@@ -42,17 +42,14 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     public String PlantHireRequestController.createForm(Model uiModel) {
         populateEditForm(uiModel, new PlantHireRequest());
         List<String[]> dependencies = new ArrayList<String[]>();
-        if (Supplier.countSuppliers() == 0) {
-            dependencies.add(new String[] { "supplier", "suppliers" });
-        }
-        if (Site.countSites() == 0) {
-            dependencies.add(new String[] { "site", "sites" });
-        }
         if (SiteEngineer.countSiteEngineers() == 0) {
             dependencies.add(new String[] { "siteengineer", "siteengineers" });
         }
         if (Plant.countPlants() == 0) {
             dependencies.add(new String[] { "plant", "plants" });
+        }
+        if (Site.countSites() == 0) {
+            dependencies.add(new String[] { "site", "sites" });
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "planthirerequests/create";

@@ -87,3 +87,8 @@ perform tests
 perform tests
 web mvc scaffold --class ~.domain.SiteController --backingType ~.domain.Site
 web mvc scaffold --class ~.domain.SupplierController --backingType ~.domain.Supplier
+focus --class ~.domain.PlantHireRequestController
+focus --class ~.domain.PlantHireRequest
+// [failed] field reference --fieldName site --type ~.domain.Site --cardinality ONE_TO_ONE 
+field reference --fieldName site --type ~.domain.Site --cardinality ONE_TO_ONE 
+field reference --fieldName supplier --type ~.domain.Supplier --cardinality ONE_TO_ONE 

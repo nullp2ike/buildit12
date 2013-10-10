@@ -6,9 +6,9 @@
         <field:display date="true" dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="s_cs_ut_domain_PlantHireRequest_startDate" object="${planthirerequest}" z="iuBFioCT98kP3ZkyGnVKx35fJZI="/>
         <field:display date="true" dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="s_cs_ut_domain_PlantHireRequest_endDate" object="${planthirerequest}" z="TAG8pCAk8NxLWpmkSeCAnH6pdo0="/>
         <field:display field="totalCost" id="s_cs_ut_domain_PlantHireRequest_totalCost" object="${planthirerequest}" z="88Z9UpO26krqXl2vD1NPz1dA+Gc="/>
-        <field:display field="supplier" id="s_cs_ut_domain_PlantHireRequest_supplier" object="${planthirerequest}" z="WEUGEr3aD7WrZXlOc+6K2lIKhmU="/>
         <field:display field="siteEngineer" id="s_cs_ut_domain_PlantHireRequest_siteEngineer" object="${planthirerequest}" z="yaLH6FdyNa2juiTHS80nS81j9I4="/>
         <field:display field="plant" id="s_cs_ut_domain_PlantHireRequest_plant" object="${planthirerequest}" z="3N3BeEJwZVBxFG9ox6jqwLsxr9E="/>
         <field:display field="site" id="s_cs_ut_domain_PlantHireRequest_site" object="${planthirerequest}" z="Ju28sVV2D0lvIw5E1/b85em7ksE="/>
+        <field:display field="supplier" id="s_cs_ut_domain_PlantHireRequest_supplier" object="${planthirerequest}" z="WEUGEr3aD7WrZXlOc+6K2lIKhmU="/>
     </page:show>
 </div>

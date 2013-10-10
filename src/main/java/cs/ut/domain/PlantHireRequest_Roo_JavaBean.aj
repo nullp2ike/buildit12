@@ -37,22 +37,6 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.totalCost = totalCost;
     }
     
-    public Supplier PlantHireRequest.getSupplier() {
-        return this.supplier;
-    }
-    
-    public void PlantHireRequest.setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-    
-    public Site PlantHireRequest.getSite() {
-        return this.site;
-    }
-    
-    public void PlantHireRequest.setSite(Site site) {
-        this.site = site;
-    }
-    
     public SiteEngineer PlantHireRequest.getSiteEngineer() {
         return this.siteEngineer;
     }
@@ -67,6 +51,22 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setPlant(Plant plant) {
         this.plant = plant;
+    }
+    
+    public Site PlantHireRequest.getSite() {
+        return this.site;
+    }
+    
+    public void PlantHireRequest.setSite(Site site) {
+        this.site = site;
+    }
+    
+    public Supplier PlantHireRequest.getSupplier() {
+        return this.supplier;
+    }
+    
+    public void PlantHireRequest.setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
     
 }

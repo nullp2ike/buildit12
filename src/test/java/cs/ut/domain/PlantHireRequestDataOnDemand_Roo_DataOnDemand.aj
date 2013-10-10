@@ -11,7 +11,6 @@ import cs.ut.domain.Site;
 import cs.ut.domain.SiteDataOnDemand;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
-import cs.ut.domain.Supplier;
 import cs.ut.domain.SupplierDataOnDemand;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -54,7 +53,6 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
-        setSupplier(obj, index);
         setTotalCost(obj, index);
         return obj;
     }
@@ -82,11 +80,6 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setStartDate(PlantHireRequest obj, int index) {
         Date startDate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setStartDate(startDate);
-    }
-    
-    public void PlantHireRequestDataOnDemand.setSupplier(PlantHireRequest obj, int index) {
-        Supplier supplier = supplierDataOnDemand.getSpecificSupplier(index);
-        obj.setSupplier(supplier);
     }
     
     public void PlantHireRequestDataOnDemand.setTotalCost(PlantHireRequest obj, int index) {
