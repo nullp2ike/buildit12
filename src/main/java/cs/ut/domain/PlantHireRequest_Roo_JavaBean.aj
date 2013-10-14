@@ -3,7 +3,6 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -45,12 +44,12 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.siteEngineer = siteEngineer;
     }
     
-    public Plant PlantHireRequest.getPlant() {
-        return this.plant;
+    public int PlantHireRequest.getPlantId() {
+        return this.plantId;
     }
     
-    public void PlantHireRequest.setPlant(Plant plant) {
-        this.plant = plant;
+    public void PlantHireRequest.setPlantId(int plantId) {
+        this.plantId = plantId;
     }
     
     public Site PlantHireRequest.getSite() {

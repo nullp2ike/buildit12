@@ -3,7 +3,6 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestController;
 import cs.ut.domain.Site;
@@ -44,9 +43,6 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         List<String[]> dependencies = new ArrayList<String[]>();
         if (SiteEngineer.countSiteEngineers() == 0) {
             dependencies.add(new String[] { "siteengineer", "siteengineers" });
-        }
-        if (Plant.countPlants() == 0) {
-            dependencies.add(new String[] { "plant", "plants" });
         }
         if (Site.countSites() == 0) {
             dependencies.add(new String[] { "site", "sites" });
@@ -113,7 +109,6 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     void PlantHireRequestController.populateEditForm(Model uiModel, PlantHireRequest plantHireRequest) {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("plants", Plant.findAllPlants());
         uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
         uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());

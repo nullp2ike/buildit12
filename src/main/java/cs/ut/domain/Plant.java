@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
 public class Plant {
 
     /**

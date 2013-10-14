@@ -3,8 +3,6 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.Plant;
-import cs.ut.domain.PlantDataOnDemand;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.Site;
@@ -35,9 +33,6 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     private List<PlantHireRequest> PlantHireRequestDataOnDemand.data;
     
     @Autowired
-    PlantDataOnDemand PlantHireRequestDataOnDemand.plantDataOnDemand;
-    
-    @Autowired
     SiteDataOnDemand PlantHireRequestDataOnDemand.siteDataOnDemand;
     
     @Autowired
@@ -49,7 +44,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public PlantHireRequest PlantHireRequestDataOnDemand.getNewTransientPlantHireRequest(int index) {
         PlantHireRequest obj = new PlantHireRequest();
         setEndDate(obj, index);
-        setPlant(obj, index);
+        setPlantId(obj, index);
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
@@ -62,18 +57,18 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         obj.setEndDate(endDate);
     }
     
-    public void PlantHireRequestDataOnDemand.setPlant(PlantHireRequest obj, int index) {
-        Plant plant = plantDataOnDemand.getSpecificPlant(index);
-        obj.setPlant(plant);
+    public void PlantHireRequestDataOnDemand.setPlantId(PlantHireRequest obj, int index) {
+        int plantId = index;
+        obj.setPlantId(plantId);
     }
     
     public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {
-        Site site = siteDataOnDemand.getSpecificSite(index);
+        Site site = siteDataOnDemand.getRandomSite();
         obj.setSite(site);
     }
     
     public void PlantHireRequestDataOnDemand.setSiteEngineer(PlantHireRequest obj, int index) {
-        SiteEngineer siteEngineer = siteEngineerDataOnDemand.getSpecificSiteEngineer(index);
+        SiteEngineer siteEngineer = siteEngineerDataOnDemand.getRandomSiteEngineer();
         obj.setSiteEngineer(siteEngineer);
     }
     

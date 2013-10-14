@@ -92,3 +92,9 @@ focus --class ~.domain.PlantHireRequest
 // [failed] field reference --fieldName site --type ~.domain.Site --cardinality ONE_TO_ONE 
 field reference --fieldName site --type ~.domain.Site --cardinality ONE_TO_ONE 
 field reference --fieldName supplier --type ~.domain.Supplier --cardinality ONE_TO_ONE 
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-10 12:00:34
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-14 23:26:47
+entity jpa --class ~.domain.PurchaseOrder --testAutomatically
+field reference --fieldName plantHireRequest --type ~.domain.PlantHireRequest --cardinality ONE_TO_ONE 
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-14 23:40:59
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-14 23:54:51

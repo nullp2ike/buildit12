@@ -2,17 +2,17 @@
 <aspects>
 <aspect name="cs.ut.domain.SiteEngineerController_Roo_Controller"/>
 <aspect name="cs.ut.domain.SiteController_Roo_Controller"/>
+<aspect name="cs.ut.domain.PurchaseOrder_Roo_JavaBean"/>
 <aspect name="cs.ut.domain.SiteEngineer_Roo_Jpa_ActiveRecord"/>
+<aspect name="cs.ut.domain.PurchaseOrder_Roo_ToString"/>
 <aspect name="cs.ut.domain.SupplierController_Roo_Controller"/>
 <aspect name="cs.ut.domain.Supplier_Roo_Configurable"/>
 <aspect name="cs.ut.domain.SiteEngineer_Roo_JavaBean"/>
 <aspect name="cs.ut.domain.PlantHireRequestController_Roo_Controller"/>
-<aspect name="cs.ut.domain.PlantController_Roo_Controller"/>
 <aspect name="cs.ut.domain.SiteEngineer_Roo_ToString"/>
 <aspect name="cs.ut.domain.Site_Roo_Configurable"/>
 <aspect name="cs.ut.domain.Site_Roo_Jpa_Entity"/>
 <aspect name="cs.ut.domain.Site_Roo_JavaBean"/>
-<aspect name="cs.ut.domain.Plant_Roo_Jpa_Entity"/>
 <aspect name="cs.ut.domain.Supplier_Roo_Jpa_ActiveRecord"/>
 <aspect name="cs.ut.domain.Supplier_Roo_ToString"/>
 <aspect name="cs.ut.domain.Plant_Roo_ToString"/>
@@ -23,13 +23,11 @@
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_JavaBean"/>
 <aspect name="cs.ut.domain.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_Jpa_ActiveRecord"/>
-<aspect name="cs.ut.domain.Plant_Roo_Configurable"/>
 <aspect name="cs.ut.domain.Supplier_Roo_Jpa_Entity"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_ToString"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_Configurable"/>
 <aspect name="cs.ut.domain.PlantHireRequest_Roo_Jpa_Entity"/>
 <aspect name="cs.ut.domain.SiteEngineer_Roo_Jpa_Entity"/>
-<aspect name="cs.ut.domain.Plant_Roo_Jpa_ActiveRecord"/>
 <aspect name="cs.ut.domain.Plant_Roo_JavaBean"/>
 </aspects>
 </aspectj>
