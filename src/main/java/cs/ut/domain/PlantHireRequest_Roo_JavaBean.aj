@@ -3,6 +3,7 @@
 
 package cs.ut.domain;
 
+import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -66,6 +67,14 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+    
+    public ApprovalStatus PlantHireRequest.getStatus() {
+        return this.status;
+    }
+    
+    public void PlantHireRequest.setStatus(ApprovalStatus status) {
+        this.status = status;
     }
     
 }

@@ -3,6 +3,7 @@
 
 package cs.ut.domain;
 
+import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.Site;
@@ -48,6 +49,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
+        setStatus(obj, index);
         setTotalCost(obj, index);
         return obj;
     }
@@ -75,6 +77,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setStartDate(PlantHireRequest obj, int index) {
         Date startDate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setStartDate(startDate);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setStatus(PlantHireRequest obj, int index) {
+        ApprovalStatus status = ApprovalStatus.class.getEnumConstants()[0];
+        obj.setStatus(status);
     }
     
     public void PlantHireRequestDataOnDemand.setTotalCost(PlantHireRequest obj, int index) {

@@ -10,5 +10,6 @@
         <field:display field="site" id="s_cs_ut_domain_PlantHireRequest_site" object="${planthirerequest}" z="Ju28sVV2D0lvIw5E1/b85em7ksE="/>
         <field:display field="supplier" id="s_cs_ut_domain_PlantHireRequest_supplier" object="${planthirerequest}" z="WEUGEr3aD7WrZXlOc+6K2lIKhmU="/>
         <field:display field="plantId" id="s_cs_ut_domain_PlantHireRequest_plantId" object="${planthirerequest}" z="Xyu0m8sjnQJrJF2PoBUwgPjN07I="/>
+        <field:display field="status" id="s_cs_ut_domain_PlantHireRequest_status" object="${planthirerequest}" z="yiw7Xih5LiptvAop5XvFqOrLQes="/>
     </page:show>
 </div>

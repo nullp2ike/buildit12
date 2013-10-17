@@ -10,6 +10,7 @@
         <field:select field="site" id="c_cs_ut_domain_PlantHireRequest_site" itemValue="id" items="${sites}" path="/sites" required="true" z="F8q8QWI70izxGfn7PE2JeA36pHk="/>
         <field:select field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" itemValue="id" items="${suppliers}" path="/suppliers" z="MQ+6rAH82LKSPG5YNsrdVg5+U6s="/>
         <field:input field="plantId" id="c_cs_ut_domain_PlantHireRequest_plantId" z="RoHck69a2GU6dPZ/WefXjBRkN9o="/>
+        <field:select field="status" id="c_cs_ut_domain_PlantHireRequest_status" items="${approvalstatuses}" path="approvalstatuses" z="oTnQVUOCjpCy9SEp2BgFtVqh1yE="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cs_ut_domain_PlantHireRequest" render="${not empty dependencies}" z="shLeCRbq6YOqAVqqd1/pcNyNj98="/>
 </div>
