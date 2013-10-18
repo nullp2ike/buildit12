@@ -19,6 +19,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.ClientResponse.Status;
 
 import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.LoadTestProperties;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -28,16 +29,17 @@ import cs.ut.domain.Supplier;
 @RooIntegrationTest(entity = PlantHireRequestResource.class)
 public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4SpringContextTests {
 
-	private static final String DOMAIN = "http://buildit12.herokuapp.com";
-	//private static final String DOMAIN = "http://localhost:8080/Buildit";
 	Client client;
 	SiteEngineer sE;
 	Supplier sup;
 	Site s;
+	String app_url;
 	
     @Before
     public void setUp(){
     	client = Client.create();
+    	LoadTestProperties props = new LoadTestProperties();
+    	app_url = props.loadProperty("webappurl");
     }
     
     private void setRequiredTables(String siteName, String supplierName, String engFirst, String engLast){
@@ -85,7 +87,7 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	phrResource.setSupplier(sup);
     	phrResource.setStatus(ApprovalStatus.PENDING);
     	
-    	WebResource webResource = client.resource(DOMAIN + "/rest/phr");
+    	WebResource webResource = client.resource(app_url + "/rest/phr");
     	
     	ClientResponse postResponse = webResource.type(MediaType.APPLICATION_XML)
     			.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, phrResource);
@@ -110,7 +112,7 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	phrResource.setSupplier(sup);
     	phrResource.setStatus(ApprovalStatus.APPROVED);
     	
-    	WebResource webResource = client.resource(DOMAIN + "/rest/phr/" + String.valueOf(phrId));
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + String.valueOf(phrId));
     	ClientResponse clientResponse = webResource.type(MediaType.APPLICATION_XML)
     			.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, phrResource);
     	assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
@@ -123,7 +125,7 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	long phrId = setPlantHireRequest(100);
     	PlantHireRequestResourceStatus phrResource = new PlantHireRequestResourceStatus();
     	phrResource.setStatus(ApprovalStatus.CANCELED);
-    	WebResource webResource = client.resource(DOMAIN + "/rest/phr/" + String.valueOf(phrId) + "/cancel");
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + String.valueOf(phrId) + "/cancel");
     	ClientResponse clientResponse = webResource.type(MediaType.APPLICATION_XML)
     			.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, phrResource);
     	assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
@@ -134,7 +136,7 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     public void testGetStatusOfPlantHireRequest(){
     	setRequiredTables("Check Status", "Supplier4", "FirstName4", "LastName4");
     	long phrId = setPlantHireRequest(100);
-    	WebResource webResource = client.resource(DOMAIN + "/rest/phr/" + String.valueOf(phrId) + "/status");
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + String.valueOf(phrId) + "/status");
       	ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
     			.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
     	assertTrue(response.getStatus() == Status.OK.getStatusCode());
