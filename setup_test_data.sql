@@ -1,1 +1,4 @@
-insert into public.site_engineer VALUES (1000, 'FirstName2', 'LastName', 0)
+truncate site_engineer, plant_hire_request, site, supplier;
+insert into site_engineer VALUES (0, 'FirstName', 'LastName', 0);
+insert into site VALUES (0, 'SiteName', 0);
+insert into supplier VALUES (0, 'SupplierName', 0);

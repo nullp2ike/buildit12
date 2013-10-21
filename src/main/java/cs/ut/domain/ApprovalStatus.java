@@ -2,6 +2,6 @@ package cs.ut.domain;
 
 public enum ApprovalStatus {
 	
-	PENDING, APPROVED, REJECTED, CANCELED
+	PENDING_APPROVAL, REJECTED, CANCELED, APPROVED
 
 }

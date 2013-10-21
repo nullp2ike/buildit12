@@ -13,6 +13,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import cs.ut.util.ResourceSupport;
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -21,7 +22,7 @@ import cs.ut.domain.Supplier;
 @RooJavaBean
 @RooToString
 @XmlRootElement(name = "plantHireRequest")
-public class PlantHireRequestResource {
+public class PlantHireRequestResource extends ResourceSupport{
 	
 	private BigDecimal totalCost;
 	private Site site;

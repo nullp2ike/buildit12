@@ -1,6 +1,8 @@
 package cs.ut.domain.rest;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
@@ -40,23 +42,17 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	client = Client.create();
     	LoadTestProperties props = new LoadTestProperties();
     	app_url = props.loadProperty("webappurl");
+    	setRequiredTables("Create", "Supplier1", "FirstName1", "LastName1");
     }
     
-    
-	private long getIdFromLocation(URI location) {
-		String locationStr = location.toString();
-		String id = locationStr.substring(locationStr.lastIndexOf("/")+1);
-		return Long.parseLong(id);
-	}
-    
-    private void setRequiredTables(){
+    private void setRequiredTables(String siteName, String supplierName, String engFirst, String engLast){
     	sE = new SiteEngineer();
-    	sE.setFirstName("FirstName");
-    	sE.setLastName("LastName");
+    	sE.setFirstName(engFirst);
+    	sE.setLastName(engLast);
     	s = new Site();
-    	s.setName("SiteName");
+    	s.setName(siteName);
     	sup = new Supplier();
-    	sup.setName("SupplierName");
+    	sup.setName(supplierName);
     	sE.persist();
     	sE.flush();
     	s.persist();
@@ -65,7 +61,6 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	sup.persist();
     }
     
-    /*
     private long setPlantHireRequest(int totalCost){
     	PlantHireRequest phr = new PlantHireRequest();
     	phr.setEndDate(new Date());
@@ -73,46 +68,25 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	phr.setPlantId(1);
     	phr.setSite(s);
     	phr.setSiteEngineer(sE);
-    	phr.setStatus(ApprovalStatus.PENDING);
+    	phr.setStatus(ApprovalStatus.PENDING_APPROVAL);
     	phr.setSupplier(sup);
     	phr.setTotalCost(new BigDecimal(totalCost));
     	phr.persist();
     	phr.flush();
     	return phr.getId();
     }
-    */
-    
-    private long makePlantHireRequest(){    	
-    	PlantHireRequestResource phrResource = new PlantHireRequestResource();
-    	phrResource.setTotalCost(new BigDecimal(3));
-    	phrResource.setSite(s);
-    	phrResource.setEndDate(new Date());
-    	phrResource.setPlantId(0);
-    	phrResource.setSiteEngineer(sE);
-    	phrResource.setStartDate(new Date());
-    	phrResource.setSupplier(sup);
-    	phrResource.setStatus(ApprovalStatus.PENDING);
-    	
-    	WebResource webResource = client.resource(app_url + "/rest/phr");
-    	
-    	ClientResponse postResponse = webResource.type(MediaType.APPLICATION_XML)
-    			.accept(MediaType.APPLICATION_XML).post(ClientResponse.class, phrResource);
-    	return getIdFromLocation(postResponse.getLocation());
-    }
     
     @Test
-    public void testCreatePHR(){
-    	setRequiredTables();
-    	
+    public void testCreatePHR(){    	
     	PlantHireRequestResource phrResource = new PlantHireRequestResource();
     	phrResource.setTotalCost(new BigDecimal(3));
     	phrResource.setSite(s);
     	phrResource.setEndDate(new Date());
-    	phrResource.setPlantId(0);
+    	phrResource.setPlantId(1);
     	phrResource.setSiteEngineer(sE);
     	phrResource.setStartDate(new Date());
     	phrResource.setSupplier(sup);
-    	phrResource.setStatus(ApprovalStatus.PENDING);
+    	phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
     	
     	WebResource webResource = client.resource(app_url + "/rest/phr");
     	
@@ -121,13 +95,12 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	assertTrue(postResponse.getStatus() == Status.CREATED.getStatusCode());
     	long id = getIdFromLocation(postResponse.getLocation());
     	assertTrue(PlantHireRequest.findPlantHireRequest(id).getTotalCost().compareTo(new BigDecimal(3)) == 0);
-    	assertTrue(PlantHireRequest.findPlantHireRequest(id).getSite().getName().equals("SiteName"));
+    	assertTrue(PlantHireRequest.findPlantHireRequest(id).getSite().getName().equals("Create"));
     }
     
     @Test
     public void testUpdatePHR(){
-    	setRequiredTables();
-    	long phrId = makePlantHireRequest();
+    	long phrId = setPlantHireRequest(2);
     	
     	PlantHireRequestResource phrResource = new PlantHireRequestResource();
     	phrResource.setTotalCost(new BigDecimal(3));
@@ -139,7 +112,7 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     	phrResource.setSupplier(sup);
     	phrResource.setStatus(ApprovalStatus.APPROVED);
     	
-    	WebResource webResource = client.resource(app_url + "/rest/phr/" + String.valueOf(phrId));
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + phrId);
     	ClientResponse clientResponse = webResource.type(MediaType.APPLICATION_XML)
     			.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, phrResource);
     	assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
@@ -148,27 +121,39 @@ public class PlantHireRequestResourceIntegrationTest extends AbstractJUnit4Sprin
     
     @Test 
     public void testCancelPHR(){
-    	setRequiredTables();
-    	long phrId = makePlantHireRequest();
-    	PlantHireRequestResourceStatus phrResource = new PlantHireRequestResourceStatus();
-    	phrResource.setStatus(ApprovalStatus.CANCELED);
-    	WebResource webResource = client.resource(app_url + "/rest/phr/" + String.valueOf(phrId) + "/cancel");
+    	long phrId = setPlantHireRequest(100);
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + phrId + "/cancel");
     	ClientResponse clientResponse = webResource.type(MediaType.APPLICATION_XML)
-    			.accept(MediaType.APPLICATION_XML).put(ClientResponse.class, phrResource);
+    			.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
     	assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
     	assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus().equals(ApprovalStatus.CANCELED));
     }
     
     @Test
     public void testGetStatusPHR(){
-    	setRequiredTables();
-    	long phrId = makePlantHireRequest();
-    	WebResource webResource = client.resource(app_url + "/rest/phr/" + String.valueOf(phrId) + "/status");
+    	long phrId = setPlantHireRequest(100);
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + phrId + "/status");
       	ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
     			.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
     	assertTrue(response.getStatus() == Status.OK.getStatusCode());
     	PlantHireRequestResourceStatus status = response.getEntity(PlantHireRequestResourceStatus.class);
-    	assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus().equals(ApprovalStatus.PENDING));
-    	
+    	assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus().equals(ApprovalStatus.PENDING_APPROVAL));
     }
+    
+    @Test
+    public void testGetPHR(){
+    	long phrId = setPlantHireRequest(100);
+    	WebResource webResource = client.resource(app_url + "/rest/phr/" + phrId);
+      	ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
+    			.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+    	assertTrue(response.getStatus() == Status.OK.getStatusCode());
+    	PlantHireRequestResourceStatus status = response.getEntity(PlantHireRequestResourceStatus.class);
+    	assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus().equals(ApprovalStatus.PENDING_APPROVAL));
+    }
+    
+	private long getIdFromLocation(URI location) {
+		String locationStr = location.toString();
+		String id = locationStr.substring(locationStr.lastIndexOf("/")+1);
+		return Long.parseLong(id);
+	}
 }
