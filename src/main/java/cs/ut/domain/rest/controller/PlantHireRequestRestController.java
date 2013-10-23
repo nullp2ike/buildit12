@@ -25,13 +25,13 @@ import com.sun.jersey.api.client.WebResource;
 
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
-import cs.ut.domain.LoadTestProperties;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
+import cs.ut.util.LoadTestProperties;
 
 @Controller
 @RequestMapping("/rest/phr/")
