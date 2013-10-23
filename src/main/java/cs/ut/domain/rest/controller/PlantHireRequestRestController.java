@@ -3,7 +3,11 @@ package cs.ut.domain.rest.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.net.URI;
+import java.util.Date;
+
+import javax.ws.rs.core.MediaType;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,10 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
 import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.LoadTestProperties;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
+import cs.ut.domain.rest.PlantResource;
+import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
 
 @Controller
@@ -79,13 +91,35 @@ public class PlantHireRequestRestController {
 	
 	//OK
 	@RequestMapping(method = RequestMethod.PUT, value = "{id}/approve")
-	public ResponseEntity<Void> approvePHR(@PathVariable("id") Long id) {
+	public ResponseEntity<PurchaseOrderResource> approvePHR(@PathVariable("id") Long id) {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
-		ResponseEntity<Void> response;
+		ResponseEntity<PurchaseOrderResource> response;
 		if (phr.getStatus().equals(ApprovalStatus.PENDING_APPROVAL)) {
 			phr.setStatus(ApprovalStatus.APPROVED);
 			phr.persist();
-			response = new ResponseEntity<>(HttpStatus.OK);
+			Client client = new Client();
+			LoadTestProperties props = new LoadTestProperties();
+			String app_url = props.loadProperty("supplierurl");
+			WebResource webResource = client.resource(app_url + "/rest/pos/");
+			
+			PurchaseOrderResource poResource = new PurchaseOrderResource();
+			poResource.setEndDate(phr.getEndDate());
+			poResource.setStartDate(phr.getStartDate());
+			PlantResource pR = new PlantResource();
+			pR.setIdentifier(phr.getPlantId());
+			poResource.setPlantResource(pR);
+			poResource.setStatus(HireRequestStatus.PENDING_CONFIRMATION);
+			poResource.setTotalCost(phr.getTotalCost());
+
+			ClientResponse clientResponse = webResource
+					.type(MediaType.APPLICATION_XML)
+					.accept(MediaType.APPLICATION_XML)
+					.post(ClientResponse.class, poResource);
+			
+			PurchaseOrderResource after = clientResponse
+					.getEntity(PurchaseOrderResource.class);
+			
+			response = new ResponseEntity<>(after, HttpStatus.OK);
 		} else
 			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
 		return response;

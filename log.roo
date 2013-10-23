@@ -109,3 +109,5 @@ entity jpa --class ~.domain.rest.PlantHireRequestStatusResource --testAutomatica
 entity jpa --class ~.domain.rest.PlantHireRequestResource --testAutomatically 
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-17 04:22:51
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-21 23:20:58
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-24 00:33:43
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-24 01:12:01
