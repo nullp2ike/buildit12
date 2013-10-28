@@ -1,18 +1,18 @@
-package cs.ut.domain;
+package cs.ut.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class LoadTestProperties {
+public class LoadProperties {
 
 	
 	Properties props;
 	
-	public LoadTestProperties() {
+	public LoadProperties() {
 		
 		props = new Properties();
-		InputStream in = getClass().getResourceAsStream("/test.properties");
+		InputStream in = getClass().getResourceAsStream("/local.properties");
 		try {
 			props.load(in);
 		} catch (IOException e) {

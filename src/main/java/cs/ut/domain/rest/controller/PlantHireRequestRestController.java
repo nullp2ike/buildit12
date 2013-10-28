@@ -31,7 +31,7 @@ import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
-import cs.ut.util.LoadTestProperties;
+import cs.ut.util.LoadProperties;
 
 @Controller
 @RequestMapping("/rest/phr/")
@@ -98,7 +98,7 @@ public class PlantHireRequestRestController {
 			phr.setStatus(ApprovalStatus.APPROVED);
 			phr.persist();
 			Client client = new Client();
-			LoadTestProperties props = new LoadTestProperties();
+			LoadProperties props = new LoadProperties();
 			String app_url = props.loadProperty("supplierurl");
 			WebResource webResource = client.resource(app_url + "/rest/pos/");
 			

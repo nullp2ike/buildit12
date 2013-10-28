@@ -2,8 +2,6 @@ package cs.ut.domain.rest;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
@@ -24,11 +22,11 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
-import cs.ut.domain.LoadTestProperties;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.util.LoadProperties;
 
 @ContextConfiguration(locations = { "/META-INF/spring/applicationContext.xml" })
 @RooIntegrationTest(entity = PlantHireRequestResource.class)
@@ -44,7 +42,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	@Before
 	public void setUp() {
 		client = Client.create();
-		LoadTestProperties props = new LoadTestProperties();
+		LoadProperties props = new LoadProperties();
 		app_url = props.loadProperty("webappurl");
 		setRequiredTables("Create", "Supplier1", "FirstName1", "LastName1");
 	}
@@ -207,6 +205,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		phrResource.setSupplier(sup);
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
 		
+		//Create Plant Hire Request
 		WebResource webResource = client.resource(app_url + "/rest/phr/");
 		ClientResponse clientResponseCreate = webResource
 				.type(MediaType.APPLICATION_XML)
@@ -219,6 +218,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		Link acceptLink = poResource.get_link("approvePHR");
 		String acceptUrl = acceptLink.getHref();		
 		
+		//Accept Plant Hire Request
 		WebResource webResourceAccept = client.resource(acceptUrl);
 		ClientResponse clientResponseAccept = webResourceAccept
 				.type(MediaType.APPLICATION_XML)
@@ -238,10 +238,6 @@ public class PlantHireRequestResourceIntegrationTest extends
 		PurchaseOrderResource phrResourceRentitPO = clientResponseGetPO
 				.getEntity(PurchaseOrderResource.class);
 		assertTrue(phrResourceRentitPO.getStatus().equals(HireRequestStatus.PENDING_CONFIRMATION));
-		
-		
-		//assertTrue(phrResourceAccept.s);
-		//phrResourceAccept.
 	}
 
 	private long getIdFromLocation(URI location) {
@@ -252,7 +248,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	
 	@Test
 	public void testGetPlantsFromSupplier(){
-		LoadTestProperties props = new LoadTestProperties();
+		LoadProperties props = new LoadProperties();
 		String app_url = props.loadProperty("supplierurl");
 		WebResource webResource = client.resource(app_url + "/rest/plant/");
 		ClientResponse clientResponse = webResource
