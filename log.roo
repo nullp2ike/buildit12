@@ -114,3 +114,10 @@ entity jpa --class ~.domain.rest.PlantHireRequestResource --testAutomatically
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-24 23:16:41
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-24 23:18:39
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-28 23:11:38
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-29 10:43:19
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-06 01:51:48
+web mvc controller --class ~.web.PlantQueryController --preferredMapping /planthirerequests/queryPlant
+web mvc controller --class ~.web.PlantQueryController --preferredMapping /planthirerequests/queryPlant
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-06 11:27:34
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-07 11:12:26
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-07 18:02:05

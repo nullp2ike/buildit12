@@ -245,17 +245,4 @@ public class PlantHireRequestResourceIntegrationTest extends
 		String id = locationStr.substring(locationStr.lastIndexOf("/") + 1);
 		return Long.parseLong(id);
 	}
-	
-	@Test
-	public void testGetPlantsFromSupplier(){
-		LoadProperties props = new LoadProperties();
-		String app_url = props.loadProperty("supplierurl");
-		WebResource webResource = client.resource(app_url + "/rest/plant/");
-		ClientResponse clientResponse = webResource
-				.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML)
-				.get(ClientResponse.class);
-		assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
-		
-	}
 }

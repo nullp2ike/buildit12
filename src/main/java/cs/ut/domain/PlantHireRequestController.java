@@ -7,4 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RooWebScaffold(path = "planthirerequests", formBackingObject = PlantHireRequest.class)
 public class PlantHireRequestController {
+	
+	
+	
 }

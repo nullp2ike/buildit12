@@ -23,5 +23,8 @@
             <menu:item id="i_supplier_new" messageCode="global_menu_new" url="/suppliers?form" z="48D4zeaX6ENxXujfvnWrtY5odlQ="/>
             <menu:item id="i_supplier_list" messageCode="global_menu_list" url="/suppliers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="m3iWO9PZ5+HPrY21osNhms/WqIE="/>
         </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__planthirerequests_queryplantindex_id" messageCode="global_generic" url="/planthirerequests/queryPlant/index" z="taZk4bI3vTVWr27q2TaTTF9pWtQ="/>
+        </menu:category>
     </menu:menu>
 </div>

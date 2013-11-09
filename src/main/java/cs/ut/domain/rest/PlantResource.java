@@ -1,5 +1,7 @@
 package cs.ut.domain.rest;
 
+import java.math.BigDecimal;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -11,5 +13,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class PlantResource {
 
 	private long identifier;
+	private String plantName;
+    private BigDecimal pricePerDay;
+    private String description;
 	
 }

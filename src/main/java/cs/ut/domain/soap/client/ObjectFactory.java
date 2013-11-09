@@ -24,7 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Plants_QNAME = new QName("http://service.soap.domain.ut.cs/", "plants");
+    private final static QName _PlantResource_QNAME = new QName("http://service.soap.domain.ut.cs/", "plantResource");
+    private final static QName _PlantResourceList_QNAME = new QName("http://service.soap.domain.ut.cs/", "plantResourceList");
     private final static QName _GetAllPlantsResponse_QNAME = new QName("http://service.soap.domain.ut.cs/", "getAllPlantsResponse");
     private final static QName _GetAllPlants_QNAME = new QName("http://service.soap.domain.ut.cs/", "getAllPlants");
 
@@ -33,6 +34,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link PlantResource }
+     * 
+     */
+    public PlantResource createPlantResource() {
+        return new PlantResource();
     }
 
     /**
@@ -60,12 +69,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlantResource }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.soap.domain.ut.cs/", name = "plantResource")
+    public JAXBElement<PlantResource> createPlantResource(PlantResource value) {
+        return new JAXBElement<PlantResource>(_PlantResource_QNAME, PlantResource.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link PlantResourceList }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://service.soap.domain.ut.cs/", name = "plants")
-    public JAXBElement<PlantResourceList> createPlants(PlantResourceList value) {
-        return new JAXBElement<PlantResourceList>(_Plants_QNAME, PlantResourceList.class, null, value);
+    @XmlElementDecl(namespace = "http://service.soap.domain.ut.cs/", name = "plantResourceList")
+    public JAXBElement<PlantResourceList> createPlantResourceList(PlantResourceList value) {
+        return new JAXBElement<PlantResourceList>(_PlantResourceList_QNAME, PlantResourceList.class, null, value);
     }
 
     /**
