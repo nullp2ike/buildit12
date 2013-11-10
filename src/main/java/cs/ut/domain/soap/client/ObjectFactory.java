@@ -25,7 +25,9 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _PlantResource_QNAME = new QName("http://service.soap.domain.ut.cs/", "plantResource");
+    private final static QName _GetAvailablePlants_QNAME = new QName("http://service.soap.domain.ut.cs/", "getAvailablePlants");
     private final static QName _PlantResourceList_QNAME = new QName("http://service.soap.domain.ut.cs/", "plantResourceList");
+    private final static QName _GetAvailablePlantsResponse_QNAME = new QName("http://service.soap.domain.ut.cs/", "getAvailablePlantsResponse");
     private final static QName _GetAllPlantsResponse_QNAME = new QName("http://service.soap.domain.ut.cs/", "getAllPlantsResponse");
     private final static QName _GetAllPlants_QNAME = new QName("http://service.soap.domain.ut.cs/", "getAllPlants");
 
@@ -50,6 +52,22 @@ public class ObjectFactory {
      */
     public PlantResourceList createPlantResourceList() {
         return new PlantResourceList();
+    }
+
+    /**
+     * Create an instance of {@link GetAvailablePlantsResponse }
+     * 
+     */
+    public GetAvailablePlantsResponse createGetAvailablePlantsResponse() {
+        return new GetAvailablePlantsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAvailablePlants }
+     * 
+     */
+    public GetAvailablePlants createGetAvailablePlants() {
+        return new GetAvailablePlants();
     }
 
     /**
@@ -78,12 +96,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAvailablePlants }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.soap.domain.ut.cs/", name = "getAvailablePlants")
+    public JAXBElement<GetAvailablePlants> createGetAvailablePlants(GetAvailablePlants value) {
+        return new JAXBElement<GetAvailablePlants>(_GetAvailablePlants_QNAME, GetAvailablePlants.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link PlantResourceList }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://service.soap.domain.ut.cs/", name = "plantResourceList")
     public JAXBElement<PlantResourceList> createPlantResourceList(PlantResourceList value) {
         return new JAXBElement<PlantResourceList>(_PlantResourceList_QNAME, PlantResourceList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAvailablePlantsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.soap.domain.ut.cs/", name = "getAvailablePlantsResponse")
+    public JAXBElement<GetAvailablePlantsResponse> createGetAvailablePlantsResponse(GetAvailablePlantsResponse value) {
+        return new JAXBElement<GetAvailablePlantsResponse>(_GetAvailablePlantsResponse_QNAME, GetAvailablePlantsResponse.class, null, value);
     }
 
     /**

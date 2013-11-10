@@ -22,6 +22,7 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -195,11 +196,23 @@ public class PlantHireRequestResourceIntegrationTest extends
 
 	@Test
 	public void testAutomaticPOGeneration() {
+		//Get some existing plant id
+		LoadProperties prop = new LoadProperties();
+		String supplierUrl = prop.loadProperty("supplierurl");
+		WebResource plantResource = client.resource(supplierUrl + "/rest/plant/");
+		ClientResponse clientResponse = plantResource
+				.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML)
+				.get(ClientResponse.class);
+		PlantResourceList plantResourceList = clientResponse
+				.getEntity(PlantResourceList.class);
+		
+		long plantId = plantResourceList.getListOfPlantResources().get(0).getIdentifier();
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(3));
 		phrResource.setSite(s);
 		phrResource.setEndDate(new Date());
-		phrResource.setPlantId(1);
+		phrResource.setPlantId((int)plantId);
 		phrResource.setSiteEngineer(sE);
 		phrResource.setStartDate(new Date());
 		phrResource.setSupplier(sup);

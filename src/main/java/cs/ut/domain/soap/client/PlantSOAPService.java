@@ -2,9 +2,11 @@
 package cs.ut.domain.soap.client;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Action;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
@@ -22,6 +24,24 @@ import javax.xml.ws.ResponseWrapper;
 })
 public interface PlantSOAPService {
 
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns cs.ut.domain.soap.client.PlantResourceList
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAvailablePlants", targetNamespace = "http://service.soap.domain.ut.cs/", className = "cs.ut.domain.soap.client.GetAvailablePlants")
+    @ResponseWrapper(localName = "getAvailablePlantsResponse", targetNamespace = "http://service.soap.domain.ut.cs/", className = "cs.ut.domain.soap.client.GetAvailablePlantsResponse")
+    @Action(input = "http://service.soap.domain.ut.cs/PlantSOAPService/getAvailablePlantsRequest", output = "http://service.soap.domain.ut.cs/PlantSOAPService/getAvailablePlantsResponse")
+    public PlantResourceList getAvailablePlants(
+        @WebParam(name = "arg0", targetNamespace = "")
+        XMLGregorianCalendar arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        XMLGregorianCalendar arg1);
 
     /**
      * 
