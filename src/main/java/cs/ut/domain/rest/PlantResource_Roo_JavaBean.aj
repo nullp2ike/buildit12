@@ -8,14 +8,6 @@ import java.math.BigDecimal;
 
 privileged aspect PlantResource_Roo_JavaBean {
     
-    public long PlantResource.getIdentifier() {
-        return this.identifier;
-    }
-    
-    public void PlantResource.setIdentifier(long identifier) {
-        this.identifier = identifier;
-    }
-    
     public String PlantResource.getPlantName() {
         return this.plantName;
     }
@@ -38,6 +30,14 @@ privileged aspect PlantResource_Roo_JavaBean {
     
     public void PlantResource.setDescription(String description) {
         this.description = description;
+    }
+    
+    public long PlantResource.getIdentifier() {
+        return this.identifier;
+    }
+    
+    public void PlantResource.setIdentifier(long identifier) {
+        this.identifier = identifier;
     }
     
 }

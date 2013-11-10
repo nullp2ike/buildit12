@@ -28,6 +28,7 @@ import cs.ut.domain.soap.client.PlantSOAPServiceService;
 
 @RooIntegrationTest(entity = Plant.class)
 public class PlantIntegrationTest {
+	
 
 	@Test
 	public void testGetAllPlants() {

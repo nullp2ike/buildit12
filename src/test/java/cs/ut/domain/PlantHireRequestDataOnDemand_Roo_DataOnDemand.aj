@@ -10,6 +10,7 @@ import cs.ut.domain.Site;
 import cs.ut.domain.SiteDataOnDemand;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
+import cs.ut.domain.Supplier;
 import cs.ut.domain.SupplierDataOnDemand;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -50,6 +51,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
         setStatus(obj, index);
+        setSupplier(obj, index);
         setTotalCost(obj, index);
         return obj;
     }
@@ -82,6 +84,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setStatus(PlantHireRequest obj, int index) {
         ApprovalStatus status = ApprovalStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setSupplier(PlantHireRequest obj, int index) {
+        Supplier supplier = supplierDataOnDemand.getRandomSupplier();
+        obj.setSupplier(supplier);
     }
     
     public void PlantHireRequestDataOnDemand.setTotalCost(PlantHireRequest obj, int index) {

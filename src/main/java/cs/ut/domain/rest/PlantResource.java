@@ -12,9 +12,9 @@ import org.springframework.roo.addon.tostring.RooToString;
 @XmlRootElement(name = "plant")
 public class PlantResource {
 
-	private long identifier;
 	private String plantName;
     private BigDecimal pricePerDay;
     private String description;
+	private long identifier;
 	
 }

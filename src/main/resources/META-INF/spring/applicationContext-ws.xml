@@ -14,4 +14,15 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			<property name="namespaceUri" value="http://service.soap.domain.ut.cs/" />
 			<property name="portName" value="PlantSOAPServicePort" />
 		</bean>
+		
+		<bean id="purchaseOrderSOAPService"
+			class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+			<property name="serviceName" value="PurchaseOrderSOAPServiceService" />
+			<property name="serviceInterface"
+				value="cs.ut.domain.soap.client.po.PurchaseOrderSOAPService" />
+			<property name="wsdlDocumentUrl"
+				value="http://localhost:8081/Rentit/PurchaseOrderSOAPService?wsdl" />
+			<property name="namespaceUri" value="http://service.soap.domain.ut.cs/" />
+			<property name="portName" value="PurchaseOrderSOAPServicePort" />
+		</bean>
 </beans>

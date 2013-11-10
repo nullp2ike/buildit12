@@ -97,19 +97,25 @@ public class PlantHireRequestRestController {
 		if (phr.getStatus().equals(ApprovalStatus.PENDING_APPROVAL)) {
 			phr.setStatus(ApprovalStatus.APPROVED);
 			phr.persist();
-			Client client = new Client();
-			LoadProperties props = new LoadProperties();
-			String app_url = props.loadProperty("supplierurl");
-			WebResource webResource = client.resource(app_url + "/rest/pos/");
+			
+
+			
+			//Create Automatic Purchase order
+			
+			PlantResource pR = new PlantResource();
+			pR.setIdentifier(phr.getPlantId());
 			
 			PurchaseOrderResource poResource = new PurchaseOrderResource();
 			poResource.setEndDate(phr.getEndDate());
 			poResource.setStartDate(phr.getStartDate());
-			PlantResource pR = new PlantResource();
-			pR.setIdentifier(phr.getPlantId());
 			poResource.setPlantResource(pR);
 			poResource.setStatus(HireRequestStatus.PENDING_CONFIRMATION);
 			poResource.setTotalCost(phr.getTotalCost());
+			
+			Client client = new Client();
+			LoadProperties props = new LoadProperties();
+			String app_url = props.loadProperty("supplierurl");
+			WebResource webResource = client.resource(app_url + "/rest/pos/");
 
 			ClientResponse clientResponse = webResource
 					.type(MediaType.APPLICATION_XML)

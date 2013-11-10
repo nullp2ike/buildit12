@@ -49,6 +49,9 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         if (Site.countSites() == 0) {
             dependencies.add(new String[] { "site", "sites" });
         }
+        if (Supplier.countSuppliers() == 0) {
+            dependencies.add(new String[] { "supplier", "suppliers" });
+        }
         uiModel.addAttribute("dependencies", dependencies);
         return "planthirerequests/create";
     }

@@ -65,11 +65,11 @@ public class PlantHireRequestResourceIntegrationTest extends
 		sup.persist();
 	}
 
-	private long setPlantHireRequest(int totalCost, ApprovalStatus status) {
+	private long setPlantHireRequest(int plantId, int totalCost, ApprovalStatus status) {
 		PlantHireRequest phr = new PlantHireRequest();
 		phr.setEndDate(new Date());
 		phr.setStartDate(new Date());
-		phr.setPlantId(1);
+		phr.setPlantId(plantId);
 		phr.setSite(s);
 		phr.setSiteEngineer(sE);
 		phr.setStatus(status);
@@ -87,7 +87,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		phrResource.setTotalCost(new BigDecimal(3));
 		phrResource.setSite(s);
 		phrResource.setEndDate(new Date());
-		phrResource.setPlantId(1);
+		phrResource.setPlantId(269);
 		phrResource.setSiteEngineer(sE);
 		phrResource.setStartDate(new Date());
 		phrResource.setSupplier(sup);
@@ -113,7 +113,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	// OK
 	@Test
 	public void testRejectPHR() {
-		long phrId = setPlantHireRequest(2, ApprovalStatus.PENDING_APPROVAL);
+		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
 		WebResource webResource = client.resource(app_url + "/rest/phr/"
 				+ phrId + "/reject");
 		ClientResponse clientResponse = webResource
@@ -122,22 +122,40 @@ public class PlantHireRequestResourceIntegrationTest extends
 		assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
 	}
 
-	// OK
 	@Test
 	public void testApprovePHR() {
-		long phrId = setPlantHireRequest(2, ApprovalStatus.PENDING_APPROVAL);
+		LoadProperties prop = new LoadProperties();
+		String supplierUrl = prop.loadProperty("supplierurl");
+		WebResource plantResource = client.resource(supplierUrl + "/rest/plant/");
+		ClientResponse cR = plantResource
+				.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML)
+				.get(ClientResponse.class);
+		PlantResourceList plantResourceList = cR
+				.getEntity(PlantResourceList.class);
+		
+		long plantId = plantResourceList.getListOfPlantResources().get(0).getIdentifier();
+		
+		long phrId = setPlantHireRequest((int)plantId, 2, ApprovalStatus.PENDING_APPROVAL);
+		
 		WebResource webResource = client.resource(app_url + "/rest/phr/"
 				+ phrId + "/approve");
+		
 		ClientResponse clientResponse = webResource
 				.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).put(ClientResponse.class);
 		assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
+		PurchaseOrderResource poResource = clientResponse
+				.getEntity(PurchaseOrderResource.class);
+		assertTrue(poResource.getStatus().equals(HireRequestStatus.PENDING_CONFIRMATION));
+		
+		
 	}
 
 	// OK
 	@Test
 	public void testUpdatePHR() {
-		long phrId = setPlantHireRequest(2, ApprovalStatus.PENDING_APPROVAL);
+		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
 
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(100));
@@ -167,7 +185,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 
 	@Test
 	public void testCancelPHR() {
-		long phrId = setPlantHireRequest(100, ApprovalStatus.PENDING_APPROVAL);
+		long phrId = setPlantHireRequest(1, 100, ApprovalStatus.PENDING_APPROVAL);
 		WebResource webResource = client.resource(app_url + "/rest/phr/"
 				+ phrId + "/cancel");
 		ClientResponse clientResponse = webResource
@@ -180,7 +198,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 
 	@Test
 	public void testGetPHR() {
-		long phrId = setPlantHireRequest(100, ApprovalStatus.PENDING_APPROVAL);
+		long phrId = setPlantHireRequest(1, 100, ApprovalStatus.PENDING_APPROVAL);
 		WebResource webResource = client.resource(app_url + "/rest/phr/"
 				+ phrId);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)

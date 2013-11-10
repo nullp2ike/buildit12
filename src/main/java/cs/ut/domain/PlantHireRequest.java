@@ -43,6 +43,7 @@ public class PlantHireRequest {
     @NotNull
     private SiteEngineer siteEngineer;
 
+    @NotNull
     private int plantId;
 
     /**
@@ -54,8 +55,10 @@ public class PlantHireRequest {
     /**
      */
     @ManyToOne
+    @NotNull
     private Supplier supplier;
     
     @Enumerated
+    @NotNull
     ApprovalStatus status;
 }
