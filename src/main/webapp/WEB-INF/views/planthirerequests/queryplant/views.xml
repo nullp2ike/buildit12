@@ -5,8 +5,8 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/planthirerequests/queryplant/search.jspx" />
 	</definition>
-	<definition extends="default" name="planthirerequests/queryPlant/index">
+	<definition extends="default" name="planthirerequests/queryPlant/result">
 		<put-attribute name="body"
-			value="/WEB-INF/views/planthirerequests/queryplant/index.jspx" />
+			value="/WEB-INF/views/planthirerequests/queryplant/result.jspx" />
 	</definition>
 </tiles-definitions>

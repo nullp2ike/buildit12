@@ -4,15 +4,34 @@
 package cs.ut.domain.bean;
 
 import cs.ut.domain.bean.PlantDTO;
+import cs.ut.domain.rest.PlantResource;
+import java.util.Date;
+import java.util.List;
 
 privileged aspect PlantDTO_Roo_JavaBean {
     
-    public String PlantDTO.getName() {
-        return this.name;
+    public List<PlantResource> PlantDTO.getPlantList() {
+        return this.plantList;
     }
     
-    public void PlantDTO.setName(String name) {
-        this.name = name;
+    public void PlantDTO.setPlantList(List<PlantResource> plantList) {
+        this.plantList = plantList;
+    }
+    
+    public Date PlantDTO.getStartDate() {
+        return this.startDate;
+    }
+    
+    public void PlantDTO.setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Date PlantDTO.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void PlantDTO.setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
 }

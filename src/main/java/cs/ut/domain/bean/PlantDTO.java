@@ -1,20 +1,37 @@
 package cs.ut.domain.bean;
 
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+
+import cs.ut.domain.rest.PlantResource;
 
 @RooJavaBean
 public class PlantDTO {
-	
-    private String name;
-/*
-    private String description;
 
-    private BigDecimal pricePerDay;
-    
-    private long identifier;
-*/
+	private List<PlantResource> plantList;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "MM")
+	private Date startDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "MM")
+	private Date endDate;
+	
+	/*
+	 * private String description;
+	 * 
+	 * private BigDecimal pricePerDay;
+	 * 
+	 * private long identifier;
+	 */
 }
