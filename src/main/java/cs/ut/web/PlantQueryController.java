@@ -2,7 +2,9 @@ package cs.ut.web;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -40,21 +43,16 @@ public class PlantQueryController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String displayPlants(@Valid PlantDTO plant, ModelMap modelMap) {
-		LoadProperties prop = new LoadProperties();
-		Client client = new Client();
-		String app_url = prop.loadProperty("supplierurl");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
 		String startDate = formatter.format(plant.getStartDate());
 		String endDate = formatter.format(plant.getEndDate());
-		WebResource webResource = client.resource(app_url + "/rest/plant/" + "?startDate=" + startDate + "&endDate=" + endDate);
-
-		ClientResponse getResponse = webResource
-				.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
-
-		PlantResourceList plantList = getResponse
-				.getEntity(PlantResourceList.class);
-
+		
+		LoadProperties prop = new LoadProperties();
+		String app_url = prop.loadProperty("supplierurl");
+		String url = app_url + "/rest/plant/" + "?startDate=" + startDate + "&endDate=" + endDate;
+		
+		RestTemplate restTemplate = new RestTemplate();
+		PlantResourceList plantList = restTemplate.getForObject(url, PlantResourceList.class);
 		List<PlantResource> plants = plantList.getListOfPlantResources();
 		
 		PlantDTO p = new PlantDTO();

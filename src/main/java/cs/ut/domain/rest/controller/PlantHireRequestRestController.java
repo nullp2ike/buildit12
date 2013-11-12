@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sun.jersey.api.client.Client;
@@ -29,6 +31,7 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
+import cs.ut.domain.rest.PlantResourceList;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
 import cs.ut.util.LoadProperties;
@@ -98,10 +101,7 @@ public class PlantHireRequestRestController {
 			phr.setStatus(ApprovalStatus.APPROVED);
 			phr.persist();
 			
-
-			
-			//Create Automatic Purchase order
-			
+			//Create Automatic Purchase order	
 			PlantResource pR = new PlantResource();
 			pR.setIdentifier(phr.getPlantId());
 			
@@ -112,18 +112,12 @@ public class PlantHireRequestRestController {
 			poResource.setStatus(HireRequestStatus.PENDING_CONFIRMATION);
 			poResource.setTotalCost(phr.getTotalCost());
 			
-			Client client = new Client();
 			LoadProperties props = new LoadProperties();
 			String app_url = props.loadProperty("supplierurl");
-			WebResource webResource = client.resource(app_url + "/rest/pos/");
-
-			ClientResponse clientResponse = webResource
-					.type(MediaType.APPLICATION_XML)
-					.accept(MediaType.APPLICATION_XML)
-					.post(ClientResponse.class, poResource);
+			String url = app_url + "/rest/pos/";
 			
-			PurchaseOrderResource after = clientResponse
-					.getEntity(PurchaseOrderResource.class);
+			RestTemplate restTemplate = new RestTemplate();
+			PurchaseOrderResource after = restTemplate.postForObject(url, poResource, PurchaseOrderResource.class);
 			
 			response = new ResponseEntity<>(after, HttpStatus.OK);
 		} else
