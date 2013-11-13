@@ -19,6 +19,8 @@ public class PlantDTO {
 
 	private List<PlantResource> plantList;
 
+	private int chosenPlantId;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "MM")
 	private Date startDate;

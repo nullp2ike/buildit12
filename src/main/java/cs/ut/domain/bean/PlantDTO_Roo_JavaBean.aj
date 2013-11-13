@@ -18,6 +18,14 @@ privileged aspect PlantDTO_Roo_JavaBean {
         this.plantList = plantList;
     }
     
+    public int PlantDTO.getChosenPlantId() {
+        return this.chosenPlantId;
+    }
+    
+    public void PlantDTO.setChosenPlantId(int chosenPlantId) {
+        this.chosenPlantId = chosenPlantId;
+    }
+    
     public Date PlantDTO.getStartDate() {
         return this.startDate;
     }

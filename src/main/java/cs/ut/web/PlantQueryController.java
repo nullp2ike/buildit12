@@ -1,7 +1,9 @@
 package cs.ut.web;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,10 @@ import javax.ws.rs.core.MediaType;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,7 +31,14 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.PlantHireRequest;
+import cs.ut.domain.Site;
+import cs.ut.domain.SiteEngineer;
+import cs.ut.domain.Supplier;
 import cs.ut.domain.bean.PlantDTO;
+import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
 import cs.ut.util.LoadProperties;
@@ -56,15 +69,34 @@ public class PlantQueryController {
 		List<PlantResource> plants = plantList.getListOfPlantResources();
 		
 		PlantDTO p = new PlantDTO();
+		p.setEndDate(plant.getEndDate());
+		p.setStartDate(plant.getStartDate());
 		p.setPlantList(plants);
+		addDateTimeFormatPatterns(modelMap);
 		modelMap.put("plantDTO", p);
 		return "planthirerequests/queryPlant/result";
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.POST)
-	public String createPlantHireRequest(@Valid PlantDTO plant, ModelMap modelMap, @PathVariable("id") Long id) {
+	@RequestMapping(value = "result", method = RequestMethod.POST)
+	public String createPlantHireRequest(@Valid PlantDTO plant, ModelMap modelMap) {
+		LoadProperties prop = new LoadProperties();
+		String app_url = prop.loadProperty("webappurl");
+		String url = app_url + "/rest/phr/";
+		PlantHireRequestResource phrResource = new PlantHireRequestResource();
+		phrResource.setEndDate(new Date());
+		phrResource.setStartDate(new Date());
+		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
+		phrResource.setPlantId(plant.getChosenPlantId());
+		phrResource.setSite(Site.findAllSites().get(0));
+		phrResource.setSiteEngineer(SiteEngineer.findAllSiteEngineers().get(0));
+		phrResource.setSupplier(Supplier.findAllSuppliers().get(0));
+		phrResource.setTotalCost(new BigDecimal(1));
 		
-		return "/planthirerequests?page=1&size=10";
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = restTemplate.postForEntity(url, phrResource, String.class);
+		List<PlantHireRequest> phrList = PlantHireRequest.findAllPlantHireRequests();
+		long id = phrList.get(phrList.size() - 1).getId();
+		return "redirect:/planthirerequests/" + id;
 	}
 
 	private void addDateTimeFormatPatterns(ModelMap modelMap) {
