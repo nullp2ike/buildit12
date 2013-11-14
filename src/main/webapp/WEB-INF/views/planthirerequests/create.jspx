@@ -11,6 +11,7 @@
         <field:select field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" itemValue="id" items="${suppliers}" path="/suppliers" required="true" z="btsyUKnUdnzzRG+1y/9byi6ruCk="/>
         <field:input field="plantId" id="c_cs_ut_domain_PlantHireRequest_plantId" required="true" z="MIoQUsTfO7nSiFZOKvh4RUUDApI="/>
         <field:select field="status" id="c_cs_ut_domain_PlantHireRequest_status" items="${approvalstatuses}" path="approvalstatuses" required="true" z="c6d2RYvVbhKuIPTARcyt9JfWXdY="/>
+        <field:input field="comment" id="c_cs_ut_domain_PlantHireRequest_comment" z="b3ossQsr6mNPSCHM4fV7mIeztEA="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cs_ut_domain_PlantHireRequest" render="${not empty dependencies}" z="shLeCRbq6YOqAVqqd1/pcNyNj98="/>
 </div>

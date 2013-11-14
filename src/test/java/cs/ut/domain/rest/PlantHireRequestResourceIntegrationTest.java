@@ -115,7 +115,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	public void testRejectPHR() {
 		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
 		WebResource webResource = client.resource(app_url + "/rest/phr/"
-				+ phrId + "/reject");
+				+ phrId + "/reject?comment=declined");
 		ClientResponse clientResponse = webResource
 				.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);

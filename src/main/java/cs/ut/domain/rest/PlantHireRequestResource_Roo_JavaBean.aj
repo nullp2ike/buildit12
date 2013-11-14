@@ -77,4 +77,12 @@ privileged aspect PlantHireRequestResource_Roo_JavaBean {
         this.status = status;
     }
     
+    public String PlantHireRequestResource.getComment() {
+        return this.comment;
+    }
+    
+    public void PlantHireRequestResource.setComment(String comment) {
+        this.comment = comment;
+    }
+    
 }

@@ -19,7 +19,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PlantHireRequest, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.PlantHireRequest, java.lang.String>() {
             public String convert(PlantHireRequest plantHireRequest) {
-                return new StringBuilder().append(plantHireRequest.getStartDate()).append(' ').append(plantHireRequest.getEndDate()).append(' ').append(plantHireRequest.getTotalCost()).append(' ').append(plantHireRequest.getPlantId()).toString();
+                return new StringBuilder().append(plantHireRequest.getStartDate()).append(' ').append(plantHireRequest.getEndDate()).append(' ').append(plantHireRequest.getTotalCost()).append(' ').append(plantHireRequest.getComment()).toString();
             }
         };
     }

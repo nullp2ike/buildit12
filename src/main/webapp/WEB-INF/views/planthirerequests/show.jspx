@@ -11,5 +11,6 @@
         <field:display field="supplier" id="s_cs_ut_domain_PlantHireRequest_supplier" object="${planthirerequest}" z="WEUGEr3aD7WrZXlOc+6K2lIKhmU="/>
         <field:display field="plantId" id="s_cs_ut_domain_PlantHireRequest_plantId" object="${planthirerequest}" z="Xyu0m8sjnQJrJF2PoBUwgPjN07I="/>
         <field:display field="status" id="s_cs_ut_domain_PlantHireRequest_status" object="${planthirerequest}" z="yiw7Xih5LiptvAop5XvFqOrLQes="/>
+        <field:display field="comment" id="s_cs_ut_domain_PlantHireRequest_comment" object="${planthirerequest}" z="0JX4isIwqjPdzXmDJixYEeSJTDA="/>
     </page:show>
 </div>

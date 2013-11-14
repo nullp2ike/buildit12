@@ -32,4 +32,5 @@ public class PlantHireRequestResource extends ResourceSupport{
     private int plantId;
     private Supplier supplier;
     private ApprovalStatus status;
+    private String comment;
 }

@@ -45,6 +45,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     
     public PlantHireRequest PlantHireRequestDataOnDemand.getNewTransientPlantHireRequest(int index) {
         PlantHireRequest obj = new PlantHireRequest();
+        setComment(obj, index);
         setEndDate(obj, index);
         setPlantId(obj, index);
         setSite(obj, index);
@@ -54,6 +55,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setSupplier(obj, index);
         setTotalCost(obj, index);
         return obj;
+    }
+    
+    public void PlantHireRequestDataOnDemand.setComment(PlantHireRequest obj, int index) {
+        String comment = "comment_" + index;
+        obj.setComment(comment);
     }
     
     public void PlantHireRequestDataOnDemand.setEndDate(PlantHireRequest obj, int index) {

@@ -43,6 +43,7 @@ public class PlantHireRequest {
     @NotNull
     private SiteEngineer siteEngineer;
 
+    private String comment;
     @NotNull
     private int plantId;
 
