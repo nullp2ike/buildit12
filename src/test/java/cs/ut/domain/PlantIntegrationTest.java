@@ -1,25 +1,15 @@
 package cs.ut.domain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.validation.constraints.AssertTrue;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpression;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.test.RooIntegrationTest;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import cs.ut.domain.soap.client.PlantResource;
 import cs.ut.domain.soap.client.PlantResourceList;

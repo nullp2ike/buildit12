@@ -1,6 +1,7 @@
 package cs.ut.util;
 
 import java.util.Date;
+
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class DateAdapter extends XmlAdapter<Date, Date>{

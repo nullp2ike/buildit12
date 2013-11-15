@@ -3,12 +3,7 @@ package cs.ut.domain.rest.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
 import java.net.URI;
-import java.util.Date;
-import java.util.List;
-
-import javax.ws.rs.core.MediaType;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,17 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
-import cs.ut.domain.rest.PlantResourceList;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
 import cs.ut.util.LoadProperties;

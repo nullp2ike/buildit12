@@ -17,12 +17,11 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.api.client.WebResource;
 
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
-import cs.ut.domain.Plant;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
