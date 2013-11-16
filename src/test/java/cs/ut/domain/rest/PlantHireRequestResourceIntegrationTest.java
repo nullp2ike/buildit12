@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Link;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,7 +27,6 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
-import cs.ut.util.LoadProperties;
 
 @ContextConfiguration(locations = { "/META-INF/spring/applicationContext.xml" })
 @RooIntegrationTest(entity = PlantHireRequestResource.class)
@@ -37,13 +37,16 @@ public class PlantHireRequestResourceIntegrationTest extends
 	SiteEngineer sE;
 	Supplier sup;
 	Site s;
-	String app_url;
+	
+	@Value("${supplierurl}")
+	String supplierurl;
+	
+	@Value("${webappurl}")
+	String webappurl;
 
 	@Before
 	public void setUp() {
 		client = Client.create();
-		LoadProperties props = new LoadProperties();
-		app_url = props.loadProperty("webappurl");
 		setRequiredTables("Create", "Supplier1", "FirstName1", "LastName1");
 	}
 
@@ -92,7 +95,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		phrResource.setSupplier(sup);
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
 
-		WebResource webResource = client.resource(app_url + "/rest/phr/");
+		WebResource webResource = client.resource(webappurl + "/rest/phr/");
 
 		ClientResponse clientResponse = webResource
 				.type(MediaType.APPLICATION_XML)
@@ -113,7 +116,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	@Test
 	public void testRejectPHR() {
 		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
-		WebResource webResource = client.resource(app_url + "/rest/phr/"
+		WebResource webResource = client.resource(webappurl + "/rest/phr/"
 				+ phrId + "/reject?comment=declined");
 		ClientResponse clientResponse = webResource
 				.type(MediaType.APPLICATION_XML)
@@ -123,9 +126,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 
 	@Test
 	public void testApprovePHR() {
-		LoadProperties prop = new LoadProperties();
-		String supplierUrl = prop.loadProperty("supplierurl");
-		WebResource plantResource = client.resource(supplierUrl + "/rest/plant/");
+		WebResource plantResource = client.resource(supplierurl + "/rest/plant/");
 		ClientResponse cR = plantResource
 				.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)
@@ -137,7 +138,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		
 		long phrId = setPlantHireRequest((int)plantId, 2, ApprovalStatus.PENDING_APPROVAL);
 		
-		WebResource webResource = client.resource(app_url + "/rest/phr/"
+		WebResource webResource = client.resource(webappurl + "/rest/phr/"
 				+ phrId + "/approve");
 		
 		ClientResponse clientResponse = webResource
@@ -166,7 +167,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		phrResource.setSupplier(sup);
 		phrResource.setStatus(ApprovalStatus.APPROVED);
 
-		WebResource webResource = client.resource(app_url + "/rest/phr/"
+		WebResource webResource = client.resource(webappurl + "/rest/phr/"
 				+ phrId);
 		ClientResponse clientResponse = webResource
 				.type(MediaType.APPLICATION_XML)
@@ -185,7 +186,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	@Test
 	public void testCancelPHR() {
 		long phrId = setPlantHireRequest(1, 100, ApprovalStatus.PENDING_APPROVAL);
-		WebResource webResource = client.resource(app_url + "/rest/phr/"
+		WebResource webResource = client.resource(webappurl + "/rest/phr/"
 				+ phrId + "/cancel");
 		ClientResponse clientResponse = webResource
 				.type(MediaType.APPLICATION_XML)
@@ -198,7 +199,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	@Test
 	public void testGetPHR() {
 		long phrId = setPlantHireRequest(1, 100, ApprovalStatus.PENDING_APPROVAL);
-		WebResource webResource = client.resource(app_url + "/rest/phr/"
+		WebResource webResource = client.resource(webappurl + "/rest/phr/"
 				+ phrId);
 		ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
@@ -214,9 +215,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 	@Test
 	public void testAutomaticPOGeneration() {
 		//Get some existing plant id
-		LoadProperties prop = new LoadProperties();
-		String supplierUrl = prop.loadProperty("supplierurl");
-		WebResource plantResource = client.resource(supplierUrl + "/rest/plant/");
+		WebResource plantResource = client.resource(supplierurl + "/rest/plant/");
 		ClientResponse clientResponse = plantResource
 				.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)
@@ -236,7 +235,7 @@ public class PlantHireRequestResourceIntegrationTest extends
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
 		
 		//Create Plant Hire Request
-		WebResource webResource = client.resource(app_url + "/rest/phr/");
+		WebResource webResource = client.resource(webappurl + "/rest/phr/");
 		ClientResponse clientResponseCreate = webResource
 				.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)

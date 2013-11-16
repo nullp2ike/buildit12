@@ -4,7 +4,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.Properties;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +29,13 @@ import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
-import cs.ut.util.LoadProperties;
 
 @Controller
 @RequestMapping("/rest/phr/")
 public class PlantHireRequestRestController {
+	
+	@Value("${supplierurl}")
+	String supplierurl;
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
 	public ResponseEntity<PlantHireRequestResource> createPHR(
@@ -103,9 +109,7 @@ public class PlantHireRequestRestController {
 			poResource.setTotalCost(phr.getTotalCost());
 			poResource.setPlantHireRequestId(phr.getId());
 
-			LoadProperties props = new LoadProperties();
-			String app_url = props.loadProperty("supplierurl");
-			String url = app_url + "/rest/pos/";
+			String url = supplierurl + "/rest/pos/";
 
 			RestTemplate restTemplate = new RestTemplate();
 			PurchaseOrderResource after = restTemplate.postForObject(url,

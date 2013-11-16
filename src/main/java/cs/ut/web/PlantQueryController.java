@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,16 @@ import cs.ut.domain.bean.PlantDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
-import cs.ut.util.LoadProperties;
 
 @RequestMapping("/planthirerequests/queryPlant/**")
 @Controller
 public class PlantQueryController {
+	
+	@Value("${supplierurl}")
+	String supplierUrl;
+	
+	@Value("${webappurl}")
+	String webAppUrl;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String searchPlants(ModelMap modelMap) {
@@ -44,9 +50,7 @@ public class PlantQueryController {
 		String startDate = formatter.format(plant.getStartDate());
 		String endDate = formatter.format(plant.getEndDate());
 		
-		LoadProperties prop = new LoadProperties();
-		String app_url = prop.loadProperty("supplierurl");
-		String url = app_url + "/rest/plant/" + "?startDate=" + startDate + "&endDate=" + endDate;
+		String url = supplierUrl + "/rest/plant/" + "?startDate=" + startDate + "&endDate=" + endDate;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		PlantResourceList plantList = restTemplate.getForObject(url, PlantResourceList.class);
@@ -63,9 +67,7 @@ public class PlantQueryController {
 	
 	@RequestMapping(value = "result", method = RequestMethod.POST)
 	public String createPlantHireRequest(@Valid PlantDTO plant, ModelMap modelMap) {
-		LoadProperties prop = new LoadProperties();
-		String app_url = prop.loadProperty("webappurl");
-		String url = app_url + "/rest/phr/";
+		String url = webAppUrl + "/rest/phr/";
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setEndDate(new Date());
 		phrResource.setStartDate(new Date());
