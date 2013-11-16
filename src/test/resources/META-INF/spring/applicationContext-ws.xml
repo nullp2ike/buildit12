@@ -10,7 +10,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			<property name="serviceInterface"
 				value="cs.ut.domain.soap.client.PlantSOAPService" />
 			<property name="wsdlDocumentUrl"
-				value="/WEB-INF/wsdl/PlantSOAPService.wsdl" />
+				value="${plantSOAPService.wsdlDocumentUrl}" />
 			<property name="namespaceUri" value="http://service.soap.domain.ut.cs/" />
 			<property name="portName" value="PlantSOAPServicePort" />
 		</bean>
@@ -21,7 +21,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			<property name="serviceInterface"
 				value="cs.ut.domain.soap.client.po.PurchaseOrderSOAPService" />
 			<property name="wsdlDocumentUrl"
-				value="/WEB-INF/wsdl/PurchaseOrderSOAPService.wsdl" />
+				value="${purchaseOrderSOAPService.wsdlDocumentUrl}"  />
 			<property name="namespaceUri" value="http://service.soap.domain.ut.cs/" />
 			<property name="portName" value="PurchaseOrderSOAPServicePort" />
 		</bean>
