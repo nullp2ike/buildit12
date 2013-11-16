@@ -18,7 +18,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "PlantSOAPServiceService", targetNamespace = "http://service.soap.domain.ut.cs/", wsdlLocation = "http://localhost:8081/Rentit/PlantSOAPService?wsdl")
+@WebServiceClient(name = "PlantSOAPServiceService", targetNamespace = "http://service.soap.domain.ut.cs/", wsdlLocation = "/WEB-INF/wsdl/PlantSOAPService.wsdl")
 public class PlantSOAPServiceService
     extends Service
 {
@@ -31,7 +31,7 @@ public class PlantSOAPServiceService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8081/Rentit/PlantSOAPService?wsdl");
+            url = new URL("/WEB-INF/wsdl/PlantSOAPService.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
