@@ -45,8 +45,7 @@
 	</binding>
 	<service name="PurchaseOrderSOAPServiceService">
 		<port name="PurchaseOrderSOAPServicePort" binding="tns:PurchaseOrderSOAPServicePortBinding">
-			<soap:address location="http://rentit12.herokuapp.com/PurchaseOrderSOAPService" />
-			<!-- <soap:address location="http://localhost:8081/Rentit/PurchaseOrderSOAPService" />  -->
+			<soap:address location="${purchaseOrderSOAPService.url}" />
 		</port>
 	</service>
 </definitions>
