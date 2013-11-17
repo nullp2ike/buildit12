@@ -20,15 +20,15 @@ public class PlantHireRequest {
 
     /**
      */
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "S-")
     @NotNull
     private Date startDate;
 
     /**
      */
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "S-")
     @NotNull
     private Date endDate;
 

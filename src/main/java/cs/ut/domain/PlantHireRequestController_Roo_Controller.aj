@@ -107,8 +107,8 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     }
     
     void PlantHireRequestController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("plantHireRequest_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("plantHireRequest_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("plantHireRequest_startdate_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("plantHireRequest_enddate_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     void PlantHireRequestController.populateEditForm(Model uiModel, PlantHireRequest plantHireRequest) {

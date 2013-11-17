@@ -1,5 +1,6 @@
 package cs.ut.domain.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,28 +10,27 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import cs.ut.domain.Site;
+import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.rest.PlantResource;
 
 @RooJavaBean
-public class PlantDTO {
+public class PlantHireRequestDTO {
 
 	private List<PlantResource> plantList;
+	private List<Site> siteList;
+	private List<SiteEngineer> engList;
 
-	private int chosenPlantId;
+	private int plant;
+	private int site;
+	private int engineer;
+	private BigDecimal pricePerDay;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "MM")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style = "S-")
 	private Date startDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "MM")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(style = "S-")
 	private Date endDate;
-	
-	/*
-	 * private String description;
-	 * 
-	 * private BigDecimal pricePerDay;
-	 * 
-	 * private long identifier;
-	 */
 }

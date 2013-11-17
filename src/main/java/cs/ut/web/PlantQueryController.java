@@ -4,9 +4,13 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import cs.ut.domain.ApprovalStatus;
@@ -22,7 +27,7 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
-import cs.ut.domain.bean.PlantDTO;
+import cs.ut.domain.bean.PlantHireRequestDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
@@ -40,13 +45,16 @@ public class PlantQueryController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String searchPlants(ModelMap modelMap) {
 		addDateTimeFormatPatterns(modelMap);
-		modelMap.put("plantquery", new PlantDTO());
+		PlantHireRequestDTO phrDTO = new PlantHireRequestDTO();
+		phrDTO.setSiteList(Site.findAllSites());
+		phrDTO.setEngList(SiteEngineer.findAllSiteEngineers());
+		modelMap.put("plantDTO", phrDTO);
 		return "planthirerequests/queryPlant/search";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String displayPlants(@Valid PlantDTO plant, ModelMap modelMap) {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+	@RequestMapping(value = "pick", method = RequestMethod.GET)
+	public String displayPlants(@Valid PlantHireRequestDTO plant, ModelMap modelMap) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		String startDate = formatter.format(plant.getStartDate());
 		String endDate = formatter.format(plant.getEndDate());
 		
@@ -56,27 +64,40 @@ public class PlantQueryController {
 		PlantResourceList plantList = restTemplate.getForObject(url, PlantResourceList.class);
 		List<PlantResource> plants = plantList.getListOfPlantResources();
 		
-		PlantDTO p = new PlantDTO();
+		PlantHireRequestDTO p = new PlantHireRequestDTO();
 		p.setEndDate(plant.getEndDate());
 		p.setStartDate(plant.getStartDate());
 		p.setPlantList(plants);
+		p.setEngineer(plant.getEngineer());
+		p.setSite(plant.getSite());
 		addDateTimeFormatPatterns(modelMap);
 		modelMap.put("plantDTO", p);
 		return "planthirerequests/queryPlant/result";
 	}
 	
 	@RequestMapping(value = "result", method = RequestMethod.POST)
-	public String createPlantHireRequest(@Valid PlantDTO plant, ModelMap modelMap) {
+	public String createPlantHireRequest(@Valid PlantHireRequestDTO plant, ModelMap modelMap) {
+		
+		String plantRequestUrl = supplierUrl + "/rest/plant/" + plant.getPlant();
+		RestTemplate template = new RestTemplate();
+		PlantResource plantResource = template.getForObject(plantRequestUrl, PlantResource.class);
+		
+	    DateTime startDate = new DateTime(plant.getStartDate());
+	    DateTime endDate = new DateTime(plant.getEndDate());
+
+	    Days d = Days.daysBetween(startDate, endDate);
+	    int days = d.getDays();
+		
 		String url = webAppUrl + "/rest/phr/";
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
-		phrResource.setEndDate(new Date());
-		phrResource.setStartDate(new Date());
+		phrResource.setEndDate(plant.getEndDate());
+		phrResource.setStartDate(plant.getStartDate());
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
-		phrResource.setPlantId(plant.getChosenPlantId());
+		phrResource.setPlantId(plant.getPlant());
 		phrResource.setSite(Site.findAllSites().get(0));
 		phrResource.setSiteEngineer(SiteEngineer.findAllSiteEngineers().get(0));
 		phrResource.setSupplier(Supplier.findAllSuppliers().get(0));
-		phrResource.setTotalCost(new BigDecimal(1));
+		phrResource.setTotalCost(plantResource.getPricePerDay().multiply(new BigDecimal(days)));
 		
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response = restTemplate.postForEntity(url, phrResource, String.class);
@@ -88,11 +109,9 @@ public class PlantQueryController {
 	private void addDateTimeFormatPatterns(ModelMap modelMap) {
 		modelMap.put(
 				"plantHRBean_startr_date_format",
-				DateTimeFormat.patternForStyle("MM",
-						LocaleContextHolder.getLocale()));
+				DateTimeFormat.patternForStyle(("S-"), LocaleContextHolder.getLocale()));
 		modelMap.put(
 				"plantHRBean_endr_date_format",
-				DateTimeFormat.patternForStyle("MM",
-						LocaleContextHolder.getLocale()));
+				DateTimeFormat.patternForStyle(("S-"), LocaleContextHolder.getLocale()));
 	}
 }
