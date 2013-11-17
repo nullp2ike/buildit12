@@ -94,8 +94,8 @@ public class PlantQueryController {
 		phrResource.setStartDate(plant.getStartDate());
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
 		phrResource.setPlantId(plant.getPlant());
-		phrResource.setSite(Site.findAllSites().get(0));
-		phrResource.setSiteEngineer(SiteEngineer.findAllSiteEngineers().get(0));
+		phrResource.setSite(Site.findSite((long)plant.getSite()));
+		phrResource.setSiteEngineer(SiteEngineer.findSiteEngineer((long)plant.getEngineer()));
 		phrResource.setSupplier(Supplier.findAllSuppliers().get(0));
 		phrResource.setTotalCost(plantResource.getPricePerDay().multiply(new BigDecimal(days)));
 		
