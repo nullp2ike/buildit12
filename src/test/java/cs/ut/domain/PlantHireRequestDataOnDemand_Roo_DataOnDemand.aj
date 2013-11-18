@@ -48,6 +48,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setComment(obj, index);
         setEndDate(obj, index);
         setPlantId(obj, index);
+        setPurchaseOrderHRef(obj, index);
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
@@ -70,6 +71,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setPlantId(PlantHireRequest obj, int index) {
         int plantId = index;
         obj.setPlantId(plantId);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setPurchaseOrderHRef(PlantHireRequest obj, int index) {
+        String purchaseOrderHRef = "purchaseOrderHRef_" + index;
+        obj.setPurchaseOrderHRef(purchaseOrderHRef);
     }
     
     public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {

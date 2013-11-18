@@ -62,4 +62,7 @@ public class PlantHireRequest {
     @Enumerated
     @NotNull
     ApprovalStatus status;
+    
+    //For invoice
+    private String purchaseOrderHRef;
 }

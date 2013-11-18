@@ -85,4 +85,12 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.status = status;
     }
     
+    public String PlantHireRequest.getPurchaseOrderHRef() {
+        return this.purchaseOrderHRef;
+    }
+    
+    public void PlantHireRequest.setPurchaseOrderHRef(String purchaseOrderHRef) {
+        this.purchaseOrderHRef = purchaseOrderHRef;
+    }
+    
 }
