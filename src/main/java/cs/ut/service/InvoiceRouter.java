@@ -14,6 +14,7 @@ public class InvoiceRouter {
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		xPath.evaluate("//purchaseOrderHRef", invoice);
 		Float total = Float.valueOf(xPath.evaluate("//total", invoice));
+
 		if (total <= 100)
 			destinationChannel = "MINOR";
 		else

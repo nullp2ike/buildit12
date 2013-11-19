@@ -111,6 +111,10 @@ public class PlantHireRequestRestController {
 			RestTemplate restTemplate = new RestTemplate();
 			PurchaseOrderResource after = restTemplate.postForObject(url,
 					poResource, PurchaseOrderResource.class);
+			
+			String link = after.get_link("getPO").toString();
+			phr.setPurchaseOrderHRef(link);
+			phr.persist();
 
 			response = new ResponseEntity<>(after, HttpStatus.OK);
 		} else
