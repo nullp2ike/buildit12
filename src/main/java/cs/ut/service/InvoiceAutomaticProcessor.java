@@ -13,6 +13,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
+import cs.ut.domain.Invoice;
+import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.repository.PlantHireRequestRepository;
 
@@ -69,7 +71,10 @@ public class InvoiceAutomaticProcessor {
 
 		if(phr.getInvoice().getIsPaid() == false){
 			//normally there would be some pay method here
-			phr.getInvoice().setIsPaid(true);
+			Invoice inv = Invoice.findInvoice(phr.getInvoice().getId());
+			inv.setStatus(InvoiceStatus.APPROVED);
+			inv.setIsPaid(true);	
+			inv.merge();
 			mailMessage.setSubject("The payment has been made");
 			mailMessage.setText("url: " + urlFromFile + ", total cost: " + totalCostFromFile);
 		}else{

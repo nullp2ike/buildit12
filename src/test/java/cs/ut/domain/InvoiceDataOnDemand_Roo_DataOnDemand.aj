@@ -5,6 +5,7 @@ package cs.ut.domain;
 
 import cs.ut.domain.Invoice;
 import cs.ut.domain.InvoiceDataOnDemand;
+import cs.ut.domain.InvoiceStatus;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,20 +26,15 @@ privileged aspect InvoiceDataOnDemand_Roo_DataOnDemand {
     public Invoice InvoiceDataOnDemand.getNewTransientInvoice(int index) {
         Invoice obj = new Invoice();
         setIsPaid(obj, index);
-        setNeedsApproval(obj, index);
         setPurchaseOrderHRef(obj, index);
         setPurchaseOrderId(obj, index);
+        setStatus(obj, index);
         return obj;
     }
     
     public void InvoiceDataOnDemand.setIsPaid(Invoice obj, int index) {
         Boolean isPaid = Boolean.TRUE;
         obj.setIsPaid(isPaid);
-    }
-    
-    public void InvoiceDataOnDemand.setNeedsApproval(Invoice obj, int index) {
-        Boolean needsApproval = Boolean.TRUE;
-        obj.setNeedsApproval(needsApproval);
     }
     
     public void InvoiceDataOnDemand.setPurchaseOrderHRef(Invoice obj, int index) {
@@ -49,6 +45,11 @@ privileged aspect InvoiceDataOnDemand_Roo_DataOnDemand {
     public void InvoiceDataOnDemand.setPurchaseOrderId(Invoice obj, int index) {
         Long purchaseOrderId = new Integer(index).longValue();
         obj.setPurchaseOrderId(purchaseOrderId);
+    }
+    
+    public void InvoiceDataOnDemand.setStatus(Invoice obj, int index) {
+        InvoiceStatus status = null;
+        obj.setStatus(status);
     }
     
     public Invoice InvoiceDataOnDemand.getSpecificInvoice(int index) {

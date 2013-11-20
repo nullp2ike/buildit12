@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
 import cs.ut.domain.Invoice;
+import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
@@ -123,7 +124,7 @@ public class PlantHireRequestRestController {
 			invoice.setIsPaid(false);
 			invoice.setPurchaseOrderHRef(link);
 			invoice.setPurchaseOrderId(purchaseOrderId);
-			invoice.setNeedsApproval(false);
+			invoice.setStatus(InvoiceStatus.NO_INVOICE);
 			invoice.persist();
 			
 			phr.setInvoice(invoice);

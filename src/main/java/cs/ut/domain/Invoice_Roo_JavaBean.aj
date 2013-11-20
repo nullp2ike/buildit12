@@ -4,6 +4,7 @@
 package cs.ut.domain;
 
 import cs.ut.domain.Invoice;
+import cs.ut.domain.InvoiceStatus;
 
 privileged aspect Invoice_Roo_JavaBean {
     
@@ -31,12 +32,12 @@ privileged aspect Invoice_Roo_JavaBean {
         this.isPaid = isPaid;
     }
     
-    public Boolean Invoice.getNeedsApproval() {
-        return this.needsApproval;
+    public InvoiceStatus Invoice.getStatus() {
+        return this.status;
     }
     
-    public void Invoice.setNeedsApproval(Boolean needsApproval) {
-        this.needsApproval = needsApproval;
+    public void Invoice.setStatus(InvoiceStatus status) {
+        this.status = status;
     }
     
 }

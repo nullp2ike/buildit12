@@ -2,6 +2,7 @@ package cs.ut.repository;
 
 import java.util.List;
 
+import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
 
 import org.springframework.data.jpa.repository.Query;
@@ -17,9 +18,9 @@ public interface PlantHireRequestRepository {
 	@Transactional(readOnly = true)
 	PlantHireRequest findByPurchaseOrderId(@Param("purchaseOrderId") long purchaseOrderId);
 	
-	@Query("SELECT phr FROM PlantHireRequest AS phr WHERE phr.invoice = (SELECT inv FROM Invoice AS inv WHERE inv.needsApproval = true)")
+	@Query("SELECT phr FROM PlantHireRequest AS phr WHERE phr.invoice IN (SELECT inv.id FROM Invoice AS inv WHERE inv.status = :status)")
 	
 	@Transactional(readOnly = true)
-	List<PlantHireRequest> findRequestsThatNeedApproval();
+	List<PlantHireRequest> findRequestsByInvoiceStatus(@Param("status") InvoiceStatus status);
 	
 }

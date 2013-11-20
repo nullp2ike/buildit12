@@ -154,3 +154,6 @@ web mvc controller --class ~.domain.PlantHireRequest --preferredMapping /planthi
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 21:57:23
 web mvc controller --class ~.web.InvoiceApproveController --preferredMapping /invoices/approve
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-20 22:28:59
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 22:39:48
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-21 01:15:24
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-21 01:15:49

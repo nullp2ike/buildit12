@@ -13,6 +13,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
+import cs.ut.domain.Invoice;
+import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.repository.PlantHireRequestRepository;
 
@@ -56,9 +58,11 @@ public class InvoiceHumanAssistedHandling {
 		}
 		
 		if(phr.getInvoice().getIsPaid() == false){
-			phr.getInvoice().setNeedsApproval(true);
+			Invoice inv = Invoice.findInvoice(phr.getInvoice().getId());
+			inv.setStatus(InvoiceStatus.NEEDS_APPROVAL);
+			inv.merge();
 			mailMessage.setSubject("The payment is being processed");
-			mailMessage.setText("Since the total sum is quite large, the payment will be made soon by one of our employees" + "url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+			mailMessage.setText("Since the total sum is quite large, the payment will be made soon by our employee. " + "url: " + urlFromFile + ", total cost: " + totalCostFromFile);
 		}else{
 			mailMessage.setSubject("The plant hire has already been paid for");
 			mailMessage.setText(" According to us the plant hire has already been paid for " +

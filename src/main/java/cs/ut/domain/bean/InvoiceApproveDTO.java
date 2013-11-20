@@ -10,5 +10,6 @@ import cs.ut.domain.PlantHireRequest;
 public class InvoiceApproveDTO {
 	
 	private List<PlantHireRequest> phrList;
+	private int radio;
 
 }

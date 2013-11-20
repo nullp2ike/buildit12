@@ -69,7 +69,7 @@ public class InvoiceIntegrationTest {
 		inv.setIsPaid(false);
 		inv.setPurchaseOrderHRef("asd");
 		inv.setPurchaseOrderId(123);
-		inv.setNeedsApproval(false);
+		inv.setStatus(InvoiceStatus.NO_INVOICE);
 		inv.persist();
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(phrId);
 		phr.setInvoice(inv);

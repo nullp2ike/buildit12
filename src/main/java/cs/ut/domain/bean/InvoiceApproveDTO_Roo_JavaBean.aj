@@ -17,4 +17,12 @@ privileged aspect InvoiceApproveDTO_Roo_JavaBean {
         this.phrList = phrList;
     }
     
+    public int InvoiceApproveDTO.getRadio() {
+        return this.radio;
+    }
+    
+    public void InvoiceApproveDTO.setRadio(int radio) {
+        this.radio = radio;
+    }
+    
 }

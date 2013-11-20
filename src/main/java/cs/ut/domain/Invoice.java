@@ -19,7 +19,6 @@ public class Invoice {
     @NotNull
     private Boolean isPaid;
     
-    @NotNull
-    private Boolean needsApproval;
+    private InvoiceStatus status;
     
 }
