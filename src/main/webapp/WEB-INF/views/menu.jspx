@@ -20,7 +20,7 @@
             <menu:item id="i_supplier_list" messageCode="global_menu_list" url="/suppliers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="m3iWO9PZ5+HPrY21osNhms/WqIE="/>
         </menu:category>
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__planthirerequests_approveindex_id" messageCode="global_generic" url="/planthirerequests/approve/index" z="OZtB0oGIRoy2ybr2IPhyk36cRQs="/>
+            <menu:item id="i_controller__invoices_approveindex_id" messageCode="global_generic" url="/invoices/approve/index" z="PjIhYiwom9j9Xazqi/MhmTl89lw="/>
         </menu:category>
     </menu:menu>
 </div>

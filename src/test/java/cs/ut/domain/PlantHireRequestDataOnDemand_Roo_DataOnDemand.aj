@@ -55,10 +55,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         PlantHireRequest obj = new PlantHireRequest();
         setComment(obj, index);
         setEndDate(obj, index);
-        setIsPaid(obj, index);
         setPlantId(obj, index);
-        setPurchaseOrderHRef(obj, index);
-        setPurchaseOrderId(obj, index);
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
@@ -78,24 +75,9 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         obj.setEndDate(endDate);
     }
     
-    public void PlantHireRequestDataOnDemand.setIsPaid(PlantHireRequest obj, int index) {
-        Boolean isPaid = Boolean.TRUE;
-        obj.setIsPaid(isPaid);
-    }
-    
     public void PlantHireRequestDataOnDemand.setPlantId(PlantHireRequest obj, int index) {
         int plantId = index;
         obj.setPlantId(plantId);
-    }
-    
-    public void PlantHireRequestDataOnDemand.setPurchaseOrderHRef(PlantHireRequest obj, int index) {
-        String purchaseOrderHRef = "purchaseOrderHRef_" + index;
-        obj.setPurchaseOrderHRef(purchaseOrderHRef);
-    }
-    
-    public void PlantHireRequestDataOnDemand.setPurchaseOrderId(PlantHireRequest obj, int index) {
-        Long purchaseOrderId = new Integer(index).longValue();
-        obj.setPurchaseOrderId(purchaseOrderId);
     }
     
     public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {

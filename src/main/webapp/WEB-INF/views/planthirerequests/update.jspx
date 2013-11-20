@@ -13,8 +13,5 @@
         <field:select field="status" id="c_cs_ut_domain_PlantHireRequest_status" items="${approvalstatuses}" path="approvalstatuses" required="true" z="c6d2RYvVbhKuIPTARcyt9JfWXdY="/>
         <field:input field="comment" id="c_cs_ut_domain_PlantHireRequest_comment" z="b3ossQsr6mNPSCHM4fV7mIeztEA="/>
         <field:select field="invoice" id="c_cs_ut_domain_PlantHireRequest_invoice" itemValue="id" items="${invoices}" path="/invoices" z="Nj424IAv7vJc6xZ4B7FsWpcwlvk="/>
-        <field:input field="purchaseOrderHRef" id="c_cs_ut_domain_PlantHireRequest_purchaseOrderHRef" z="FmnhLyGW4tc1ZD431VuqUf7Rf3w="/>
-        <field:input field="purchaseOrderId" id="c_cs_ut_domain_PlantHireRequest_purchaseOrderId" z="rFCz2b3RE7lX5iCy4O/DNEw5TzE="/>
-        <field:checkbox field="isPaid" id="c_cs_ut_domain_PlantHireRequest_isPaid" z="VzcvTZW+BXjdevtJkyGt2czJWzE="/>
     </form:update>
 </div>

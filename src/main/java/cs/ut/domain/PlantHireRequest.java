@@ -63,13 +63,6 @@ public class PlantHireRequest {
     @NotNull
     ApprovalStatus status;
 
-    //For invoice
-    private String purchaseOrderHRef;
-
-    private long purchaseOrderId;
-
-    private Boolean isPaid;
-
     /**
      */
     @OneToOne

@@ -123,6 +123,7 @@ public class PlantHireRequestRestController {
 			invoice.setIsPaid(false);
 			invoice.setPurchaseOrderHRef(link);
 			invoice.setPurchaseOrderId(purchaseOrderId);
+			invoice.setNeedsApproval(false);
 			invoice.persist();
 			
 			phr.setInvoice(invoice);

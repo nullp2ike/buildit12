@@ -14,8 +14,5 @@
         <field:display field="comment" id="s_cs_ut_domain_PlantHireRequest_comment" object="${planthirerequest}" z="0JX4isIwqjPdzXmDJixYEeSJTDA="/>
         <field:display field="id" id="c_cs_ut_domain_PlantHireRequest_id" object="${planthirerequest}"/>
         <field:display field="invoice" id="s_cs_ut_domain_PlantHireRequest_invoice" object="${planthirerequest}" z="MSFh6Ip0fGHSmRfSwz6cc5sZr+s="/>
-        <field:display field="purchaseOrderHRef" id="s_cs_ut_domain_PlantHireRequest_purchaseOrderHRef" object="${planthirerequest}" z="QQRZbUZqqXYc8encMpfgYwBagtM="/>
-        <field:display field="purchaseOrderId" id="s_cs_ut_domain_PlantHireRequest_purchaseOrderId" object="${planthirerequest}" z="TbAjnREICMqt5XZ0mMEhr/g/vVQ="/>
-        <field:display field="isPaid" id="s_cs_ut_domain_PlantHireRequest_isPaid" object="${planthirerequest}" z="j3qaTSLA4rGQxoyZbFcscBjnYE8="/>
     </page:show>
 </div>
