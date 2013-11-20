@@ -30,8 +30,7 @@ import cs.ut.domain.Supplier;
 
 @ContextConfiguration(locations = { "/META-INF/spring/applicationContext.xml" })
 @RooIntegrationTest(entity = PlantHireRequestResource.class)
-public class PlantHireRequestResourceIntegrationTest extends
-		AbstractJUnit4SpringContextTests {
+public class PlantHireRequestResourceIntegrationTest{
 
 	Client client;
 	SiteEngineer sE;

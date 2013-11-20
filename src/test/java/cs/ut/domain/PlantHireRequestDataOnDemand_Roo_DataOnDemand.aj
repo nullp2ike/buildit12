@@ -4,6 +4,7 @@
 package cs.ut.domain;
 
 import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.InvoiceDataOnDemand;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.Site;
@@ -12,6 +13,7 @@ import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
 import cs.ut.domain.Supplier;
 import cs.ut.domain.SupplierDataOnDemand;
+import cs.ut.repository.PlantHireRequestRepository;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     private List<PlantHireRequest> PlantHireRequestDataOnDemand.data;
     
     @Autowired
+    InvoiceDataOnDemand PlantHireRequestDataOnDemand.invoiceDataOnDemand;
+    
+    @Autowired
     SiteDataOnDemand PlantHireRequestDataOnDemand.siteDataOnDemand;
     
     @Autowired
@@ -43,12 +48,17 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     @Autowired
     SupplierDataOnDemand PlantHireRequestDataOnDemand.supplierDataOnDemand;
     
+    @Autowired
+    PlantHireRequestRepository PlantHireRequestDataOnDemand.plantHireRequestRepository;
+    
     public PlantHireRequest PlantHireRequestDataOnDemand.getNewTransientPlantHireRequest(int index) {
         PlantHireRequest obj = new PlantHireRequest();
         setComment(obj, index);
         setEndDate(obj, index);
+        setIsPaid(obj, index);
         setPlantId(obj, index);
         setPurchaseOrderHRef(obj, index);
+        setPurchaseOrderId(obj, index);
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
@@ -68,6 +78,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         obj.setEndDate(endDate);
     }
     
+    public void PlantHireRequestDataOnDemand.setIsPaid(PlantHireRequest obj, int index) {
+        Boolean isPaid = Boolean.TRUE;
+        obj.setIsPaid(isPaid);
+    }
+    
     public void PlantHireRequestDataOnDemand.setPlantId(PlantHireRequest obj, int index) {
         int plantId = index;
         obj.setPlantId(plantId);
@@ -76,6 +91,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setPurchaseOrderHRef(PlantHireRequest obj, int index) {
         String purchaseOrderHRef = "purchaseOrderHRef_" + index;
         obj.setPurchaseOrderHRef(purchaseOrderHRef);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setPurchaseOrderId(PlantHireRequest obj, int index) {
+        Long purchaseOrderId = new Integer(index).longValue();
+        obj.setPurchaseOrderId(purchaseOrderId);
     }
     
     public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {
@@ -118,14 +138,14 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         }
         PlantHireRequest obj = data.get(index);
         Long id = obj.getId();
-        return PlantHireRequest.findPlantHireRequest(id);
+        return plantHireRequestRepository.findOne(id);
     }
     
     public PlantHireRequest PlantHireRequestDataOnDemand.getRandomPlantHireRequest() {
         init();
         PlantHireRequest obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return PlantHireRequest.findPlantHireRequest(id);
+        return plantHireRequestRepository.findOne(id);
     }
     
     public boolean PlantHireRequestDataOnDemand.modifyPlantHireRequest(PlantHireRequest obj) {
@@ -135,7 +155,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = PlantHireRequest.findPlantHireRequestEntries(from, to);
+        data = plantHireRequestRepository.findAll(new org.springframework.data.domain.PageRequest(from / to, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'PlantHireRequest' illegally returned null");
         }
@@ -147,7 +167,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         for (int i = 0; i < 10; i++) {
             PlantHireRequest obj = getNewTransientPlantHireRequest(i);
             try {
-                obj.persist();
+                plantHireRequestRepository.save(obj);
             } catch (final ConstraintViolationException e) {
                 final StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -156,7 +176,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
                 }
                 throw new IllegalStateException(msg.toString(), e);
             }
-            obj.flush();
+            plantHireRequestRepository.flush();
             data.add(obj);
         }
     }

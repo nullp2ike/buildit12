@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
 import cs.ut.domain.PlantHireRequest;
+import cs.ut.repository.PlantHireRequestRepository;
 
 @Component
 public class InvoiceAutomaticProcessor {
 
+	@Autowired PlantHireRequestRepository phrRepository;
 	@Value("${email.rentit}")
 	String rentitEmail;
 
@@ -27,25 +30,17 @@ public class InvoiceAutomaticProcessor {
 		MailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(rentitEmail);
 		mailMessage.setSentDate(new Date());
-		JAXBContext jaxbCtx;
-		InvoiceResource invoiceRes = null;
-		try {
-			jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
-			invoiceRes = (InvoiceResource) jaxbCtx.createUnmarshaller()
-					.unmarshal(invoice);
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		InvoiceResource invoiceRes = xmlToInvoiceResource(invoice);
 
 		String urlFromFile = invoiceRes.getPurchaseOrderHRef();
 		System.out.println("urlfromfile: " + urlFromFile);
 		String totalCostFromFile = invoiceRes.getTotal().toPlainString();
 
-		long id = Long.parseLong(urlFromFile.substring(urlFromFile
+		long purchaseOrderId = Long.parseLong(urlFromFile.substring(urlFromFile
 				.lastIndexOf("/") + 1));
-		System.out.println("id: " + id);
-		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
+		System.out.println("id: " + purchaseOrderId);
+		PlantHireRequest phr = phrRepository.findByPurchaseOrderId(purchaseOrderId);
 
 		if (phr == null) {
 			System.out.println("null");
@@ -72,10 +67,31 @@ public class InvoiceAutomaticProcessor {
 			return mailMessage;
 		}
 
-		mailMessage.setSubject("The payment is being processed");
-		mailMessage.setText("url: " + urlFromFile + ", total cost: "
-				+ totalCostFromFile);
+		if(phr.getInvoice().getIsPaid() == false){
+			//normally there would be some pay method here
+			phr.getInvoice().setIsPaid(true);
+			mailMessage.setSubject("The payment has been made");
+			mailMessage.setText("url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+		}else{
+			mailMessage.setSubject("The plant hire has already been paid for");
+			mailMessage.setText(" According to us the plant hire has already been paid for " +
+			" url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+		}
 		return mailMessage;
+	}
+
+	private InvoiceResource xmlToInvoiceResource(Document invoice) {
+		JAXBContext jaxbCtx;
+		InvoiceResource invoiceRes = null;
+		try {
+			jaxbCtx = JAXBContext.newInstance(InvoiceResource.class);
+			invoiceRes = (InvoiceResource) jaxbCtx.createUnmarshaller()
+					.unmarshal(invoice);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return invoiceRes;
 	}
 
 }

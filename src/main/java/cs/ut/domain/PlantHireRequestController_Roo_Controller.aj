@@ -4,11 +4,13 @@
 package cs.ut.domain;
 
 import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestController;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.repository.PlantHireRequestRepository;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect PlantHireRequestController_Roo_Controller {
     
+    @Autowired
+    PlantHireRequestRepository PlantHireRequestController.plantHireRequestRepository;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String PlantHireRequestController.create(@Valid PlantHireRequest plantHireRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -35,7 +41,7 @@ privileged aspect PlantHireRequestController_Roo_Controller {
             return "planthirerequests/create";
         }
         uiModel.asMap().clear();
-        plantHireRequest.persist();
+        plantHireRequestRepository.save(plantHireRequest);
         return "redirect:/planthirerequests/" + encodeUrlPathSegment(plantHireRequest.getId().toString(), httpServletRequest);
     }
     
@@ -59,7 +65,7 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PlantHireRequestController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("planthirerequest", PlantHireRequest.findPlantHireRequest(id));
+        uiModel.addAttribute("planthirerequest", plantHireRequestRepository.findOne(id));
         uiModel.addAttribute("itemId", id);
         return "planthirerequests/show";
     }
@@ -69,11 +75,11 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("planthirerequests", PlantHireRequest.findPlantHireRequestEntries(firstResult, sizeNo));
-            float nrOfPages = (float) PlantHireRequest.countPlantHireRequests() / sizeNo;
+            uiModel.addAttribute("planthirerequests", plantHireRequestRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
+            float nrOfPages = (float) plantHireRequestRepository.count() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("planthirerequests", PlantHireRequest.findAllPlantHireRequests());
+            uiModel.addAttribute("planthirerequests", plantHireRequestRepository.findAll());
         }
         addDateTimeFormatPatterns(uiModel);
         return "planthirerequests/list";
@@ -86,20 +92,20 @@ privileged aspect PlantHireRequestController_Roo_Controller {
             return "planthirerequests/update";
         }
         uiModel.asMap().clear();
-        plantHireRequest.merge();
+        plantHireRequestRepository.save(plantHireRequest);
         return "redirect:/planthirerequests/" + encodeUrlPathSegment(plantHireRequest.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PlantHireRequestController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, PlantHireRequest.findPlantHireRequest(id));
+        populateEditForm(uiModel, plantHireRequestRepository.findOne(id));
         return "planthirerequests/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String PlantHireRequestController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        PlantHireRequest plantHireRequest = PlantHireRequest.findPlantHireRequest(id);
-        plantHireRequest.remove();
+        PlantHireRequest plantHireRequest = plantHireRequestRepository.findOne(id);
+        plantHireRequestRepository.delete(plantHireRequest);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
@@ -115,6 +121,7 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("approvalstatuses", Arrays.asList(ApprovalStatus.values()));
+        uiModel.addAttribute("invoices", Invoice.findAllInvoices());
         uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
         uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());

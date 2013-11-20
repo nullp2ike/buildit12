@@ -141,3 +141,14 @@ web mvc controller --class ~.web.PlantQueryController --preferredMapping /planth
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-18 22:30:02
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-18 22:35:10
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-19 23:10:33
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-20 00:51:36
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 19:31:47
+repository jpa --interface ~.repository.PlantHireRequestRepository --entity ~.domain.PlantHireRequest
+entity jpa --class ~.domain.Invoice --testAutomatically
+focus --class ~.domain.PlantHireRequest 
+field reference --fieldName invoice --type ~.domain.Invoice --cardinality ONE_TO_ONE 
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-20 20:19:18
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 20:19:33
+web mvc controller --class ~.domain.PlantHireRequest --preferredMapping /planthirerequests/approve
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-20 21:57:08
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 21:57:23

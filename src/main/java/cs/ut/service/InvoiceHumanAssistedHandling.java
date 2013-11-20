@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
 import cs.ut.domain.PlantHireRequest;
+import cs.ut.repository.PlantHireRequestRepository;
 
 @Component
 public class InvoiceHumanAssistedHandling {
 	
+	@Autowired PlantHireRequestRepository phrRepository;
 	@Value("${email.rentit}")
 	String rentitEmail;
 
@@ -27,6 +30,46 @@ public class InvoiceHumanAssistedHandling {
 		MailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(rentitEmail);
 		mailMessage.setSentDate(new Date());
+		
+		InvoiceResource invoiceRes = xmlToInvoiceResource(invoice);
+
+		String urlFromFile = invoiceRes.getPurchaseOrderHRef();
+		String totalCostFromFile = invoiceRes.getTotal().toPlainString();
+		
+		long purchaseOrderId = Long.parseLong(urlFromFile.substring(urlFromFile.lastIndexOf("/") + 1));
+		
+		PlantHireRequest phr = phrRepository.findByPurchaseOrderId(purchaseOrderId);
+		
+		if(phr == null){
+				mailMessage.setSubject("Problem with the invoice url");
+				mailMessage.setText("The invoice was not found in our database, you sent us the following info" +
+				" url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+				return mailMessage;
+		}
+		
+		String costInDatabase = phr.getTotalCost().toPlainString();
+		if(!totalCostFromFile.equals(costInDatabase)){
+			mailMessage.setSubject("Problem with the total");
+			mailMessage.setText("The invoice total cost did not match with the total cost in our database. The cost according to us should be: " + costInDatabase +
+			" url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+			return mailMessage;
+		}
+		
+		if(phr.getInvoice().getIsPaid() == false){
+			phr.getInvoice().setNeedsApproval(true);
+			mailMessage.setSubject("The payment is being processed");
+			mailMessage.setText("Since the total sum is quite large, the payment will be made soon by one of our employees" + "url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+		}else{
+			mailMessage.setSubject("The plant hire has already been paid for");
+			mailMessage.setText(" According to us the plant hire has already been paid for " +
+			" url: " + urlFromFile + ", total cost: " + totalCostFromFile);
+		}
+		
+		return mailMessage;
+
+	}
+
+	private InvoiceResource xmlToInvoiceResource(Document invoice) {
 		JAXBContext jaxbCtx;
 		InvoiceResource invoiceRes = null;
 		try {
@@ -37,41 +80,9 @@ public class InvoiceHumanAssistedHandling {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//"<http://localhost:8081/Rentit/rest/pos/194>;rel="getPO""
-		String urlFromFile = invoiceRes.getPurchaseOrderHRef();
-		String totalCostFromFile = invoiceRes.getTotal().toPlainString();
-		
-		long id = Long.parseLong(urlFromFile.substring(urlFromFile.lastIndexOf("/") + 1));
-		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
-		
-		if(phr == null){
-				mailMessage.setSubject("Problem with the invoice url");
-				mailMessage.setText("The invoice was not found in our database, you sent us the following info" +
-				" url: " + urlFromFile + ", total cost: " + totalCostFromFile);
-				return mailMessage;
-		}
-		
-		//unpaid Purchase Order
-		
-		String costInDatabase = phr.getTotalCost().toPlainString();
-		if(!totalCostFromFile.equals(costInDatabase)){
-			mailMessage.setSubject("Problem with the total");
-			mailMessage.setText("The invoice total cost did not match with the total cost in our database. The cost according to us should be: " + costInDatabase +
-			" url: " + urlFromFile + ", total cost: " + totalCostFromFile);
-			return mailMessage;
-		}
-		
-		mailMessage.setSubject("The payment is being processed");
-		mailMessage.setText("url: " + urlFromFile + ", total cost: " + totalCostFromFile);
-		return mailMessage;
-
+		return invoiceRes;
 	}
 
-	// CC10. When an invoice is received, the system must check that the PO
-	// number in the invoice
-	// corresponds to an existing and unpaid Purchase Order. If the PO does not
-	// exist, an error
-	// message is returned to the supplier.
 	// CC11. The system must allow site engineers to approve an invoice and to
 	// retrieve the PO associated
 	// to an invoice.

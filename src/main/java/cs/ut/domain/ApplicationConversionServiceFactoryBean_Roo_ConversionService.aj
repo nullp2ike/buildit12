@@ -8,6 +8,8 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.repository.PlantHireRequestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -15,6 +17,9 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    @Autowired
+    PlantHireRequestRepository ApplicationConversionServiceFactoryBean.plantHireRequestRepository;
     
     public Converter<PlantHireRequest, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.PlantHireRequest, java.lang.String>() {
@@ -27,7 +32,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, PlantHireRequest> ApplicationConversionServiceFactoryBean.getIdToPlantHireRequestConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.domain.PlantHireRequest>() {
             public cs.ut.domain.PlantHireRequest convert(java.lang.Long id) {
-                return PlantHireRequest.findPlantHireRequest(id);
+                return plantHireRequestRepository.findOne(id);
             }
         };
     }

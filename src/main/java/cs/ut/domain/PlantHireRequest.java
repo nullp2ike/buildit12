@@ -1,17 +1,16 @@
 package cs.ut.domain;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
+import javax.persistence.OneToOne;
 
 @RooJavaBean
 @RooToString
@@ -44,6 +43,7 @@ public class PlantHireRequest {
     private SiteEngineer siteEngineer;
 
     private String comment;
+
     @NotNull
     private int plantId;
 
@@ -58,11 +58,20 @@ public class PlantHireRequest {
     @ManyToOne
     @NotNull
     private Supplier supplier;
-    
+
     @Enumerated
     @NotNull
     ApprovalStatus status;
-    
+
     //For invoice
     private String purchaseOrderHRef;
+
+    private long purchaseOrderId;
+
+    private Boolean isPaid;
+
+    /**
+     */
+    @OneToOne
+    private Invoice invoice;
 }

@@ -5,6 +5,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import java.lang.reflect.Method;
 import java.net.URI;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
+import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.util.ExtendedLink;
 
 @Controller
@@ -33,6 +36,7 @@ public class PlantHireRequestRestController {
 	
 	@Value("${supplierurl}")
 	String supplierurl;
+
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
 	public ResponseEntity<PlantHireRequestResource> createPHR(
@@ -112,8 +116,16 @@ public class PlantHireRequestRestController {
 			PurchaseOrderResource after = restTemplate.postForObject(url,
 					poResource, PurchaseOrderResource.class);
 			
-			String link = after.get_link("getPO").toString();
-			phr.setPurchaseOrderHRef(link);
+			String link = after.get_link("getPO").getHref();
+			long purchaseOrderId = Long.parseLong(link.substring(link.lastIndexOf("/") + 1));
+			
+			Invoice invoice = new Invoice();
+			invoice.setIsPaid(false);
+			invoice.setPurchaseOrderHRef(link);
+			invoice.setPurchaseOrderId(purchaseOrderId);
+			invoice.persist();
+			
+			phr.setInvoice(invoice);
 			phr.persist();
 
 			response = new ResponseEntity<>(after, HttpStatus.OK);

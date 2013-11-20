@@ -4,6 +4,7 @@
 package cs.ut.domain;
 
 import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -91,6 +92,30 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setPurchaseOrderHRef(String purchaseOrderHRef) {
         this.purchaseOrderHRef = purchaseOrderHRef;
+    }
+    
+    public long PlantHireRequest.getPurchaseOrderId() {
+        return this.purchaseOrderId;
+    }
+    
+    public void PlantHireRequest.setPurchaseOrderId(long purchaseOrderId) {
+        this.purchaseOrderId = purchaseOrderId;
+    }
+    
+    public Boolean PlantHireRequest.getIsPaid() {
+        return this.isPaid;
+    }
+    
+    public void PlantHireRequest.setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+    
+    public Invoice PlantHireRequest.getInvoice() {
+        return this.invoice;
+    }
+    
+    public void PlantHireRequest.setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
     
 }

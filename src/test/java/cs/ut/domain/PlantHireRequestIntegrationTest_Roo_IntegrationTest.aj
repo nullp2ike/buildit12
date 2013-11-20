@@ -3,9 +3,9 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.PlantHireRequestIntegrationTest;
+import cs.ut.repository.PlantHireRequestRepository;
 import java.util.Iterator;
 import java.util.List;
 import javax.validation.ConstraintViolation;
@@ -29,42 +29,45 @@ privileged aspect PlantHireRequestIntegrationTest_Roo_IntegrationTest {
     @Autowired
     PlantHireRequestDataOnDemand PlantHireRequestIntegrationTest.dod;
     
+    @Autowired
+    PlantHireRequestRepository PlantHireRequestIntegrationTest.plantHireRequestRepository;
+    
     @Test
-    public void PlantHireRequestIntegrationTest.testCountPlantHireRequests() {
+    public void PlantHireRequestIntegrationTest.testCount() {
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", dod.getRandomPlantHireRequest());
-        long count = PlantHireRequest.countPlantHireRequests();
+        long count = plantHireRequestRepository.count();
         Assert.assertTrue("Counter for 'PlantHireRequest' incorrectly reported there were no entries", count > 0);
     }
     
     @Test
-    public void PlantHireRequestIntegrationTest.testFindPlantHireRequest() {
+    public void PlantHireRequestIntegrationTest.testFind() {
         PlantHireRequest obj = dod.getRandomPlantHireRequest();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to provide an identifier", id);
-        obj = PlantHireRequest.findPlantHireRequest(id);
+        obj = plantHireRequestRepository.findOne(id);
         Assert.assertNotNull("Find method for 'PlantHireRequest' illegally returned null for id '" + id + "'", obj);
         Assert.assertEquals("Find method for 'PlantHireRequest' returned the incorrect identifier", id, obj.getId());
     }
     
     @Test
-    public void PlantHireRequestIntegrationTest.testFindAllPlantHireRequests() {
+    public void PlantHireRequestIntegrationTest.testFindAll() {
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", dod.getRandomPlantHireRequest());
-        long count = PlantHireRequest.countPlantHireRequests();
+        long count = plantHireRequestRepository.count();
         Assert.assertTrue("Too expensive to perform a find all test for 'PlantHireRequest', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);
-        List<PlantHireRequest> result = PlantHireRequest.findAllPlantHireRequests();
+        List<PlantHireRequest> result = plantHireRequestRepository.findAll();
         Assert.assertNotNull("Find all method for 'PlantHireRequest' illegally returned null", result);
         Assert.assertTrue("Find all method for 'PlantHireRequest' failed to return any data", result.size() > 0);
     }
     
     @Test
-    public void PlantHireRequestIntegrationTest.testFindPlantHireRequestEntries() {
+    public void PlantHireRequestIntegrationTest.testFindEntries() {
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", dod.getRandomPlantHireRequest());
-        long count = PlantHireRequest.countPlantHireRequests();
+        long count = plantHireRequestRepository.count();
         if (count > 20) count = 20;
         int firstResult = 0;
         int maxResults = (int) count;
-        List<PlantHireRequest> result = PlantHireRequest.findPlantHireRequestEntries(firstResult, maxResults);
+        List<PlantHireRequest> result = plantHireRequestRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
         Assert.assertNotNull("Find entries method for 'PlantHireRequest' illegally returned null", result);
         Assert.assertEquals("Find entries method for 'PlantHireRequest' returned an incorrect number of entries", count, result.size());
     }
@@ -75,37 +78,37 @@ privileged aspect PlantHireRequestIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to provide an identifier", id);
-        obj = PlantHireRequest.findPlantHireRequest(id);
+        obj = plantHireRequestRepository.findOne(id);
         Assert.assertNotNull("Find method for 'PlantHireRequest' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyPlantHireRequest(obj);
         Integer currentVersion = obj.getVersion();
-        obj.flush();
+        plantHireRequestRepository.flush();
         Assert.assertTrue("Version for 'PlantHireRequest' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
     @Test
-    public void PlantHireRequestIntegrationTest.testMergeUpdate() {
+    public void PlantHireRequestIntegrationTest.testSaveUpdate() {
         PlantHireRequest obj = dod.getRandomPlantHireRequest();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to provide an identifier", id);
-        obj = PlantHireRequest.findPlantHireRequest(id);
+        obj = plantHireRequestRepository.findOne(id);
         boolean modified =  dod.modifyPlantHireRequest(obj);
         Integer currentVersion = obj.getVersion();
-        PlantHireRequest merged = obj.merge();
-        obj.flush();
+        PlantHireRequest merged = plantHireRequestRepository.save(obj);
+        plantHireRequestRepository.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         Assert.assertTrue("Version for 'PlantHireRequest' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
     
     @Test
-    public void PlantHireRequestIntegrationTest.testPersist() {
+    public void PlantHireRequestIntegrationTest.testSave() {
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", dod.getRandomPlantHireRequest());
         PlantHireRequest obj = dod.getNewTransientPlantHireRequest(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'PlantHireRequest' identifier to be null", obj.getId());
         try {
-            obj.persist();
+            plantHireRequestRepository.save(obj);
         } catch (final ConstraintViolationException e) {
             final StringBuilder msg = new StringBuilder();
             for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -114,20 +117,20 @@ privileged aspect PlantHireRequestIntegrationTest_Roo_IntegrationTest {
             }
             throw new IllegalStateException(msg.toString(), e);
         }
-        obj.flush();
+        plantHireRequestRepository.flush();
         Assert.assertNotNull("Expected 'PlantHireRequest' identifier to no longer be null", obj.getId());
     }
     
     @Test
-    public void PlantHireRequestIntegrationTest.testRemove() {
+    public void PlantHireRequestIntegrationTest.testDelete() {
         PlantHireRequest obj = dod.getRandomPlantHireRequest();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to initialize correctly", obj);
         Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'PlantHireRequest' failed to provide an identifier", id);
-        obj = PlantHireRequest.findPlantHireRequest(id);
-        obj.remove();
-        obj.flush();
-        Assert.assertNull("Failed to remove 'PlantHireRequest' with identifier '" + id + "'", PlantHireRequest.findPlantHireRequest(id));
+        obj = plantHireRequestRepository.findOne(id);
+        plantHireRequestRepository.delete(obj);
+        plantHireRequestRepository.flush();
+        Assert.assertNull("Failed to remove 'PlantHireRequest' with identifier '" + id + "'", plantHireRequestRepository.findOne(id));
     }
     
 }
