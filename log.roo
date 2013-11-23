@@ -169,3 +169,9 @@ field reference --fieldName worksEngineer --type ~.domain.WorksEngineer --cardin
 web mvc controller --class ~.web.PlantHireRequestApproveController --preferredMapping /planthirerequests/pending
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-23 20:03:08
 security setup
+entity jpa --class ~.security.Users
+entity jpa --class ~.security.Authorities
+entity jpa --class ~.security.Assignments
+web mvc scaffold --class ~.security.UsersController --path /security/users
+web mvc scaffold --class ~.security.AuthoritiesController --path /security/authorities
+web mvc scaffold --class ~.security.AssignmentsController --path /security/assignments
