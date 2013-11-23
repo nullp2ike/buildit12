@@ -157,3 +157,13 @@ web mvc controller --class ~.web.InvoiceApproveController --preferredMapping /in
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-20 22:39:48
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-21 01:15:24
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-21 01:15:49
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-21 11:58:51
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-23 13:53:57
+focus --class ~.domain.PlantHireRequest
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-23 13:56:08
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-23 13:56:23
+entity jpa --class ~.domain.WorksEngineer
+entity jpa --class ~.domain.WorksEngineer
+focus --class ~.domain.PlantHireRequest
+field reference --fieldName worksEngineer --type ~.domain.WorksEngineer --cardinality MANY_TO_ONE 
+web mvc controller --class ~.web.PlantHireRequestApproveController --preferredMapping /planthirerequests/pending

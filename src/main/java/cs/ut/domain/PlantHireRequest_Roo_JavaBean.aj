@@ -9,6 +9,7 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.domain.WorksEngineer;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -92,6 +93,14 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+    
+    public WorksEngineer PlantHireRequest.getWorksEngineer() {
+        return this.worksEngineer;
+    }
+    
+    public void PlantHireRequest.setWorksEngineer(WorksEngineer worksEngineer) {
+        this.worksEngineer = worksEngineer;
     }
     
 }

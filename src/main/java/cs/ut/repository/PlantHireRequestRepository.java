@@ -2,6 +2,7 @@ package cs.ut.repository;
 
 import java.util.List;
 
+import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
 
@@ -22,5 +23,10 @@ public interface PlantHireRequestRepository {
 	
 	@Transactional(readOnly = true)
 	List<PlantHireRequest> findRequestsByInvoiceStatus(@Param("status") InvoiceStatus status);
+	
+	@Query("SELECT phr FROM PlantHireRequest AS phr WHERE phr.status = :status")
+	
+	@Transactional(readOnly = true)
+	List<PlantHireRequest> findRequestsByApprovalStatus(@Param("status") ApprovalStatus status);
 	
 }

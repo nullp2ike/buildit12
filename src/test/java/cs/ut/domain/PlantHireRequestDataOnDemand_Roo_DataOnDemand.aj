@@ -13,6 +13,7 @@ import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
 import cs.ut.domain.Supplier;
 import cs.ut.domain.SupplierDataOnDemand;
+import cs.ut.domain.WorksEngineer;
 import cs.ut.repository.PlantHireRequestRepository;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -62,6 +63,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setStatus(obj, index);
         setSupplier(obj, index);
         setTotalCost(obj, index);
+        setWorksEngineer(obj, index);
         return obj;
     }
     
@@ -108,6 +110,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setTotalCost(PlantHireRequest obj, int index) {
         BigDecimal totalCost = BigDecimal.valueOf(index);
         obj.setTotalCost(totalCost);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setWorksEngineer(PlantHireRequest obj, int index) {
+        WorksEngineer worksEngineer = null;
+        obj.setWorksEngineer(worksEngineer);
     }
     
     public PlantHireRequest PlantHireRequestDataOnDemand.getSpecificPlantHireRequest(int index) {

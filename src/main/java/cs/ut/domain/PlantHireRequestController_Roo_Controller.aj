@@ -10,6 +10,7 @@ import cs.ut.domain.PlantHireRequestController;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.domain.WorksEngineer;
 import cs.ut.repository.PlantHireRequestRepository;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -125,6 +126,7 @@ privileged aspect PlantHireRequestController_Roo_Controller {
         uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
         uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());
+        uiModel.addAttribute("worksengineers", WorksEngineer.findAllWorksEngineers());
     }
     
     String PlantHireRequestController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
