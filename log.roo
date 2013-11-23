@@ -167,3 +167,5 @@ entity jpa --class ~.domain.WorksEngineer
 focus --class ~.domain.PlantHireRequest
 field reference --fieldName worksEngineer --type ~.domain.WorksEngineer --cardinality MANY_TO_ONE 
 web mvc controller --class ~.web.PlantHireRequestApproveController --preferredMapping /planthirerequests/pending
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-23 20:03:08
+security setup
