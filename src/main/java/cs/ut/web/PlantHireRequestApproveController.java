@@ -28,11 +28,15 @@ public class PlantHireRequestApproveController {
 	@Value("${webappurl}")
 	String webappurl;
 	
+	@Value("${supplierurl}")
+	String supplierurl;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String displayInvoicesThatNeedApproval(ModelMap modelMap) {
 		List<PlantHireRequest> phrList = repository.findRequestsByApprovalStatus(ApprovalStatus.PENDING_APPROVAL);
 		PlantHireRequestApproveDTO phrAproveDTO = new PlantHireRequestApproveDTO();
 		phrAproveDTO.setPhrList(phrList);
+		phrAproveDTO.setSupplierUrl(supplierurl);
 		modelMap.put("phrApproveDTO", phrAproveDTO);
 		return "planthirerequests/pending/list";
 	}

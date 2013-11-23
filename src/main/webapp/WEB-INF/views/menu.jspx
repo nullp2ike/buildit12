@@ -21,7 +21,7 @@
         </menu:category>
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
             <menu:item id="i_controller__invoices_approveindex_id" messageCode="global_generic" url="/invoices/approve/list" z="user-managed"/>
-            <menu:item id="i_controller__planthirerequests_pendingindex_id" messageCode="global_generic" url="/planthirerequests/pending/index" z="2s5ZuH0PxbOwjyIz3BTGnGBpumI="/>
+            <menu:item id="i_controller__planthirerequests_pendingindex_id" messageCode="global_generic" url="/planthirerequests/pending/list" z="user-managed"/>
         </menu:category>
     </menu:menu>
 </div>

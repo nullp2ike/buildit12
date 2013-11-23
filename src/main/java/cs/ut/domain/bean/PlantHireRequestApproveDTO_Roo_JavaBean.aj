@@ -25,4 +25,12 @@ privileged aspect PlantHireRequestApproveDTO_Roo_JavaBean {
         this.radio = radio;
     }
     
+    public String PlantHireRequestApproveDTO.getSupplierUrl() {
+        return this.supplierUrl;
+    }
+    
+    public void PlantHireRequestApproveDTO.setSupplierUrl(String supplierUrl) {
+        this.supplierUrl = supplierUrl;
+    }
+    
 }

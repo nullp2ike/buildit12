@@ -11,19 +11,33 @@
 		<table>
 			<tr>
 				<td></td>
+				<td>Plant url</td>
 				<td>Total cost</td>
-				<td>URL</td>
+				<td>Site</td>
+				<td>Start date</td>
+				<td>End date</td>
+				<td>Site engineer</td>
 			</tr>
 			<c:forEach var="hireRequests" items="${phrApproveDTO.phrList}">
+				<fmt:formatDate value="${hireRequests.startDate}"
+					pattern="dd-MM-yyyy" var="newStartDate" />
+				<fmt:formatDate value="${hireRequests.endDate}" pattern="dd-MM-yyyy"
+					var="newEndDate" />
 				<tr>
-					<td><form:radiobutton path="radio" value="${hireRequests.id}"/></td>
+					<td><form:radiobutton path="radio" value="${hireRequests.id}" /></td>
+					<td>${phrApproveDTO.supplierUrl}/rest/plant/${hireRequests.plantId}</td>
 					<td>${hireRequests.totalCost}</td>
-					<td>${hireRequests.site}</td>
+					<td>${hireRequests.site.name}</td>
+					<td>${newStartDate}</td>
+					<td>${newEndDate}</td>
+					<td>${hireRequests.siteEngineer.firstName}
+						${hireRequests.siteEngineer.lastName}</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" name ="submit" value="Approve" />
-		<input type="submit" name ="submit" value="Reject" />
-		<input type="text" name ="rejectionReason" placeholder="Why did you reject .."/>
+		<input type="submit" name="submit" value="Approve" />
+		<input type="submit" name="submit" value="Reject" />
+		<input type="text" name="rejectionReason"
+			placeholder="Why did you reject .." />
 	</form:form>
 </div>

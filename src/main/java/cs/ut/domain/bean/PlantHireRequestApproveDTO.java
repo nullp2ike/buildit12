@@ -10,4 +10,5 @@ import cs.ut.domain.PlantHireRequest;
 public class PlantHireRequestApproveDTO {
 	private List<PlantHireRequest> phrList;
 	private int radio;
+	private String supplierUrl;
 }
