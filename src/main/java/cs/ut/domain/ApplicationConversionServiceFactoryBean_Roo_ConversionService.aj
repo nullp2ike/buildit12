@@ -9,7 +9,6 @@ import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
 import cs.ut.repository.PlantHireRequestRepository;
-import cs.ut.security.Assignments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
@@ -118,30 +117,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Assignments, String> ApplicationConversionServiceFactoryBean.getAssignmentsToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cs.ut.security.Assignments, java.lang.String>() {
-            public String convert(Assignments assignments) {
-                return "(no displayable fields)";
-            }
-        };
-    }
-    
-    public Converter<Long, Assignments> ApplicationConversionServiceFactoryBean.getIdToAssignmentsConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.security.Assignments>() {
-            public cs.ut.security.Assignments convert(java.lang.Long id) {
-                return Assignments.findAssignments(id);
-            }
-        };
-    }
-    
-    public Converter<String, Assignments> ApplicationConversionServiceFactoryBean.getStringToAssignmentsConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cs.ut.security.Assignments>() {
-            public cs.ut.security.Assignments convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Assignments.class);
-            }
-        };
-    }
-    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getPlantHireRequestToStringConverter());
         registry.addConverter(getIdToPlantHireRequestConverter());
@@ -155,9 +130,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSupplierToStringConverter());
         registry.addConverter(getIdToSupplierConverter());
         registry.addConverter(getStringToSupplierConverter());
-        registry.addConverter(getAssignmentsToStringConverter());
-        registry.addConverter(getIdToAssignmentsConverter());
-        registry.addConverter(getStringToAssignmentsConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {
