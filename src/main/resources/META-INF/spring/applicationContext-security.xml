@@ -20,28 +20,13 @@
 		<!-- SHA-256 values can be produced using 'echo -n your_desired_password 
 			| sha256sum' (using normal *nix environments) -->
 		<authentication-provider>
-			<password-encoder hash="sha-256" />
-			<user-service>
-				<user name="admin"
-					password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
-					authorities="ROLE_ADMIN" />
-				<user name="user"
-					password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
-					authorities="ROLE_USER" />
-				<user name="site_engineer"
-					password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
-					authorities="ROLE_SITE_ENGINEER" />
-				<user name="works_engineer"
-					password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
-					authorities="ROLE_WORKS_ENGINEER" />
-			</user-service>
+
+			
+	
+
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT username, password, enabled
-FROM users WHERE username = ?;"
-				authorities-by-username-query="SELECT p.username, a.authority
-FROM users p, authorities a, assignments ra
-WHERE p.id = ra.user_build_it AND a.id = ra.authority AND 
-p.username = ?;" />
+				users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?;"
+				authorities-by-username-query="SELECT p.username, a.authority FROM users p, authorities a, assignments ra WHERE p.id = ra.user_buildit AND a.id = ra.authority AND  p.username = ?;" />
 
 
 		</authentication-provider>
