@@ -23,5 +23,17 @@
             <menu:item id="i_controller__invoices_approveindex_id" messageCode="global_generic" url="/invoices/approve/list" z="user-managed"/>
             <menu:item id="i_controller__planthirerequests_pendingindex_id" messageCode="global_generic" url="/planthirerequests/pending/list" z="user-managed"/>
         </menu:category>
+        <menu:category id="c_assignments" z="FzfH9955aHWJTb99U4eu6T1bSyw=">
+            <menu:item id="i_assignments_new" messageCode="global_menu_new" url="/security/assignments?form" z="nuG2REbd98rJ6vb9YZqqJh3/V4g="/>
+            <menu:item id="i_assignments_list" messageCode="global_menu_list" url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="1sfP88RcZqJ870QuMGVVJvzogyE="/>
+        </menu:category>
+        <menu:category id="c_authorities" z="GIjKsVX7q9V5I+B/i5YP+XPvlK0=">
+            <menu:item id="i_authorities_new" messageCode="global_menu_new" url="/security/authorities?form" z="BPJjsw6JcYTIUpNfO0S8iU6bzyY="/>
+            <menu:item id="i_authorities_list" messageCode="global_menu_list" url="/security/authorities?page=1&amp;size=${empty param.size ? 10 : param.size}" z="WrM7GUjNNbNzOXcImOKnG3K02S8="/>
+        </menu:category>
+        <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
+            <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys="/>
+            <menu:item id="i_users_list" messageCode="global_menu_list" url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="27M02mIdl6oX+h2AR7Cz2fzVA1c="/>
+        </menu:category>
     </menu:menu>
 </div>

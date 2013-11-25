@@ -1,2 +1,11 @@
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-25 22:07:49
 security setup
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-25 22:32:07
+entity jpa --class ~.security.Users
+web mvc scaffold --class ~.web.UserController --path /security/users
+entity jpa --class ~.security.Authorities
+web mvc scaffold --class ~.web.AuthorityController --path /security/authorities
+entity jpa --class ~.security.Assignments
+web mvc scaffold --class ~.web.AssignmentController --path /security/assignments
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-25 22:37:47
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-25 22:38:01
