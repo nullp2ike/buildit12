@@ -72,7 +72,7 @@ http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 	</int:router>
 
 	<int:service-activator id="invoiceAutomaticProcessor"
-		input-channel="fastTrackPath" method="process">
+		input-channel="fastTrackPath" method="process" output-channel="outboundMailChannel">
 		<bean class="cs.ut.service.InvoiceAutomaticProcessor" />
 	</int:service-activator>
 
