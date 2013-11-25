@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cs_ut_domain_PlantHireRequest" items="${planthirerequests}" z="gNPdDFppUUp1Sxwun7A65Z1zDKo=">
+        <table:table data="${planthirerequests}" delete="false" id="l_cs_ut_domain_PlantHireRequest" path="/se/phrs" z="Pjish8bQ4Y7/UW9aAnP1/mpjdEg=">
+            <table:column date="true" dateTimePattern="${plantHireRequest_startdate_date_format}" id="c_cs_ut_domain_PlantHireRequest_startDate" property="startDate" z="YHsCW98Et4XG+MjLN4O4PfhzsiQ="/>
+            <table:column date="true" dateTimePattern="${plantHireRequest_enddate_date_format}" id="c_cs_ut_domain_PlantHireRequest_endDate" property="endDate" z="xqI4nB2hubLx9D+oM+ooMtZgvT8="/>
+            <table:column id="c_cs_ut_domain_PlantHireRequest_totalCost" property="totalCost" z="9d/t+raLkpf3OCREvYoP0s1q6Ck="/>
+            <table:column id="c_cs_ut_domain_PlantHireRequest_siteEngineer" property="siteEngineer" z="JVUavfV+t+Pims+sxpwyhd1RKvA="/>
+            <table:column id="c_cs_ut_domain_PlantHireRequest_comment" property="comment" z="Fihzqc2iThd2lrwiqTQfPZpsxcQ="/>
+            <table:column id="c_cs_ut_domain_PlantHireRequest_plantId" property="plantId" z="4nzo0qpqLKSsWA1UZ5EVwUhXWxM="/>
+        </table:table>
+    </page:list>
+</div>

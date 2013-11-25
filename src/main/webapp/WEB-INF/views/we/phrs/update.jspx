@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_cs_ut_domain_PlantHireRequest" modelAttribute="plantHireRequest" path="/we/phrs" versionField="Version" z="eHx7Oh9pafLxGK4ENPQWRwL3aXM=">
+        <field:datetime dateTimePattern="${plantHireRequest_startdate_date_format}" field="startDate" id="c_cs_ut_domain_PlantHireRequest_startDate" required="true" z="fceFkKtPe8Tz9fsMQ8mc1nw2fgE="/>
+        <field:datetime dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="c_cs_ut_domain_PlantHireRequest_endDate" required="true" z="LUqEwy9rjkvF6lYue9S27kJg5ps="/>
+        <field:input field="totalCost" id="c_cs_ut_domain_PlantHireRequest_totalCost" required="true" validationMessageCode="field_invalid_number" z="zMQtjQrqcM9PHp4gEvzA3VO8UAQ="/>
+        <field:select field="siteEngineer" id="c_cs_ut_domain_PlantHireRequest_siteEngineer" itemValue="id" items="${siteengineers}" path="/siteengineers" required="true" z="Q+IbkA2c5Nzeoka89pTYZfQLJX4="/>
+        <field:input field="comment" id="c_cs_ut_domain_PlantHireRequest_comment" z="b3ossQsr6mNPSCHM4fV7mIeztEA="/>
+        <field:input field="plantId" id="c_cs_ut_domain_PlantHireRequest_plantId" required="true" z="MIoQUsTfO7nSiFZOKvh4RUUDApI="/>
+        <field:select field="site" id="c_cs_ut_domain_PlantHireRequest_site" itemValue="id" items="${sites}" path="/sites" required="true" z="F8q8QWI70izxGfn7PE2JeA36pHk="/>
+        <field:select field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" itemValue="id" items="${suppliers}" path="/suppliers" required="true" z="btsyUKnUdnzzRG+1y/9byi6ruCk="/>
+        <field:select field="status" id="c_cs_ut_domain_PlantHireRequest_status" items="${approvalstatuses}" path="approvalstatuses" required="true" z="c6d2RYvVbhKuIPTARcyt9JfWXdY="/>
+        <field:select field="invoice" id="c_cs_ut_domain_PlantHireRequest_invoice" itemValue="id" items="${invoices}" path="/invoices" z="Nj424IAv7vJc6xZ4B7FsWpcwlvk="/>
+        <field:select field="worksEngineer" id="c_cs_ut_domain_PlantHireRequest_worksEngineer" itemValue="id" items="${worksengineers}" path="/worksengineers" z="aNMxW4EmtWn/aJX553aeDzjx02w="/>
+    </form:update>
+</div>

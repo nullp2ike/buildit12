@@ -8,6 +8,8 @@ import cs.ut.security.Authorities;
 import cs.ut.security.Users;
 import cs.ut.web.AssignmentController;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.ui.Model;
@@ -35,6 +37,14 @@ privileged aspect AssignmentController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String AssignmentController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Assignments());
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (Users.countUserses() == 0) {
+            dependencies.add(new String[] { "users", "security/users" });
+        }
+        if (Authorities.countAuthoritieses() == 0) {
+            dependencies.add(new String[] { "authorities", "security/authorities" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "security/assignments/create";
     }
     
