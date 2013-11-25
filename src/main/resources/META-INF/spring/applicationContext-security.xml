@@ -23,6 +23,8 @@
             <user-service>
                 <user name="admin" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_ADMIN" />
                 <user name="user" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_USER" />
+                <user name="site_engineer" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_SITE_ENGINEER" />
+                <user name="works_engineer" password="5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" authorities="ROLE_WORKS_ENGINEER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
