@@ -9,6 +9,7 @@ import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
 import cs.ut.repository.PlantHireRequestRepository;
+import cs.ut.repository.SiteEngineerRepository;
 import cs.ut.security.Assignments;
 import cs.ut.security.Authorities;
 import cs.ut.security.Users;
@@ -23,6 +24,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     PlantHireRequestRepository ApplicationConversionServiceFactoryBean.plantHireRequestRepository;
+    
+    @Autowired
+    SiteEngineerRepository ApplicationConversionServiceFactoryBean.siteEngineerRepository;
     
     public Converter<PlantHireRequest, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.PlantHireRequest, java.lang.String>() {
@@ -75,7 +79,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<SiteEngineer, String> ApplicationConversionServiceFactoryBean.getSiteEngineerToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.SiteEngineer, java.lang.String>() {
             public String convert(SiteEngineer siteEngineer) {
-                return new StringBuilder().append(siteEngineer.getFirstName()).append(' ').append(siteEngineer.getLastName()).toString();
+                return new StringBuilder().append(siteEngineer.getFirstName()).append(' ').append(siteEngineer.getLastName()).append(' ').append(siteEngineer.getEmail()).toString();
             }
         };
     }
@@ -83,7 +87,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, SiteEngineer> ApplicationConversionServiceFactoryBean.getIdToSiteEngineerConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.domain.SiteEngineer>() {
             public cs.ut.domain.SiteEngineer convert(java.lang.Long id) {
-                return SiteEngineer.findSiteEngineer(id);
+                return siteEngineerRepository.findOne(id);
             }
         };
     }

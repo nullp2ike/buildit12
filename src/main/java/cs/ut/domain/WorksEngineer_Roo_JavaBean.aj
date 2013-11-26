@@ -23,4 +23,12 @@ privileged aspect WorksEngineer_Roo_JavaBean {
         this.lastName = lastName;
     }
     
+    public String WorksEngineer.getEmail() {
+        return this.email;
+    }
+    
+    public void WorksEngineer.setEmail(String email) {
+        this.email = email;
+    }
+    
 }

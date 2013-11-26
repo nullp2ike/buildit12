@@ -17,12 +17,8 @@
 				</select></td>
 			</tr>
 						<tr>
-				<td>Select Site Engineer:</td>
-				<td><select name="engineer">
-						<c:forEach var="engineers" items="${plantDTO.engList}">
-							<option value="${engineers.id}" label="${engineers.firstName} ${engineers.lastName}" />
-						</c:forEach>
-				</select></td>
+				<td>Site Engineer:</td>
+				<td name="engineer">{plantDTO.siteEng}</td>
 			</tr>
 			<tr>
 			<td>

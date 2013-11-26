@@ -19,7 +19,7 @@ public class PlantHireRequestDTO {
 
 	private List<PlantResource> plantList;
 	private List<Site> siteList;
-	private List<SiteEngineer> engList;
+	private SiteEngineer siteEng;
 
 	private int plant;
 	private int site;

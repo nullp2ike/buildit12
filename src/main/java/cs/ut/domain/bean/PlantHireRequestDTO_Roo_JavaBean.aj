@@ -29,12 +29,12 @@ privileged aspect PlantHireRequestDTO_Roo_JavaBean {
         this.siteList = siteList;
     }
     
-    public List<SiteEngineer> PlantHireRequestDTO.getEngList() {
-        return this.engList;
+    public SiteEngineer PlantHireRequestDTO.getSiteEng() {
+        return this.siteEng;
     }
     
-    public void PlantHireRequestDTO.setEngList(List<SiteEngineer> engList) {
-        this.engList = engList;
+    public void PlantHireRequestDTO.setSiteEng(SiteEngineer siteEng) {
+        this.siteEng = siteEng;
     }
     
     public int PlantHireRequestDTO.getPlant() {

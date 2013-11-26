@@ -35,6 +35,7 @@ public class InvoiceIntegrationTest {
 		sE = new SiteEngineer();
 		sE.setFirstName(engFirst);
 		sE.setLastName(engLast);
+		sE.setEmail("se@test.com");
 		s = new Site();
 		s.setName(siteName);
 		sup = new Supplier();

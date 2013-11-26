@@ -17,4 +17,7 @@ public class SiteEngineer {
     
     @NotNull
     private String lastName;
+
+    @NotNull
+    private String email;
 }

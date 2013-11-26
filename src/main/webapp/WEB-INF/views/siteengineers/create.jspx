@@ -5,6 +5,7 @@
     <form:create id="fc_cs_ut_domain_SiteEngineer" modelAttribute="siteEngineer" path="/siteengineers" render="${empty dependencies}" z="gqjxMG5BhUg+cCMitgVyD/T0vI4=">
         <field:input field="firstName" id="c_cs_ut_domain_SiteEngineer_firstName" required="true" z="imYAkU7hHikaN2EA+Z7beKbsa2A="/>
         <field:input field="lastName" id="c_cs_ut_domain_SiteEngineer_lastName" required="true" z="eNguSBWIuYTJfpYReMv647a8CqQ="/>
+        <field:input field="email" id="c_cs_ut_domain_SiteEngineer_email" required="true" validationMessageCode="field_invalid_email" z="yB0MqlM6VsoUXYLr+TFeLjMESvI="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cs_ut_domain_SiteEngineer" render="${not empty dependencies}" z="JKig5WYJKPBrLW2A2OmPS8Zi4YM="/>
 </div>

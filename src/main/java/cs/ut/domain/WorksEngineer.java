@@ -18,4 +18,7 @@ public class WorksEngineer {
     @NotNull
     private String lastName;
     
+    @NotNull
+    private String email;
+    
 }

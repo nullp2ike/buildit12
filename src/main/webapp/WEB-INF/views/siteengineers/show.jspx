@@ -5,5 +5,6 @@
     <page:show id="ps_cs_ut_domain_SiteEngineer" object="${siteengineer}" path="/siteengineers" z="yJp0/wnfo2Y36B3vcKtPgPpCMMo=">
         <field:display field="firstName" id="s_cs_ut_domain_SiteEngineer_firstName" object="${siteengineer}" z="eH4sSe067MJ9H9eWAsN2CZxwBv0="/>
         <field:display field="lastName" id="s_cs_ut_domain_SiteEngineer_lastName" object="${siteengineer}" z="lkNnQ8yE9EOX5JVRl52Z7e3wIeE="/>
+        <field:display field="email" id="s_cs_ut_domain_SiteEngineer_email" object="${siteengineer}" z="hisOhG8936M7ly9WAK2YNyJeLIA="/>
     </page:show>
 </div>

@@ -9,8 +9,11 @@ import javax.validation.Valid;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ import cs.ut.domain.bean.PlantHireRequestDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
+import cs.ut.repository.SiteEngineerRepository;
 
 @RequestMapping("/planthirerequests/queryPlant/**")
 @Controller
@@ -36,13 +40,20 @@ public class PlantQueryController {
 
 	@Value("${webappurl}")
 	String webAppUrl;
+	
+	@Autowired
+	SiteEngineerRepository repository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String searchPlants(ModelMap modelMap) {
 		addDateTimeFormatPatterns(modelMap);
 		PlantHireRequestDTO phrDTO = new PlantHireRequestDTO();
 		phrDTO.setSiteList(Site.findAllSites());
-		phrDTO.setEngList(SiteEngineer.findAllSiteEngineers());
+		Authentication authentication = 
+				SecurityContextHolder.getContext().getAuthentication();
+		String siteEngUsername = authentication.getName();
+		SiteEngineer se = repository.findSiteEngineerByEmail(siteEngUsername);
+		phrDTO.setSiteEng(se);
 		modelMap.put("plantDTO", phrDTO);
 		return "planthirerequests/queryPlant/search";
 	}

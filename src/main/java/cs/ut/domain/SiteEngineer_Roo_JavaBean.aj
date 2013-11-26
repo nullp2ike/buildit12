@@ -23,4 +23,12 @@ privileged aspect SiteEngineer_Roo_JavaBean {
         this.lastName = lastName;
     }
     
+    public String SiteEngineer.getEmail() {
+        return this.email;
+    }
+    
+    public void SiteEngineer.setEmail(String email) {
+        this.email = email;
+    }
+    
 }

@@ -6,6 +6,7 @@
         <table:table data="${siteengineers}" id="l_cs_ut_domain_SiteEngineer" path="/siteengineers" z="5DxUFxsOA4g/vSBPadAbndp+/Bg=">
             <table:column id="c_cs_ut_domain_SiteEngineer_firstName" property="firstName" z="pmN/zRb4tpo/xtLe8dlJZ6O/lOg="/>
             <table:column id="c_cs_ut_domain_SiteEngineer_lastName" property="lastName" z="GFTCNdgKkaZFko+ZX/Vgupuz9wY="/>
+            <table:column id="c_cs_ut_domain_SiteEngineer_email" property="email" z="XIntqsIKFQDX1IpiAbISJpQkriE="/>
         </table:table>
     </page:list>
 </div>

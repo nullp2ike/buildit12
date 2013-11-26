@@ -11,3 +11,5 @@ web mvc scaffold --class ~.web.AssignmentController --path /security/assignments
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-25 22:38:01
 web mvc scaffold --class ~.web.se.PHRSEController --path /se/phrs --backingType ~.domain.PlantHireRequest --disallowedOperations delete
 web mvc scaffold --class ~.web.we.PHRWEController --path /we/phrs --backingType ~.domain.PlantHireRequest --disallowedOperations create
+repository jpa --entity ~.domain.SiteEngineer --interface ~.repository.SiteEngineerRepository
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-26 09:12:04

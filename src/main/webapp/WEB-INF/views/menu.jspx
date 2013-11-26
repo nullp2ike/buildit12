@@ -1,76 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0"
-	xmlns:sec="http://www.springframework.org/security/tags">
-	<jsp:directive.page contentType="text/html;charset=UTF-8" />
-	<jsp:output omit-xml-declaration="yes" />
-	<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-	
-		<sec:authorize ifAllGranted="ROLE_WORKS_ENGINEER">
-			<menu:category id="c_planthirerequest"
-				z="RYvAYDPxevYbz1bZdWQ+gP48NkM=">
-				<menu:item id="i_planthirerequest_list"
-					messageCode="global_menu_list"
-					url="/we/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}" />
-			</menu:category>
-			<menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-				<menu:item id="i_controller__planthirerequests_pendingindex_id"
-					messageCode="global_generic" url="/planthirerequests/pending/list"
-					z="user-managed" />
-			</menu:category>
-		</sec:authorize>
-		
-		<sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
-			<menu:category id="c_planthirerequest" z="user-managed">
-				<menu:item id="i_planthirerequest_new" messageCode="global_menu_new" url="/planthirerequests/queryPlant/search"/>
-				<menu:item id="i_planthirerequest_list"
-					messageCode="global_menu_list"
-					url="/se/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="user-managed" />
-			</menu:category>
-			<menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-				<menu:item id="i_controller__invoices_approveindex_id"
-					messageCode="global_generic" url="/invoices/approve/list"
-					z="user-managed" />
-			</menu:category>
-		</sec:authorize>
-
-		<sec:authorize ifAllGranted="ROLE_ADMIN">
-			<menu:category id="c_site" z="5Z1+wiUVSVPmsN5fCUOfHNSOnaE=">
-				<menu:item id="i_site_new" messageCode="global_menu_new"
-					url="/sites?form" z="ewAqg8Z+CTUpvmsxXaCRBnq6+TU=" />
-				<menu:item id="i_site_list" messageCode="global_menu_list"
-					url="/sites?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="vhoCo6kXZ4paxcavA4SM71sw7EQ=" />
-			</menu:category>
-			<menu:category id="c_supplier" z="8IYgP9HBdyozOk+Ymf37zKa+fNc=">
-				<menu:item id="i_supplier_new" messageCode="global_menu_new"
-					url="/suppliers?form" z="48D4zeaX6ENxXujfvnWrtY5odlQ=" />
-				<menu:item id="i_supplier_list" messageCode="global_menu_list"
-					url="/suppliers?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="m3iWO9PZ5+HPrY21osNhms/WqIE=" />
-			</menu:category>
-			<menu:category id="c_assignments" z="FzfH9955aHWJTb99U4eu6T1bSyw=">
-				<menu:item id="i_assignments_new" messageCode="global_menu_new"
-					url="/security/assignments?form" z="nuG2REbd98rJ6vb9YZqqJh3/V4g=" />
-				<menu:item id="i_assignments_list" messageCode="global_menu_list"
-					url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="1sfP88RcZqJ870QuMGVVJvzogyE=" />
-			</menu:category>
-			<menu:category id="c_authorities" z="GIjKsVX7q9V5I+B/i5YP+XPvlK0=">
-				<menu:item id="i_authorities_new" messageCode="global_menu_new"
-					url="/security/authorities?form" z="BPJjsw6JcYTIUpNfO0S8iU6bzyY=" />
-				<menu:item id="i_authorities_list" messageCode="global_menu_list"
-					url="/security/authorities?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="WrM7GUjNNbNzOXcImOKnG3K02S8=" />
-			</menu:category>
-			<menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
-				<menu:item id="i_users_new" messageCode="global_menu_new"
-					url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys=" />
-				<menu:item id="i_users_list" messageCode="global_menu_list"
-					url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="27M02mIdl6oX+h2AR7Cz2fzVA1c=" />
-			</menu:category>
-		</sec:authorize>
-	</menu:menu>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <sec:authorize ifAllGranted="ROLE_WORKS_ENGINEER">
+            <menu:category id="c_planthirerequest" z="RYvAYDPxevYbz1bZdWQ+gP48NkM=">
+                <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/we/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}"/>
+            </menu:category>
+            <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+                <menu:item id="i_controller__planthirerequests_pendingindex_id" messageCode="global_generic" url="/planthirerequests/pending/list" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
+            <menu:category id="c_planthirerequest" z="user-managed">
+                <menu:item id="i_planthirerequest_new" messageCode="global_menu_new" url="/planthirerequests/queryPlant/search"/>
+                <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/se/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            </menu:category>
+            <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+                <menu:item id="i_controller__invoices_approveindex_id" messageCode="global_generic" url="/invoices/approve/list" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_ADMIN">
+            <menu:category id="c_site" z="5Z1+wiUVSVPmsN5fCUOfHNSOnaE=">
+                <menu:item id="i_site_new" messageCode="global_menu_new" url="/sites?form" z="ewAqg8Z+CTUpvmsxXaCRBnq6+TU="/>
+                <menu:item id="i_site_list" messageCode="global_menu_list" url="/sites?page=1&amp;size=${empty param.size ? 10 : param.size}" z="vhoCo6kXZ4paxcavA4SM71sw7EQ="/>
+            </menu:category>
+            <menu:category id="c_supplier" z="8IYgP9HBdyozOk+Ymf37zKa+fNc=">
+                <menu:item id="i_supplier_new" messageCode="global_menu_new" url="/suppliers?form" z="48D4zeaX6ENxXujfvnWrtY5odlQ="/>
+                <menu:item id="i_supplier_list" messageCode="global_menu_list" url="/suppliers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="m3iWO9PZ5+HPrY21osNhms/WqIE="/>
+            </menu:category>
+            <menu:category id="c_assignments" z="FzfH9955aHWJTb99U4eu6T1bSyw=">
+                <menu:item id="i_assignments_new" messageCode="global_menu_new" url="/security/assignments?form" z="nuG2REbd98rJ6vb9YZqqJh3/V4g="/>
+                <menu:item id="i_assignments_list" messageCode="global_menu_list" url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="1sfP88RcZqJ870QuMGVVJvzogyE="/>
+            </menu:category>
+            <menu:category id="c_authorities" z="GIjKsVX7q9V5I+B/i5YP+XPvlK0=">
+                <menu:item id="i_authorities_new" messageCode="global_menu_new" url="/security/authorities?form" z="BPJjsw6JcYTIUpNfO0S8iU6bzyY="/>
+                <menu:item id="i_authorities_list" messageCode="global_menu_list" url="/security/authorities?page=1&amp;size=${empty param.size ? 10 : param.size}" z="WrM7GUjNNbNzOXcImOKnG3K02S8="/>
+            </menu:category>
+            <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
+                <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys="/>
+                <menu:item id="i_users_list" messageCode="global_menu_list" url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="27M02mIdl6oX+h2AR7Cz2fzVA1c="/>
+            </menu:category>
+        </sec:authorize>
+        <menu:category id="c_siteengineer" z="xbh+0hoTf7TWv+z5OhGDxnLnKp8=">
+            <menu:item id="i_siteengineer_new" messageCode="global_menu_new" url="/siteengineers?form" z="73MDcGEekK1/OA5vq9yOzuGF2bw="/>
+            <menu:item id="i_siteengineer_list" messageCode="global_menu_list" url="/siteengineers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+9FMZynjARRy/GppxBem/QpLUFc="/>
+        </menu:category>
+    </menu:menu>
 </div>

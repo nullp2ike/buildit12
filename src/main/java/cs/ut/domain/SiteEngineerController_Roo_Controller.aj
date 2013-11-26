@@ -5,9 +5,11 @@ package cs.ut.domain;
 
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerController;
+import cs.ut.repository.SiteEngineerRepository;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect SiteEngineerController_Roo_Controller {
     
+    @Autowired
+    SiteEngineerRepository SiteEngineerController.siteEngineerRepository;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SiteEngineerController.create(@Valid SiteEngineer siteEngineer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -26,7 +31,7 @@ privileged aspect SiteEngineerController_Roo_Controller {
             return "siteengineers/create";
         }
         uiModel.asMap().clear();
-        siteEngineer.persist();
+        siteEngineerRepository.save(siteEngineer);
         return "redirect:/siteengineers/" + encodeUrlPathSegment(siteEngineer.getId().toString(), httpServletRequest);
     }
     
@@ -38,7 +43,7 @@ privileged aspect SiteEngineerController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String SiteEngineerController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("siteengineer", SiteEngineer.findSiteEngineer(id));
+        uiModel.addAttribute("siteengineer", siteEngineerRepository.findOne(id));
         uiModel.addAttribute("itemId", id);
         return "siteengineers/show";
     }
@@ -48,11 +53,11 @@ privileged aspect SiteEngineerController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("siteengineers", SiteEngineer.findSiteEngineerEntries(firstResult, sizeNo));
-            float nrOfPages = (float) SiteEngineer.countSiteEngineers() / sizeNo;
+            uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
+            float nrOfPages = (float) siteEngineerRepository.count() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
+            uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
         }
         return "siteengineers/list";
     }
@@ -64,20 +69,20 @@ privileged aspect SiteEngineerController_Roo_Controller {
             return "siteengineers/update";
         }
         uiModel.asMap().clear();
-        siteEngineer.merge();
+        siteEngineerRepository.save(siteEngineer);
         return "redirect:/siteengineers/" + encodeUrlPathSegment(siteEngineer.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String SiteEngineerController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, SiteEngineer.findSiteEngineer(id));
+        populateEditForm(uiModel, siteEngineerRepository.findOne(id));
         return "siteengineers/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String SiteEngineerController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        SiteEngineer siteEngineer = SiteEngineer.findSiteEngineer(id);
-        siteEngineer.remove();
+        SiteEngineer siteEngineer = siteEngineerRepository.findOne(id);
+        siteEngineerRepository.delete(siteEngineer);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

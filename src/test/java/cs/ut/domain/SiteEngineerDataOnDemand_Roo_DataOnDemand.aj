@@ -5,6 +5,7 @@ package cs.ut.domain;
 
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.SiteEngineerDataOnDemand;
+import cs.ut.repository.SiteEngineerRepository;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
@@ -22,11 +24,20 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
     
     private List<SiteEngineer> SiteEngineerDataOnDemand.data;
     
+    @Autowired
+    SiteEngineerRepository SiteEngineerDataOnDemand.siteEngineerRepository;
+    
     public SiteEngineer SiteEngineerDataOnDemand.getNewTransientSiteEngineer(int index) {
         SiteEngineer obj = new SiteEngineer();
+        setEmail(obj, index);
         setFirstName(obj, index);
         setLastName(obj, index);
         return obj;
+    }
+    
+    public void SiteEngineerDataOnDemand.setEmail(SiteEngineer obj, int index) {
+        String email = "foo" + index + "@bar.com";
+        obj.setEmail(email);
     }
     
     public void SiteEngineerDataOnDemand.setFirstName(SiteEngineer obj, int index) {
@@ -49,14 +60,14 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
         }
         SiteEngineer obj = data.get(index);
         Long id = obj.getId();
-        return SiteEngineer.findSiteEngineer(id);
+        return siteEngineerRepository.findOne(id);
     }
     
     public SiteEngineer SiteEngineerDataOnDemand.getRandomSiteEngineer() {
         init();
         SiteEngineer obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return SiteEngineer.findSiteEngineer(id);
+        return siteEngineerRepository.findOne(id);
     }
     
     public boolean SiteEngineerDataOnDemand.modifySiteEngineer(SiteEngineer obj) {
@@ -66,7 +77,7 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
     public void SiteEngineerDataOnDemand.init() {
         int from = 0;
         int to = 10;
-        data = SiteEngineer.findSiteEngineerEntries(from, to);
+        data = siteEngineerRepository.findAll(new org.springframework.data.domain.PageRequest(from / to, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'SiteEngineer' illegally returned null");
         }
@@ -78,7 +89,7 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
         for (int i = 0; i < 10; i++) {
             SiteEngineer obj = getNewTransientSiteEngineer(i);
             try {
-                obj.persist();
+                siteEngineerRepository.save(obj);
             } catch (final ConstraintViolationException e) {
                 final StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -87,7 +98,7 @@ privileged aspect SiteEngineerDataOnDemand_Roo_DataOnDemand {
                 }
                 throw new IllegalStateException(msg.toString(), e);
             }
-            obj.flush();
+            siteEngineerRepository.flush();
             data.add(obj);
         }
     }
