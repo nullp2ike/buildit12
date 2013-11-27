@@ -2,6 +2,7 @@ package cs.ut.web;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,7 @@ import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
 import cs.ut.repository.SiteEngineerRepository;
 
+
 @RequestMapping("/planthirerequests/queryPlant/**")
 @Controller
 public class PlantQueryController {
@@ -50,7 +53,7 @@ public class PlantQueryController {
 	String webAppUrl;
 	
 	@Autowired
-	SiteEngineerRepository repository;
+	SiteEngineerRepository siteEngineerRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String searchPlants(ModelMap modelMap) {
@@ -107,8 +110,10 @@ public class PlantQueryController {
 		Authentication authentication = 
 				SecurityContextHolder.getContext().getAuthentication();
 		String siteEngUsername = authentication.getName();
-		SiteEngineer se = repository.findSiteEngineerByEmail(siteEngUsername).get(0);
+		String password = authentication.getCredentials().toString();
 		
+		SiteEngineer se = siteEngineerRepository.findSiteEngineerByEmail(siteEngUsername);
+
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setEndDate(plant.getEndDate());
 		phrResource.setStartDate(plant.getStartDate());
@@ -122,15 +127,18 @@ public class PlantQueryController {
 		
 		String json = resourceToJson(phrResource);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
-				getHeaders(siteEngUsername + ":" + "password"));
+				getHeaders(siteEngUsername + ":" + password));
 
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForEntity(url,
+		ResponseEntity<PlantHireRequestResource> response = restTemplate.postForEntity(url,
 				requestEntity, PlantHireRequestResource.class);
-		List<PlantHireRequest> phrList = PlantHireRequest
-				.findAllPlantHireRequests();
-		long id = phrList.get(phrList.size() - 1).getId();
+		String id = getIdFromURL(response.getBody().get_link("updatePHR").getHref());
 		return "redirect:/planthirerequests/" + id;
+	}
+	
+	private String getIdFromURL(String url) {
+		String id = url.substring(url.lastIndexOf("/") + 1);
+		return id;
 	}
 
 	private void addDateTimeFormatPatterns(ModelMap modelMap) {

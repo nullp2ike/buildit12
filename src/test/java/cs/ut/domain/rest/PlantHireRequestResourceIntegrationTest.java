@@ -79,7 +79,6 @@ public class PlantHireRequestResourceIntegrationTest {
 	@Before
 	public void setUp() {
 		client = Client.create();
-		client.addFilter(new HTTPBasicAuthFilter(siteEngineerUsername, password));	
 	}
 	
 	private static void removeStuff(){
