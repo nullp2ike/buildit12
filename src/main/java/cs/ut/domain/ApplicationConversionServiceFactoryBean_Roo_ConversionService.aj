@@ -4,6 +4,7 @@
 package cs.ut.domain;
 
 import cs.ut.domain.ApplicationConversionServiceFactoryBean;
+import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -28,6 +29,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     SiteEngineerRepository ApplicationConversionServiceFactoryBean.siteEngineerRepository;
+    
+    public Converter<Invoice, String> ApplicationConversionServiceFactoryBean.getInvoiceToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cs.ut.domain.Invoice, java.lang.String>() {
+            public String convert(Invoice invoice) {
+                return new StringBuilder().append(invoice.getPurchaseOrderHRef()).append(' ').append(invoice.getPurchaseOrderId()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Invoice> ApplicationConversionServiceFactoryBean.getIdToInvoiceConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.domain.Invoice>() {
+            public cs.ut.domain.Invoice convert(java.lang.Long id) {
+                return Invoice.findInvoice(id);
+            }
+        };
+    }
+    
+    public Converter<String, Invoice> ApplicationConversionServiceFactoryBean.getStringToInvoiceConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cs.ut.domain.Invoice>() {
+            public cs.ut.domain.Invoice convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Invoice.class);
+            }
+        };
+    }
     
     public Converter<PlantHireRequest, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.domain.PlantHireRequest, java.lang.String>() {
@@ -222,6 +247,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getInvoiceToStringConverter());
+        registry.addConverter(getIdToInvoiceConverter());
+        registry.addConverter(getStringToInvoiceConverter());
         registry.addConverter(getPlantHireRequestToStringConverter());
         registry.addConverter(getIdToPlantHireRequestConverter());
         registry.addConverter(getStringToPlantHireRequestConverter());

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cs_ut_domain_Invoice" items="${invoices}" z="WkrlcoU94gFYnslruXk39aZUpzY=">
+        <table:table data="${invoices}" id="l_cs_ut_domain_Invoice" path="/invoices" z="sZB7WHpnrFHXWYrIPCiyFe/sndg=">
+            <table:column id="c_cs_ut_domain_Invoice_purchaseOrderHRef" property="purchaseOrderHRef" z="CCWXupTgVGn27IrqHuq7ntttaSU="/>
+            <table:column id="c_cs_ut_domain_Invoice_purchaseOrderId" property="purchaseOrderId" z="Zx0txZEeFKi50/gUBVd16LC0aVo="/>
+            <table:column id="c_cs_ut_domain_Invoice_isPaid" property="isPaid" z="ThyxztaaeELLxTZr8cIp3kujU5k="/>
+            <table:column id="c_cs_ut_domain_Invoice_status" property="status" z="cRhWocp4BgEwOZ2rdxlb+vVDZIE="/>
+        </table:table>
+    </page:list>
+</div>

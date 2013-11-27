@@ -33,6 +33,13 @@
 					messageCode="global_generic" url="/invoices/approve/list"
 					z="user-managed" />
 			</menu:category>
+			<menu:category id="c_invoice" z="J8t31gESmLmp6i5o6ds0/j0AMNA=">
+				<menu:item id="i_invoice_new" messageCode="global_menu_new"
+					url="/invoices?form" z="QqwPSYJNNoLrSbh5ekf/V1j0eU8=" />
+				<menu:item id="i_invoice_list" messageCode="global_menu_list"
+					url="/invoices?page=1&amp;size=${empty param.size ? 10 : param.size}"
+					z="fGp1lAWegbSUAHpxuhrzXY9RQGI=" />
+			</menu:category>
 		</sec:authorize>
 		<sec:authorize ifAllGranted="ROLE_ADMIN">
 			<menu:category id="c_site" z="5Z1+wiUVSVPmsN5fCUOfHNSOnaE=">
