@@ -13,3 +13,11 @@ web mvc scaffold --class ~.web.se.PHRSEController --path /se/phrs --backingType 
 web mvc scaffold --class ~.web.we.PHRWEController --path /we/phrs --backingType ~.domain.PlantHireRequest --disallowedOperations create
 repository jpa --entity ~.domain.SiteEngineer --interface ~.repository.SiteEngineerRepository
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-26 09:12:04
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-27 00:49:36
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-27 09:21:23
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-27 19:57:27
+entity jpa --class ~.domain.Invoices
+web mvc scaffold --class ~.web.InvoicesController --backingType ~.domain.Invoices --path /invoice
+web mvc controller --class ~.web.InvoicesController --preferredMapping /invoices
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-27 20:10:13
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-27 20:10:25

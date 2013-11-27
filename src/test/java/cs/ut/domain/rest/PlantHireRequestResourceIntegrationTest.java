@@ -15,6 +15,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.Link;
@@ -40,6 +41,7 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.domain.WorksEngineer;
 import cs.ut.security.Assignments;
 import cs.ut.security.Authorities;
 import cs.ut.security.Users;
@@ -49,28 +51,90 @@ import cs.ut.security.Users;
 public class PlantHireRequestResourceIntegrationTest {
 
 	Client client;
-	SiteEngineer sE;
-	Supplier sup;
-	Site s;
+	static SiteEngineer sE;
+	static WorksEngineer wE;
+	static Supplier sup;
+	static Site s;
 	Users user;
 	Assignments assignments;
 	Authorities authorities;
-	String password = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
-	String username = "siteengineer@buildit.com";
+	static String password = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
+	static String siteEngineerUsername = "siteengineer@buildit.com";
+	static String worksEngineerUsername = "worksengineer@buildit.com";
 
 	@Value("${supplierurl}")
 	String supplierurl;
 
 	@Value("${webappurl}")
 	String webappurl;
+	
+	@BeforeClass
+	public static void doStuff(){
+		setUsers();
+		setRequiredTables("Create", "Supplier1", "FirstName1", "LastName1");
+	}
 
 	@Before
 	public void setUp() {
 		client = Client.create();
-		client.addFilter(new HTTPBasicAuthFilter(username, password));
-		setRequiredTables("Create", "Supplier1", "FirstName1", "LastName1");
-		setUsers();
+		client.addFilter(new HTTPBasicAuthFilter(siteEngineerUsername, password));	
 	}
+	
+	private static void setRequiredTables(String siteName, String supplierName,
+			String engFirst, String engLast) {
+		sE = new SiteEngineer();
+		sE.setFirstName(engFirst);
+		sE.setLastName(engLast);
+		sE.setEmail(siteEngineerUsername);
+		sE.persist();
+		
+		wE = new WorksEngineer();
+		wE.setFirstName("WorksFirst");
+		wE.setLastName("WorksLast");
+		wE.setEmail(worksEngineerUsername);
+		wE.persist();
+		
+		s = new Site();
+		s.setName(siteName);
+		s.persist();
+		
+		sup = new Supplier();
+		sup.setName(supplierName);
+		sup.persist();
+	}
+	
+	private static void setUsers() {
+		Users siteEngineer = new Users();
+		siteEngineer.setEnabled(true);
+		siteEngineer.setPassword(password);
+		siteEngineer.setUsername(siteEngineerUsername);
+		siteEngineer.persist();
+		
+		Users worksEngineer = new Users();
+		worksEngineer.setEnabled(true);
+		worksEngineer.setPassword(password);
+		worksEngineer.setUsername(worksEngineerUsername);
+		worksEngineer.persist();
+		
+		Authorities authSiteEng = new Authorities();
+		authSiteEng.setAuthority("ROLE_SITE_ENGINEER");
+		authSiteEng.persist();
+		
+		Authorities authWorksEng = new Authorities();
+		authWorksEng.setAuthority("ROLE_WORKS_ENGINEER");
+		authWorksEng.persist();
+		
+		Assignments assignSiteEng = new Assignments();
+		assignSiteEng.setAuthority(authSiteEng);
+		assignSiteEng.setUserBuildit(siteEngineer);
+		assignSiteEng.persist();
+		
+		Assignments assignWorksEng = new Assignments();
+		assignWorksEng.setAuthority(authWorksEng);
+		assignWorksEng.setUserBuildit(worksEngineer);
+		assignWorksEng.persist();
+	}
+	
 
 	private static HttpHeaders getHeaders(String auth) {
 		HttpHeaders headers = new HttpHeaders();
@@ -81,39 +145,6 @@ public class PlantHireRequestResourceIntegrationTest {
 		headers.add("Authorization", "Basic "
 				+ new String(encodedAuthorisation));
 		return headers;
-	}
-
-	private void setUsers() {
-		Users u = new Users();
-		u.setEnabled(true);
-		u.setPassword(password);
-		u.setUsername(username);
-		u.persist();
-		Authorities auth = new Authorities();
-		auth.setAuthority("ROLE_SITE_ENGINEER");
-		auth.persist();
-		Assignments a = new Assignments();
-		a.setAuthority(auth);
-		a.setUserBuildit(u);
-		a.persist();
-	}
-
-	private void setRequiredTables(String siteName, String supplierName,
-			String engFirst, String engLast) {
-		sE = new SiteEngineer();
-		sE.setFirstName(engFirst);
-		sE.setLastName(engLast);
-		sE.setEmail("se@test.com");
-		s = new Site();
-		s.setName(siteName);
-		sup = new Supplier();
-		sup.setName(supplierName);
-		sE.persist();
-		sE.flush();
-		s.persist();
-		s.flush();
-		sup.flush();
-		sup.persist();
 	}
 
 	private long setPlantHireRequest(int plantId, int totalCost,
@@ -147,7 +178,7 @@ public class PlantHireRequestResourceIntegrationTest {
 
 		String json = resourceToJson(phrResource);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<PlantHireRequestResource> clientResponse = template.postForEntity(webappurl + "/rest/phr/", requestEntity, PlantHireRequestResource.class);
@@ -158,6 +189,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		assertTrue(PlantHireRequest.findPlantHireRequest(id).getSite()
 				.getName().equals("Create"));
 		assertTrue(clientResponse.getBody().get_links().size() == 4);
+		assertTrue(clientResponse.getBody().getStatus().equals(ApprovalStatus.PENDING_APPROVAL));
 	}
 
 	// OK
@@ -165,7 +197,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	public void testRejectPHR() {
 		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<PlantHireRequestResource> response = template.exchange(
 				webappurl + "/rest/phr/" + phrId + "/reject?comment=declined", HttpMethod.DELETE,
@@ -177,7 +209,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	public void testApprovePHR() {
 		RestTemplate template = new RestTemplate();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		ResponseEntity<PlantResourceList> response = template.exchange(
 				supplierurl + "/rest/plant/", HttpMethod.GET,
 				requestEntity, PlantResourceList.class);
@@ -217,7 +249,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		String json = resourceToJson(phrResource);
 		
 		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<PlantHireRequestResource> response = template.exchange(
 				webappurl + "/rest/phr/" + phrId, HttpMethod.PUT,
@@ -236,7 +268,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		long phrId = setPlantHireRequest(1, 100,
 				ApprovalStatus.PENDING_APPROVAL);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<Void> response = template.exchange(webappurl + "/rest/phr/" + phrId + "/cancel", HttpMethod.DELETE, requestEntity, Void.class);
 
@@ -250,7 +282,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		long phrId = setPlantHireRequest(1, 100,
 				ApprovalStatus.PENDING_APPROVAL);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<PlantHireRequestResource> response = template.exchange(
 				webappurl + "/rest/phr/" + phrId, HttpMethod.GET,
@@ -269,7 +301,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		// Get some existing plant id
 		RestTemplate template = new RestTemplate();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		ResponseEntity<PlantResourceList> response = template.exchange(
 				supplierurl + "/rest/plant/", HttpMethod.GET,
 				requestEntity, PlantResourceList.class);
@@ -289,7 +321,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		// Create Plant Hire Request
 		String json = resourceToJson(phrResource);
 		HttpEntity<String> requestEntityCreate = new HttpEntity<String>(json,
-				getHeaders(username + ":" + "password"));
+				getHeaders(siteEngineerUsername + ":" + "password"));
 		ResponseEntity<PlantHireRequestResource> clientResponse = template.postForEntity(webappurl + "/rest/phr/", requestEntityCreate, PlantHireRequestResource.class);
 		assertTrue(clientResponse.getStatusCode().value() == Status.CREATED
 				.getStatusCode());

@@ -1,17 +1,23 @@
 package cs.ut.web;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +25,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
+
+import com.sun.jersey.core.util.Base64;
 
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.PlantHireRequest;
@@ -49,11 +57,6 @@ public class PlantQueryController {
 		addDateTimeFormatPatterns(modelMap);
 		PlantHireRequestDTO phrDTO = new PlantHireRequestDTO();
 		phrDTO.setSiteList(Site.findAllSites());
-		Authentication authentication = 
-				SecurityContextHolder.getContext().getAuthentication();
-		String siteEngUsername = authentication.getName();
-		SiteEngineer se = repository.findSiteEngineerByEmail(siteEngUsername);
-		phrDTO.setSiteEng(se);
 		modelMap.put("plantDTO", phrDTO);
 		return "planthirerequests/queryPlant/search";
 	}
@@ -77,7 +80,6 @@ public class PlantQueryController {
 		p.setEndDate(plant.getEndDate());
 		p.setStartDate(plant.getStartDate());
 		p.setPlantList(plants);
-		p.setEngineer(plant.getEngineer());
 		p.setSite(plant.getSite());
 		addDateTimeFormatPatterns(modelMap);
 		modelMap.put("plantDTO", p);
@@ -101,21 +103,30 @@ public class PlantQueryController {
 		int days = d.getDays();
 
 		String url = webAppUrl + "/rest/phr/";
+		
+		Authentication authentication = 
+				SecurityContextHolder.getContext().getAuthentication();
+		String siteEngUsername = authentication.getName();
+		SiteEngineer se = repository.findSiteEngineerByEmail(siteEngUsername).get(0);
+		
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setEndDate(plant.getEndDate());
 		phrResource.setStartDate(plant.getStartDate());
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
 		phrResource.setPlantId(plant.getPlant());
 		phrResource.setSite(Site.findSite((long) plant.getSite()));
-		phrResource.setSiteEngineer(SiteEngineer.findSiteEngineer((long) plant
-				.getEngineer()));
+		phrResource.setSiteEngineer(se);
 		phrResource.setSupplier(Supplier.findAllSuppliers().get(0));
 		phrResource.setTotalCost(plantResource.getPricePerDay().multiply(
 				new BigDecimal(days)));
+		
+		String json = resourceToJson(phrResource);
+		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
+				getHeaders(siteEngUsername + ":" + "password"));
 
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForEntity(url,
-				phrResource, String.class);
+				requestEntity, PlantHireRequestResource.class);
 		List<PlantHireRequest> phrList = PlantHireRequest
 				.findAllPlantHireRequests();
 		long id = phrList.get(phrList.size() - 1).getId();
@@ -131,5 +142,28 @@ public class PlantQueryController {
 				"plantHRBean_endr_date_format",
 				DateTimeFormat.patternForStyle(("S-"),
 						LocaleContextHolder.getLocale()));
+	}
+	
+	private String resourceToJson(PlantHireRequestResource phrResource) {
+		ObjectWriter ow = new ObjectMapper().writer()
+				.withDefaultPrettyPrinter();
+		String json = null;
+		try {
+			json = ow.writeValueAsString(phrResource);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	private static HttpHeaders getHeaders(String auth) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+		headers.setAccept(Arrays
+				.asList(org.springframework.http.MediaType.APPLICATION_JSON));
+		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
+		headers.add("Authorization", "Basic "
+				+ new String(encodedAuthorisation));
+		return headers;
 	}
 }

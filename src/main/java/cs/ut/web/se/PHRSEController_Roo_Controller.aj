@@ -11,6 +11,7 @@ import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
 import cs.ut.domain.WorksEngineer;
 import cs.ut.repository.PlantHireRequestRepository;
+import cs.ut.repository.SiteEngineerRepository;
 import cs.ut.web.se.PHRSEController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ privileged aspect PHRSEController_Roo_Controller {
     @Autowired
     PlantHireRequestRepository PHRSEController.plantHireRequestRepository;
     
+    @Autowired
+    SiteEngineerRepository PHRSEController.siteEngineerRepository;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String PHRSEController.create(@Valid PlantHireRequest plantHireRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -50,7 +54,7 @@ privileged aspect PHRSEController_Roo_Controller {
     public String PHRSEController.createForm(Model uiModel) {
         populateEditForm(uiModel, new PlantHireRequest());
         List<String[]> dependencies = new ArrayList<String[]>();
-        if (SiteEngineer.countSiteEngineers() == 0) {
+        if (siteEngineerRepository.count() == 0) {
             dependencies.add(new String[] { "siteengineer", "siteengineers" });
         }
         if (Site.countSites() == 0) {
@@ -114,7 +118,7 @@ privileged aspect PHRSEController_Roo_Controller {
         uiModel.addAttribute("approvalstatuses", Arrays.asList(ApprovalStatus.values()));
         uiModel.addAttribute("invoices", Invoice.findAllInvoices());
         uiModel.addAttribute("sites", Site.findAllSites());
-        uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
+        uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
         uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());
         uiModel.addAttribute("worksengineers", WorksEngineer.findAllWorksEngineers());
     }

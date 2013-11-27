@@ -25,7 +25,6 @@
 				<input type="hidden" name="startDate"
 					value="${theFormattedStartDate}" />
 				<input type="hidden" name="endDate" value="${theFormattedEndDate}" />
-				<input type="hidden" name="engineer" value="${plantDTO.engineer}" />
 				<input type="hidden" name="site" value="${plantDTO.site}" />
 				<input type="submit" value="Submit plant hire request" />
 			</tr>

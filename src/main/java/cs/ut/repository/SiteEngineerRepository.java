@@ -16,6 +16,6 @@ public interface SiteEngineerRepository {
 	@Query("SELECT eng FROM SiteEngineer AS eng WHERE eng.email = :email")
 	
 	@Transactional(readOnly = true)
-	SiteEngineer findSiteEngineerByEmail(@Param("email") String email);
+	List<SiteEngineer> findSiteEngineerByEmail(@Param("email") String email);
 	
 }

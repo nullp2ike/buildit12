@@ -7,10 +7,10 @@ import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
-import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
 import cs.ut.domain.WorksEngineer;
 import cs.ut.repository.PlantHireRequestRepository;
+import cs.ut.repository.SiteEngineerRepository;
 import cs.ut.web.we.PHRWEController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -32,6 +32,9 @@ privileged aspect PHRWEController_Roo_Controller {
     
     @Autowired
     PlantHireRequestRepository PHRWEController.plantHireRequestRepository;
+    
+    @Autowired
+    SiteEngineerRepository PHRWEController.siteEngineerRepository;
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PHRWEController.show(@PathVariable("id") Long id, Model uiModel) {
@@ -94,7 +97,7 @@ privileged aspect PHRWEController_Roo_Controller {
         uiModel.addAttribute("approvalstatuses", Arrays.asList(ApprovalStatus.values()));
         uiModel.addAttribute("invoices", Invoice.findAllInvoices());
         uiModel.addAttribute("sites", Site.findAllSites());
-        uiModel.addAttribute("siteengineers", SiteEngineer.findAllSiteEngineers());
+        uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
         uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());
         uiModel.addAttribute("worksengineers", WorksEngineer.findAllWorksEngineers());
     }

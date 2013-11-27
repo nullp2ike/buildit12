@@ -4,7 +4,6 @@
 package cs.ut.domain.bean;
 
 import cs.ut.domain.Site;
-import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.bean.PlantHireRequestDTO;
 import cs.ut.domain.rest.PlantResource;
 import java.math.BigDecimal;
@@ -29,14 +28,6 @@ privileged aspect PlantHireRequestDTO_Roo_JavaBean {
         this.siteList = siteList;
     }
     
-    public SiteEngineer PlantHireRequestDTO.getSiteEng() {
-        return this.siteEng;
-    }
-    
-    public void PlantHireRequestDTO.setSiteEng(SiteEngineer siteEng) {
-        this.siteEng = siteEng;
-    }
-    
     public int PlantHireRequestDTO.getPlant() {
         return this.plant;
     }
@@ -51,14 +42,6 @@ privileged aspect PlantHireRequestDTO_Roo_JavaBean {
     
     public void PlantHireRequestDTO.setSite(int site) {
         this.site = site;
-    }
-    
-    public int PlantHireRequestDTO.getEngineer() {
-        return this.engineer;
-    }
-    
-    public void PlantHireRequestDTO.setEngineer(int engineer) {
-        this.engineer = engineer;
     }
     
     public BigDecimal PlantHireRequestDTO.getPricePerDay() {

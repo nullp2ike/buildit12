@@ -19,11 +19,9 @@ public class PlantHireRequestDTO {
 
 	private List<PlantResource> plantList;
 	private List<Site> siteList;
-	private SiteEngineer siteEng;
 
 	private int plant;
 	private int site;
-	private int engineer;
 	private BigDecimal pricePerDay;
 	
 	@Temporal(TemporalType.DATE)
