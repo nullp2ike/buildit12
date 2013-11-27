@@ -1,4 +1,6 @@
 package cs.ut.domain;
+import javax.persistence.Column;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -19,6 +21,7 @@ public class WorksEngineer {
     private String lastName;
     
     @NotNull
+    @Column(unique=true)
     private String email;
     
 }

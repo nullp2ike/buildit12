@@ -8,6 +8,7 @@ import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
+import cs.ut.domain.WorksEngineer;
 import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.repository.SiteEngineerRepository;
 import cs.ut.security.Assignments;
@@ -124,6 +125,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<WorksEngineer, String> ApplicationConversionServiceFactoryBean.getWorksEngineerToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cs.ut.domain.WorksEngineer, java.lang.String>() {
+            public String convert(WorksEngineer worksEngineer) {
+                return new StringBuilder().append(worksEngineer.getFirstName()).append(' ').append(worksEngineer.getLastName()).append(' ').append(worksEngineer.getEmail()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, WorksEngineer> ApplicationConversionServiceFactoryBean.getIdToWorksEngineerConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cs.ut.domain.WorksEngineer>() {
+            public cs.ut.domain.WorksEngineer convert(java.lang.Long id) {
+                return WorksEngineer.findWorksEngineer(id);
+            }
+        };
+    }
+    
+    public Converter<String, WorksEngineer> ApplicationConversionServiceFactoryBean.getStringToWorksEngineerConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cs.ut.domain.WorksEngineer>() {
+            public cs.ut.domain.WorksEngineer convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), WorksEngineer.class);
+            }
+        };
+    }
+    
     public Converter<Assignments, String> ApplicationConversionServiceFactoryBean.getAssignmentsToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cs.ut.security.Assignments, java.lang.String>() {
             public String convert(Assignments assignments) {
@@ -209,6 +234,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSupplierToStringConverter());
         registry.addConverter(getIdToSupplierConverter());
         registry.addConverter(getStringToSupplierConverter());
+        registry.addConverter(getWorksEngineerToStringConverter());
+        registry.addConverter(getIdToWorksEngineerConverter());
+        registry.addConverter(getStringToWorksEngineerConverter());
         registry.addConverter(getAssignmentsToStringConverter());
         registry.addConverter(getIdToAssignmentsConverter());
         registry.addConverter(getStringToAssignmentsConverter());

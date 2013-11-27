@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
@@ -70,6 +71,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	
 	@BeforeClass
 	public static void doStuff(){
+		removeStuff();
 		setUsers();
 		setRequiredTables("Create", "Supplier1", "FirstName1", "LastName1");
 	}
@@ -78,6 +80,14 @@ public class PlantHireRequestResourceIntegrationTest {
 	public void setUp() {
 		client = Client.create();
 		client.addFilter(new HTTPBasicAuthFilter(siteEngineerUsername, password));	
+	}
+	
+	private static void removeStuff(){
+		List<Users> allUsers = Users.findAllUserses();
+		for (Users users : allUsers) {
+			users.remove();
+			users.persist();
+		}
 	}
 	
 	private static void setRequiredTables(String siteName, String supplierName,
@@ -116,6 +126,12 @@ public class PlantHireRequestResourceIntegrationTest {
 		worksEngineer.setUsername(worksEngineerUsername);
 		worksEngineer.persist();
 		
+		Users admin = new Users();
+		admin.setEnabled(true);
+		admin.setPassword(password);
+		admin.setUsername("admin@buildit.com");
+		admin.persist();
+		
 		Authorities authSiteEng = new Authorities();
 		authSiteEng.setAuthority("ROLE_SITE_ENGINEER");
 		authSiteEng.persist();
@@ -123,6 +139,10 @@ public class PlantHireRequestResourceIntegrationTest {
 		Authorities authWorksEng = new Authorities();
 		authWorksEng.setAuthority("ROLE_WORKS_ENGINEER");
 		authWorksEng.persist();
+		
+		Authorities authAdmin = new Authorities();
+		authAdmin.setAuthority("ROLE_ADMIN");
+		authAdmin.persist();
 		
 		Assignments assignSiteEng = new Assignments();
 		assignSiteEng.setAuthority(authSiteEng);
@@ -133,6 +153,11 @@ public class PlantHireRequestResourceIntegrationTest {
 		assignWorksEng.setAuthority(authWorksEng);
 		assignWorksEng.setUserBuildit(worksEngineer);
 		assignWorksEng.persist();
+		
+		Assignments assignAdmin = new Assignments();
+		assignAdmin.setAuthority(authAdmin);
+		assignAdmin.setUserBuildit(admin);
+		assignAdmin.persist();
 	}
 	
 

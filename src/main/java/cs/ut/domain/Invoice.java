@@ -1,4 +1,5 @@
 package cs.ut.domain;
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -11,9 +12,11 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class Invoice {
 	
 	@NotNull
+    @Column(unique=true)
     private String purchaseOrderHRef;
 
     @NotNull
+    @Column(unique=true)
     private long purchaseOrderId;
 
     @NotNull
