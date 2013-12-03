@@ -53,6 +53,7 @@ public class PlantHireRequestResourceIntegrationTest {
 
 	Client client;
 	static SiteEngineer sE;
+	static SiteEngineer sE2;
 	static WorksEngineer wE;
 	static Supplier sup;
 	static Site s;
@@ -97,6 +98,12 @@ public class PlantHireRequestResourceIntegrationTest {
 		sE.setEmail(siteEngineerUsername);
 		sE.persist();
 		
+		sE2 = new SiteEngineer();
+		sE2.setEmail("eng2");
+		sE2.setFirstName("First");
+		sE2.setLastName("Last");
+		sE2.persist();
+		
 		wE = new WorksEngineer();
 		wE.setFirstName("WorksFirst");
 		wE.setLastName("WorksLast");
@@ -118,6 +125,12 @@ public class PlantHireRequestResourceIntegrationTest {
 		siteEngineer.setPassword(password);
 		siteEngineer.setUsername(siteEngineerUsername);
 		siteEngineer.persist();
+		
+		Users siteEngineer2 = new Users();
+		siteEngineer2.setEnabled(true);
+		siteEngineer2.setPassword(password);
+		siteEngineer2.setUsername("eng2");
+		siteEngineer2.persist();
 		
 		Users worksEngineer = new Users();
 		worksEngineer.setEnabled(true);
@@ -148,6 +161,11 @@ public class PlantHireRequestResourceIntegrationTest {
 		assignSiteEng.setUserBuildit(siteEngineer);
 		assignSiteEng.persist();
 		
+		Assignments assignSiteEng2 = new Assignments();
+		assignSiteEng2.setAuthority(authSiteEng);
+		assignSiteEng2.setUserBuildit(siteEngineer2);
+		assignSiteEng2.persist();
+		
 		Assignments assignWorksEng = new Assignments();
 		assignWorksEng.setAuthority(authWorksEng);
 		assignWorksEng.setUserBuildit(worksEngineer);
@@ -172,7 +190,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	}
 
 	private long setPlantHireRequest(int plantId, int totalCost,
-			ApprovalStatus status) {
+			ApprovalStatus status, SiteEngineer sE) {
 		PlantHireRequest phr = new PlantHireRequest();
 		phr.setEndDate(new Date());
 		phr.setStartDate(new Date());
@@ -190,6 +208,9 @@ public class PlantHireRequestResourceIntegrationTest {
 	// OK
 	@Test
 	public void testCreatePHR() {
+		
+		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL, sE2); //Just for testing some other thing
+		
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(3));
 		phrResource.setSite(s);
@@ -219,7 +240,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	// OK
 	@Test
 	public void testRejectPHR() {
-		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
+		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL, sE);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
 				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();
@@ -243,7 +264,7 @@ public class PlantHireRequestResourceIntegrationTest {
 				.getIdentifier();
 
 		long phrId = setPlantHireRequest((int) plantId, 2,
-				ApprovalStatus.PENDING_APPROVAL);
+				ApprovalStatus.PENDING_APPROVAL, sE);
 		
 		ResponseEntity<PurchaseOrderResource> response2 = template.exchange(
 				webappurl + "/rest/phr/" + phrId + "/approve", HttpMethod.PUT,
@@ -258,7 +279,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	// OK
 	@Test
 	public void testUpdatePHR() {
-		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL);
+		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL, sE);
 
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(100));
@@ -290,7 +311,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	@Test
 	public void testCancelPHR() {
 		long phrId = setPlantHireRequest(1, 100,
-				ApprovalStatus.PENDING_APPROVAL);
+				ApprovalStatus.PENDING_APPROVAL, sE);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
 				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();
@@ -304,7 +325,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	@Test
 	public void testGetPHR() {
 		long phrId = setPlantHireRequest(1, 100,
-				ApprovalStatus.PENDING_APPROVAL);
+				ApprovalStatus.PENDING_APPROVAL, sE);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
 				getHeaders(siteEngineerUsername + ":" + "password"));
 		RestTemplate template = new RestTemplate();

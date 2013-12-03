@@ -24,3 +24,12 @@ web mvc controller --class ~.web.InvoicesController --preferredMapping /invoices
 web mvc scaffold --class ~.web.WorksEngineerController --backingType ~.domain.WorksEngineer
 web mvc scaffold --class ~.domain.InvoiceController --backingType ~.domain.Invoice
 repository jpa --interface ~.repository.UserRepository --entity ~.security.Users
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-28 09:36:25
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-01 18:13:31
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-02 10:39:09
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-02 10:39:41
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-02 10:41:01
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-02 10:42:20
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-02 13:44:25
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-03 19:58:31
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-03 21:40:41

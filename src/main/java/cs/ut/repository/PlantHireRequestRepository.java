@@ -29,4 +29,9 @@ public interface PlantHireRequestRepository {
 	@Transactional(readOnly = true)
 	List<PlantHireRequest> findRequestsByApprovalStatus(@Param("status") ApprovalStatus status);
 	
+	@Query("SELECT phr FROM PlantHireRequest AS phr WHERE phr.siteEngineer = (SELECT se.id FROM SiteEngineer AS se WHERE se.email = :username)")
+	
+	@Transactional(readOnly = true)
+	List<PlantHireRequest> findRequestsBySiteEngineer(@Param("username") String username);
+	
 }

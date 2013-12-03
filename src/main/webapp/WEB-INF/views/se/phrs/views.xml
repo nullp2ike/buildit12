@@ -7,10 +7,16 @@
 <definition extends="default" name="se/phrs/show">
         <put-attribute name="body" value="/WEB-INF/views/se/phrs/show.jspx"/>
     </definition>
-<definition extends="default" name="se/phrs/create">
-        <put-attribute name="body" value="/WEB-INF/views/se/phrs/create.jspx"/>
-    </definition>
 <definition extends="default" name="se/phrs/update">
         <put-attribute name="body" value="/WEB-INF/views/se/phrs/update.jspx"/>
+    </definition>
+<definition extends="default" name="se/phrs/find">
+        <put-attribute name="body" value="/WEB-INF/views/se/phrs/find.jspx"/>
+    </definition>
+<definition extends="default" name="se/phrs/available">
+        <put-attribute name="body" value="/WEB-INF/views/se/phrs/available.jspx"/>
+    </definition>
+<definition extends="default" name="se/phrs/create">
+        <put-attribute name="body" value="/WEB-INF/views/se/phrs/create.jspx"/>
     </definition>
 </tiles-definitions>

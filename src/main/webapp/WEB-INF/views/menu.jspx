@@ -7,25 +7,19 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
 		<sec:authorize ifAllGranted="ROLE_WORKS_ENGINEER">
-			<menu:category id="c_planthirerequest"
-				z="RYvAYDPxevYbz1bZdWQ+gP48NkM=">
+			<menu:category id="c_planthirerequest" z="user-managed">
 				<menu:item id="i_planthirerequest_list"
-					messageCode="global_menu_list"
-					url="/we/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}" />
-			</menu:category>
-			<menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-				<menu:item id="i_controller__planthirerequests_pendingindex_id"
-					messageCode="global_generic" url="/planthirerequests/pending/list"
+					messageCode="global_menu_list" url="/we/phrs/pending"
 					z="user-managed" />
 			</menu:category>
 		</sec:authorize>
 		<sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
 			<menu:category id="c_planthirerequest" z="user-managed">
 				<menu:item id="i_planthirerequest_new" messageCode="global_menu_new"
-					url="/planthirerequests/queryPlant/search" />
+					url="/se/phrs/find" z="user-managed" />
 				<menu:item id="i_planthirerequest_list"
 					messageCode="global_menu_list"
-					url="/se/phrs?page=1&amp;size=${empty param.size ? 10 : param.size}"
+					url="/se/phrs/list"
 					z="user-managed" />
 			</menu:category>
 			<menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">

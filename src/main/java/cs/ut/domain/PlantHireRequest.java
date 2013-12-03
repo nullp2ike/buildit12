@@ -71,7 +71,6 @@ public class PlantHireRequest {
      */
     @ManyToOne
     private Invoice invoice;
-
     /**
      */
     @ManyToOne

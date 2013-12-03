@@ -1,0 +1,33 @@
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<form:form method="POST" modelAttribute="plantDTO" action="request">
+		<table>
+			<tr>
+				<select name="plant">
+					<c:forEach var="plants" items="${plantDTO.plantList}">
+						<option value="${plants.identifier}"
+							label="Name: ${plants.plantName}, info: ${plants.description}, price per day: ${plants.pricePerDay}" />
+					</c:forEach>
+				</select>
+			</tr>
+			<tr>
+				<fmt:formatDate value="${plantDTO.startDate}" type="date"
+					pattern="MM/dd/yyyy" var="theFormattedStartDate" />
+				<fmt:formatDate value="${plantDTO.endDate}" type="date"
+					pattern="MM/dd/yyyy" var="theFormattedEndDate" />
+				<input type="hidden" name="startDate"
+					value="${theFormattedStartDate}" />
+				<input type="hidden" name="endDate" value="${theFormattedEndDate}" />
+				<input type="hidden" name="site" value="${plantDTO.site}" />
+				<input type="submit" value="Submit plant hire request" />
+			</tr>
+		</table>
+	</form:form>
+</div>
