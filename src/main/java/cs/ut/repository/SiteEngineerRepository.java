@@ -1,8 +1,5 @@
 package cs.ut.repository;
-import java.util.List;
 
-import cs.ut.domain.ApprovalStatus;
-import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.SiteEngineer;
 
 import org.springframework.data.jpa.repository.Query;

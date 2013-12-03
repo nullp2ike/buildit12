@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import cs.ut.domain.Site;
-import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.rest.PlantResource;
 
 @RooJavaBean

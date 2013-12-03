@@ -9,10 +9,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.junit.Before;
@@ -26,14 +22,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.web.client.RestTemplate;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.Base64;
 
 import cs.ut.domain.ApprovalStatus;
@@ -46,6 +38,7 @@ import cs.ut.domain.WorksEngineer;
 import cs.ut.security.Assignments;
 import cs.ut.security.Authorities;
 import cs.ut.security.Users;
+
 
 @ContextConfiguration(locations = { "/META-INF/spring/applicationContext.xml" })
 @RooIntegrationTest(entity = PlantHireRequestResource.class)
@@ -209,7 +202,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	@Test
 	public void testCreatePHR() {
 		
-		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL, sE2); //Just for testing some other thing
+//		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL, sE2); //Just for testing some other thing
 		
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(3));

@@ -1,32 +1,8 @@
 package cs.ut.web;
-import java.util.Arrays;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 
-import com.sun.jersey.core.util.Base64;
-
-import cs.ut.domain.ApprovalStatus;
-import cs.ut.domain.PlantHireRequest;
-import cs.ut.domain.bean.PlantHireRequestApproveDTO;
-import cs.ut.domain.rest.PlantHireRequestResource;
-import cs.ut.domain.rest.PurchaseOrderResource;
-import cs.ut.repository.PlantHireRequestRepository;
 
 @RequestMapping("/planthirerequests/pending/**")
 @Controller

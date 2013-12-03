@@ -1,20 +1,6 @@
 package cs.ut.domain;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import org.junit.Test;
 import org.springframework.roo.addon.test.RooIntegrationTest;
-
-import cs.ut.domain.soap.client.PlantResource;
-import cs.ut.domain.soap.client.PlantResourceList;
-import cs.ut.domain.soap.client.PlantSOAPService;
-import cs.ut.domain.soap.client.PlantSOAPServiceService;
 
 @RooIntegrationTest(entity = Plant.class)
 public class PlantIntegrationTest {

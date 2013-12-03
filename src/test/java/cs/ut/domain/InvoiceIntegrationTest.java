@@ -4,10 +4,6 @@ import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.validation.constraints.AssertTrue;
-
-import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

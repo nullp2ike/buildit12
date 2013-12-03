@@ -1,16 +1,7 @@
 package cs.ut.domain;
-import java.math.BigDecimal;
-import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.roo.addon.dod.RooDataOnDemand;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import cs.ut.repository.PlantHireRequestRepository;
 
 @RooDataOnDemand(entity = Invoice.class)
 public class InvoiceDataOnDemand {
