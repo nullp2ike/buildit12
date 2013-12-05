@@ -13,7 +13,7 @@ import cs.ut.util.ResourceSupport;
 
 @RooJavaBean
 @RooToString
-@XmlRootElement(name = "purchaseOrder")
+@XmlRootElement
 public class PurchaseOrderResource extends ResourceSupport{
 	
     private Date startDate;
@@ -23,8 +23,6 @@ public class PurchaseOrderResource extends ResourceSupport{
     private BigDecimal totalCost;
     
     private HireRequestStatus status;
-    
-    private long plantHireRequestId;
     
     private PlantResource plantResource;
 

@@ -151,27 +151,4 @@ import cs.ut.repository.SiteEngineerRepository;
 //				DateTimeFormat.patternForStyle(("S-"),
 //						LocaleContextHolder.getLocale()));
 //	}
-//	
-//	private String resourceToJson(PlantHireRequestResource phrResource) {
-//		ObjectWriter ow = new ObjectMapper().writer()
-//				.withDefaultPrettyPrinter();
-//		String json = null;
-//		try {
-//			json = ow.writeValueAsString(phrResource);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return json;
-//	}
-//	
-//	private static HttpHeaders getHeaders(String auth) {
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
-//		headers.setAccept(Arrays
-//				.asList(org.springframework.http.MediaType.APPLICATION_JSON));
-//		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
-//		headers.add("Authorization", "Basic "
-//				+ new String(encodedAuthorisation));
-//		return headers;
-//	}
 //}

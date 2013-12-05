@@ -12,6 +12,7 @@ import cs.ut.domain.bean.PlantHireRequestApproveDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.repository.PlantHireRequestRepository;
+import cs.ut.util.RestHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,7 +68,7 @@ public class PHRWEController {
 		String worksEngUsername = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				getHeaders(worksEngUsername + ":" + password));
+				RestHelper.getHeaders(worksEngUsername, password));
 		if (decision.equals("Approve")) {
 			String acceptUrl = webappurl + "/rest/phr/" + selectedPHR
 					+ "/approve";
@@ -88,16 +89,5 @@ public class PHRWEController {
 		phrAproveDTO.setSupplierUrl(supplierurl);
 		modelMap.put("phrApproveDTO", phrAproveDTO);
 		return "redirect:/we/phrs/pending";
-	}
-
-	private static HttpHeaders getHeaders(String auth) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
-		headers.setAccept(Arrays
-				.asList(org.springframework.http.MediaType.APPLICATION_JSON));
-		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
-		headers.add("Authorization", "Basic "
-				+ new String(encodedAuthorisation));
-		return headers;
 	}
 }

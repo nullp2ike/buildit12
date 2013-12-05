@@ -8,6 +8,7 @@ import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestController;
 import cs.ut.domain.Site;
+import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
 import cs.ut.domain.WorksEngineer;
 import cs.ut.repository.PlantHireRequestRepository;

@@ -2,45 +2,36 @@ package cs.ut.domain.rest;
 
 import static org.junit.Assert.assertTrue;
 
-import javax.ws.rs.core.MediaType;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.roo.addon.test.RooIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.web.client.RestTemplate;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.api.client.WebResource;
+import cs.ut.util.RestHelper;
 
 @ContextConfiguration(locations = { "/META-INF/spring/applicationContext.xml" })
 @RooIntegrationTest(entity = PlantHireRequestResource.class)
 public class PlantsQueryViaRestTest {
-
-	Client client;
 	
 	@Value("${supplierurl}")
 	String supplierurl;
 	
-	@Before
-	public void setUp() {
-		
-		client = Client.create();
-	}
-	
 	@Test
 	public void testGetPlantsFromSupplier(){
-		WebResource webResource = client.resource(supplierurl + "/rest/plant/");
-		ClientResponse clientResponse = webResource
-				.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML)
-				.get(ClientResponse.class);
-		assertTrue(clientResponse.getStatus() == Status.OK.getStatusCode());
-		PlantResourceList plantResourceList = clientResponse
-				.getEntity(PlantResourceList.class);
-		assertTrue(plantResourceList.getListOfPlantResources().size() > 0);
-	}
+		
+		HttpEntity<String> requestEntity = new HttpEntity<String>(
+				RestHelper.getHeaders("user", "password"));
 
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<PlantResourceList> response = template.exchange(
+				supplierurl + "/rest/plant/", HttpMethod.GET, requestEntity,
+				PlantResourceList.class);
+
+		assertTrue(response.getStatusCode().value() == 200);
+		assertTrue(response.getBody().getListOfPlantResources().size() > 0);
+	}
 }

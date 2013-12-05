@@ -59,14 +59,4 @@ public class PlantHireRequestApproveController {
 //    	return "redirect:/planthirerequests/pending/list";
 //    }
 //	
-//	private static HttpHeaders getHeaders(String auth) {
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
-//		headers.setAccept(Arrays
-//				.asList(org.springframework.http.MediaType.APPLICATION_JSON));
-//		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
-//		headers.add("Authorization", "Basic "
-//				+ new String(encodedAuthorisation));
-//		return headers;
-//	}
 }

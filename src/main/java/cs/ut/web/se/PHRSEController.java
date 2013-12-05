@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
@@ -22,6 +24,8 @@ import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
 import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.repository.SiteEngineerRepository;
+import cs.ut.util.RestHelper;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.joda.time.DateTime;
@@ -145,9 +149,9 @@ public class PHRSEController {
 		phrResource.setTotalCost(plantResource.getPricePerDay().multiply(
 				new BigDecimal(days)));
 
-		String json = resourceToJson(phrResource);
+		String json = RestHelper.resourceToJson(phrResource);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
-				getHeaders(siteEngUsername + ":" + password));
+				RestHelper.getHeaders(siteEngUsername, password));
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<PlantHireRequestResource> response = restTemplate
@@ -162,30 +166,6 @@ public class PHRSEController {
 		String id = url.substring(url.lastIndexOf("/") + 1);
 		return id;
 	}
-
-	private String resourceToJson(PlantHireRequestResource phrResource) {
-		ObjectWriter ow = new ObjectMapper().writer()
-				.withDefaultPrettyPrinter();
-		String json = null;
-		try {
-			json = ow.writeValueAsString(phrResource);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return json;
-	}
-
-	private static HttpHeaders getHeaders(String auth) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
-		headers.setAccept(Arrays
-				.asList(org.springframework.http.MediaType.APPLICATION_JSON));
-		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
-		headers.add("Authorization", "Basic "
-				+ new String(encodedAuthorisation));
-		return headers;
-	}
-
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {

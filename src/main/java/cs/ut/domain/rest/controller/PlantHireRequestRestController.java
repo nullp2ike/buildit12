@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import cs.ut.domain.rest.PlantHireRequestResourceAssembler;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.util.ExtendedLink;
+import cs.ut.util.RestHelper;
 
 @Controller
 @RequestMapping("/rest/phr/")
@@ -107,13 +109,17 @@ public class PlantHireRequestRestController {
 			poResource.setPlantResource(pR);
 			poResource.setStatus(HireRequestStatus.PENDING_CONFIRMATION);
 			poResource.setTotalCost(phr.getTotalCost());
-			poResource.setPlantHireRequestId(phr.getId());
 
 			String url = supplierurl + "/rest/pos/";
+			
+			String json = RestHelper.resourceToJson(poResource);
+			HttpEntity<String> requestEntity = new HttpEntity<String>(json, 
+					RestHelper.getHeaders("user", "password"));		
 
 			RestTemplate restTemplate = new RestTemplate();
+			
 			PurchaseOrderResource after = restTemplate.postForObject(url,
-					poResource, PurchaseOrderResource.class);
+					requestEntity, PurchaseOrderResource.class);
 			
 			String link = after.get_link("getPO").getHref();
 			long purchaseOrderId = Long.parseLong(link.substring(link.lastIndexOf("/") + 1));
@@ -127,12 +133,12 @@ public class PlantHireRequestRestController {
 			
 			phr.setInvoice(invoice);
 			phr.persist();
-
 			response = new ResponseEntity<>(after, HttpStatus.OK);
 		} else
 			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
 		return response;
 	}
+	
 
 	// OK
 	@RequestMapping(method = RequestMethod.PUT, value = "{id}")
@@ -239,5 +245,4 @@ public class PlantHireRequestRestController {
 		String link = linkTo(methodLink, phr.getId()).toUri().toString();
 		resource.add(new ExtendedLink(link, action, method));
 	}
-
 }
