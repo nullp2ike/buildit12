@@ -20,11 +20,17 @@ public class PlantsQueryViaRestTest {
 	@Value("${supplierurl}")
 	String supplierurl;
 	
+	@Value("${rentit.role.user}")
+	String rentitUser;
+	
+	@Value("${rentit.role.user.password}")
+	String rentitUserPassword;
+	
 	@Test
 	public void testGetPlantsFromSupplier(){
 		
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				RestHelper.getHeaders("user", "password"));
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
 
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<PlantResourceList> response = template.exchange(

@@ -59,6 +59,13 @@ public class PlantHireRequestResourceIntegrationTest {
 
 	@Value("${webappurl}")
 	String webappurl;
+	
+	@Value("${rentit.role.user}")
+	String rentitUser;
+	
+	@Value("${rentit.role.user.password}")
+	String rentitUserPassword;
+
 
 	@BeforeClass
 	public static void doStuff() {
@@ -249,7 +256,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		
 
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				RestHelper.getHeaders("user", "password"));
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
 		
 		ResponseEntity<PlantResourceList> response = template.exchange(
 				url, HttpMethod.GET, requestEntity,
@@ -343,7 +350,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	public void testAutomaticPOGeneration() {
 		// Get some existing plant id
 		HttpEntity<String> requestEntitySupplier = new HttpEntity<String>(
-				RestHelper.getHeaders("user", "password"));
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
 		ResponseEntity<PlantResourceList> response = template.exchange(
 				supplierurl + "/rest/plant/", HttpMethod.GET,
 				requestEntitySupplier, PlantResourceList.class);

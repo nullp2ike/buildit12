@@ -37,6 +37,12 @@ public class PlantHireRequestRestController {
 	
 	@Value("${supplierurl}")
 	String supplierurl;
+	
+	@Value("${rentit.role.user}")
+	String rentitUser;
+	
+	@Value("${rentit.role.user.password}")
+	String rentitUserPassword;
 
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
@@ -114,7 +120,7 @@ public class PlantHireRequestRestController {
 			
 			String json = RestHelper.resourceToJson(poResource);
 			HttpEntity<String> requestEntity = new HttpEntity<String>(json, 
-					RestHelper.getHeaders("user", "password"));		
+					RestHelper.getHeaders(rentitUser, rentitUserPassword));		
 
 			RestTemplate restTemplate = new RestTemplate();
 			

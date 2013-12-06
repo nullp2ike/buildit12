@@ -36,6 +36,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.Authentication;
@@ -64,6 +65,13 @@ public class PHRSEController {
 	@Value("${webappurl}")
 	String webAppUrl;
 	
+	@Value("${rentit.role.user}")
+	String rentitUser;
+	
+	@Value("${rentit.role.user.password}")
+	String rentitUserPassword;
+
+	
 	@Autowired
 	SiteEngineerRepository siteEngineerRepository;
 
@@ -85,11 +93,14 @@ public class PHRSEController {
 
 		String url = supplierUrl + "/rest/plant/" + "?startDate=" + startDate
 				+ "&endDate=" + endDate;
+		
+		HttpEntity<String> requestEntity = new HttpEntity<String>( 
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));		
 
 		RestTemplate restTemplate = new RestTemplate();
-		PlantResourceList plantList = restTemplate.getForObject(url,
+		ResponseEntity<PlantResourceList> plantList = restTemplate.exchange(url,HttpMethod.GET,requestEntity,
 				PlantResourceList.class);
-		List<PlantResource> plants = plantList.getListOfPlantResources();
+		List<PlantResource> plants = plantList.getBody().getListOfPlantResources();
 
 		PlantHireRequestDTO p = new PlantHireRequestDTO();
 		p.setEndDate(plant.getEndDate());
@@ -119,7 +130,11 @@ public class PHRSEController {
 		String plantRequestUrl = supplierUrl + "/rest/plant/"
 				+ plant.getPlant();
 		RestTemplate template = new RestTemplate();
-		PlantResource plantResource = template.getForObject(plantRequestUrl,
+		
+		HttpEntity<String> requestEntity = new HttpEntity<String>( 
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));	
+		
+		ResponseEntity<PlantResource> plantResource = template.exchange(plantRequestUrl, HttpMethod.GET, requestEntity,
 				PlantResource.class);
 
 		DateTime startDate = new DateTime(plant.getStartDate());
@@ -146,16 +161,16 @@ public class PHRSEController {
 		phrResource.setSite(Site.findSite((long) plant.getSite()));
 		phrResource.setSiteEngineer(se);
 		phrResource.setSupplier(Supplier.findAllSuppliers().get(0));
-		phrResource.setTotalCost(plantResource.getPricePerDay().multiply(
+		phrResource.setTotalCost(plantResource.getBody().getPricePerDay().multiply(
 				new BigDecimal(days)));
 
 		String json = RestHelper.resourceToJson(phrResource);
-		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
+		HttpEntity<String> requestEntity2 = new HttpEntity<String>(json,
 				RestHelper.getHeaders(siteEngUsername, password));
 
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<PlantHireRequestResource> response = restTemplate
-				.postForEntity(url, requestEntity,
+				.postForEntity(url, requestEntity2,
 						PlantHireRequestResource.class);
 		String id = getIdFromURL(response.getBody().get_link("updatePHR")
 				.getHref());
