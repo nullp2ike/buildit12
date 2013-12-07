@@ -2,6 +2,7 @@ package cs.ut.domain.rest;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -26,13 +27,19 @@ public class PlantsQueryViaRestTest {
 	@Value("${rentit.role.user.password}")
 	String rentitUserPassword;
 	
+	private RestTemplate template;
+	private HttpEntity requestEntity;
+	
+	@Before
+	public void setUp(){
+		template = new RestTemplate();
+		requestEntity = new HttpEntity<String>(
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
+	}
+	
 	@Test
 	public void testGetPlantsFromSupplier(){
-		
-		HttpEntity<String> requestEntity = new HttpEntity<String>(
-				RestHelper.getHeaders(rentitUser, rentitUserPassword));
 
-		RestTemplate template = new RestTemplate();
 		ResponseEntity<PlantResourceList> response = template.exchange(
 				supplierurl + "/rest/plant/", HttpMethod.GET, requestEntity,
 				PlantResourceList.class);
@@ -40,4 +47,11 @@ public class PlantsQueryViaRestTest {
 		assertTrue(response.getStatusCode().value() == 200);
 		assertTrue(response.getBody().getListOfPlantResources().size() > 0);
 	}
+	
+//	@Test
+//	public void testPlantsByDate(){
+//		ResponseEntity<PlantResourceList> response = template.exchange(
+//				supplierurl + "/rest/plant/" + , HttpMethod.GET, requestEntity,
+//				PlantResourceList.class);
+//	}
 }

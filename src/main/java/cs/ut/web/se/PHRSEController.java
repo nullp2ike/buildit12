@@ -22,6 +22,7 @@ import cs.ut.domain.bean.PlantHireRequestDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
+import cs.ut.domain.rest.exception.InvalidHirePeriodException;
 import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.repository.SiteEngineerRepository;
 import cs.ut.util.RestHelper;
@@ -86,10 +87,10 @@ public class PHRSEController {
 
 	@RequestMapping(value = "select", method = RequestMethod.GET)
 	public String displayPlants(@Valid PlantHireRequestDTO plant,
-			Model model) throws AssertionError {
+			Model model) throws InvalidHirePeriodException {
 		
 		if (plant.getEndDate().before(plant.getStartDate())){
-			throw new AssertionError("End date cannot be before start date");
+			throw new InvalidHirePeriodException("End date cannot be before start date");
 		}
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -98,6 +99,8 @@ public class PHRSEController {
 
 		String url = supplierUrl + "/rest/plant/" + "?startDate=" + startDate
 				+ "&endDate=" + endDate;
+		
+		System.out.println("Plants url : " + url);
 		
 		HttpEntity<String> requestEntity = new HttpEntity<String>( 
 				RestHelper.getHeaders(rentitUser, rentitUserPassword));		

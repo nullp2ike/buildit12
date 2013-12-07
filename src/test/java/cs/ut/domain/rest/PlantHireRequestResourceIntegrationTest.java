@@ -293,12 +293,13 @@ public class PlantHireRequestResourceIntegrationTest {
 	
 	@Test
 	public void testApprovePHR() {
+
 		DateTime today = new DateTime().toDateMidnight().toDateTime();
 		DateTime tomorrow = today.plusDays(1);
 		
-		String startDateString = new SimpleDateFormat("dd-MM-yy").format(today
+		String startDateString = new SimpleDateFormat("dd-MM-yyyy").format(today
 				.toDate());
-		String endDateString = new SimpleDateFormat("dd-MM-yy").format(tomorrow
+		String endDateString = new SimpleDateFormat("dd-MM-yyyy").format(tomorrow
 				.toDate());
 		
 		String url = supplierurl + "/rest/plant/" + "?startDate=" + startDateString
@@ -407,13 +408,17 @@ public class PlantHireRequestResourceIntegrationTest {
 		long plantId = response.getBody().getListOfPlantResources().get(0)
 				.getIdentifier();
 
+		DateTime startDate = new DateTime();
+		startDate = startDate.plusDays(20);
+		DateTime endDate = startDate.plusDays(7);
+		
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(3000));
 		phrResource.setSite(s);
-		phrResource.setEndDate(new Date());
+		phrResource.setEndDate(startDate.toDate());
 		phrResource.setPlantId((int) plantId);
 		phrResource.setSiteEngineer(sE);
-		phrResource.setStartDate(new Date());
+		phrResource.setStartDate(endDate.toDate());
 		phrResource.setSupplier(sup);
 		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
 
@@ -434,6 +439,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		ResponseEntity<PurchaseOrderResource> responseAccept = template
 				.exchange(acceptUrl, HttpMethod.PUT, requestEntityCreate,
 						PurchaseOrderResource.class);
+		System.out.println(responseAccept);
 		assertTrue(responseAccept.getStatusCode().value() == 200);
 		String rentitPOUrl = responseAccept.getBody().get_link("getPO")
 				.getHref();
