@@ -86,7 +86,12 @@ public class PHRSEController {
 
 	@RequestMapping(value = "select", method = RequestMethod.GET)
 	public String displayPlants(@Valid PlantHireRequestDTO plant,
-			Model model) {
+			Model model) throws AssertionError {
+		
+		if (plant.getEndDate().before(plant.getStartDate())){
+			throw new AssertionError("End date cannot be before start date");
+		}
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		String startDate = formatter.format(plant.getStartDate());
 		String endDate = formatter.format(plant.getEndDate());
