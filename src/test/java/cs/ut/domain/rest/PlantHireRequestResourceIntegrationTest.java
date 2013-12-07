@@ -80,10 +80,45 @@ public class PlantHireRequestResourceIntegrationTest {
 	}
 
 	private static void removeStuff() {
+		
+		List<Assignments> assignments = Assignments.findAllAssignmentses();
+		for (Assignments assignments2 : assignments) {
+			assignments2.remove();
+		}
+		
 		List<Users> allUsers = Users.findAllUserses();
 		for (Users users : allUsers) {
 			users.remove();
-			users.persist();
+		}
+		
+		List<Authorities> auth = Authorities.findAllAuthoritieses();
+		for (Authorities authorities : auth) {
+			authorities.remove();
+		}
+		
+		List<PlantHireRequest> phr = PlantHireRequest.findAllPlantHireRequests();
+		for (PlantHireRequest plantHireRequest : phr) {
+			plantHireRequest.remove();
+		}
+		
+		List<Site> site = Site.findAllSites();
+		for (Site site2 : site) {
+			site2.remove();
+		}
+		
+		List<Supplier> sup = Supplier.findAllSuppliers();
+		for (Supplier supplier : sup) {
+			supplier.remove();
+		}
+		
+		List<WorksEngineer> wE = WorksEngineer.findAllWorksEngineers();
+		for (WorksEngineer worksEngineer : wE) {
+			worksEngineer.remove();
+		}
+		
+		List<SiteEngineer> siteEng = SiteEngineer.findAllSiteEngineers();
+		for (SiteEngineer siteEngineer : siteEng) {
+			siteEngineer.remove();
 		}
 	}
 

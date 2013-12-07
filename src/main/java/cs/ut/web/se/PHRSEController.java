@@ -146,7 +146,7 @@ public class PHRSEController {
 		DateTime endDate = new DateTime(plant.getEndDate());
 
 		Days d = Days.daysBetween(startDate, endDate);
-		int days = d.getDays();
+		int days = d.getDays() + 1;
 
 		String url = webAppUrl + "/rest/phr/";
 

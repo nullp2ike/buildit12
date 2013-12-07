@@ -44,7 +44,7 @@
 				return true;
 			else {
 				alert("Please choose start date before or equal to the end date ");
-				return true;
+				return false;
 			}
 		};
 	</script>
