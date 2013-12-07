@@ -8,4 +8,9 @@ public class SiteIntegrationTest {
     @Test
     public void testMarkerMethod() {
     }
+
+	@Test
+    public void testRemove() {
+
+    }
 }

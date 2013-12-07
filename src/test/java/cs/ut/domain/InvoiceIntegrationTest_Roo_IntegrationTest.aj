@@ -118,16 +118,4 @@ privileged aspect InvoiceIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Expected 'Invoice' identifier to no longer be null", obj.getId());
     }
     
-    @Test
-    public void InvoiceIntegrationTest.testRemove() {
-        Invoice obj = dod.getRandomInvoice();
-        Assert.assertNotNull("Data on demand for 'Invoice' failed to initialize correctly", obj);
-        Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'Invoice' failed to provide an identifier", id);
-        obj = Invoice.findInvoice(id);
-        obj.remove();
-        obj.flush();
-        Assert.assertNull("Failed to remove 'Invoice' with identifier '" + id + "'", Invoice.findInvoice(id));
-    }
-    
 }

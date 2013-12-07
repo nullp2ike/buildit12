@@ -75,4 +75,9 @@ public class InvoiceIntegrationTest {
 		PlantHireRequest phr2 = repository.findByPurchaseOrderId(123);
 		assertTrue(phr.getId() == phr2.getId());
     }
+
+	@Test
+    public void testRemove() {
+
+    }
 }

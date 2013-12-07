@@ -121,16 +121,4 @@ privileged aspect SiteEngineerIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Expected 'SiteEngineer' identifier to no longer be null", obj.getId());
     }
     
-    @Test
-    public void SiteEngineerIntegrationTest.testDelete() {
-        SiteEngineer obj = dod.getRandomSiteEngineer();
-        Assert.assertNotNull("Data on demand for 'SiteEngineer' failed to initialize correctly", obj);
-        Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'SiteEngineer' failed to provide an identifier", id);
-        obj = siteEngineerRepository.findOne(id);
-        siteEngineerRepository.delete(obj);
-        siteEngineerRepository.flush();
-        Assert.assertNull("Failed to remove 'SiteEngineer' with identifier '" + id + "'", siteEngineerRepository.findOne(id));
-    }
-    
 }

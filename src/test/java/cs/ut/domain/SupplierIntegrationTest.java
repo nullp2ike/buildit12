@@ -8,4 +8,8 @@ public class SupplierIntegrationTest {
     @Test
     public void testMarkerMethod() {
     }
+
+	@Test
+    public void testRemove() {
+    }
 }

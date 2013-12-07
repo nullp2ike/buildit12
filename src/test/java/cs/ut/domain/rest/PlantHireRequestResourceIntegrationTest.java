@@ -140,6 +140,12 @@ public class PlantHireRequestResourceIntegrationTest {
 		admin.setPassword(password);
 		admin.setUsername("admin@buildit.com");
 		admin.persist();
+		
+		Users rentit = new Users();
+		rentit.setEnabled(true);
+		rentit.setPassword(password);
+		rentit.setUsername("user@rentit.com");
+		rentit.persist();
 
 		Authorities authSiteEng = new Authorities();
 		authSiteEng.setAuthority("ROLE_SITE_ENGINEER");
@@ -152,6 +158,10 @@ public class PlantHireRequestResourceIntegrationTest {
 		Authorities authAdmin = new Authorities();
 		authAdmin.setAuthority("ROLE_ADMIN");
 		authAdmin.persist();
+		
+		Authorities authSupplier = new Authorities();
+		authSupplier.setAuthority("ROLE_SUPPLIER");
+		authSupplier.persist();
 
 		Assignments assignSiteEng = new Assignments();
 		assignSiteEng.setAuthority(authSiteEng);
@@ -172,6 +182,11 @@ public class PlantHireRequestResourceIntegrationTest {
 		assignAdmin.setAuthority(authAdmin);
 		assignAdmin.setUserBuildit(admin);
 		assignAdmin.persist();
+		
+		Assignments assignSupplier = new Assignments();
+		assignSupplier.setAuthority(authSupplier);
+		assignSupplier.setUserBuildit(rentit);
+		assignSupplier.persist();
 	}
 
 	private long setPlantHireRequest(int plantId, int totalCost,
@@ -358,7 +373,7 @@ public class PlantHireRequestResourceIntegrationTest {
 				.getIdentifier();
 
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
-		phrResource.setTotalCost(new BigDecimal(3));
+		phrResource.setTotalCost(new BigDecimal(3000));
 		phrResource.setSite(s);
 		phrResource.setEndDate(new Date());
 		phrResource.setPlantId((int) plantId);

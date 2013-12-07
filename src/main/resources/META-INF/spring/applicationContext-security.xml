@@ -15,6 +15,7 @@
 		<intercept-url pattern="/login/**" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<intercept-url pattern="/rest/phr/**" access="hasRole('ROLE_SITE_ENGINEER')" />
+		<intercept-url pattern="/rest/phr/**" access="hasRole('ROLE_SUPPLIER')" />
 		<http-basic />
 	</http>
 

@@ -113,6 +113,7 @@ public class PlantHireRequestRestController {
 			poResource.setEndDate(phr.getEndDate());
 			poResource.setStartDate(phr.getStartDate());
 			poResource.setPlantResource(pR);
+			poResource.setPlantHireRequestId(phr.getId());
 			poResource.setStatus(HireRequestStatus.PENDING_CONFIRMATION);
 			poResource.setTotalCost(phr.getTotalCost());
 

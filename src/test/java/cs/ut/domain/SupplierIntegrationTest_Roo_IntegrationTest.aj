@@ -118,16 +118,4 @@ privileged aspect SupplierIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Expected 'Supplier' identifier to no longer be null", obj.getId());
     }
     
-    @Test
-    public void SupplierIntegrationTest.testRemove() {
-        Supplier obj = dod.getRandomSupplier();
-        Assert.assertNotNull("Data on demand for 'Supplier' failed to initialize correctly", obj);
-        Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'Supplier' failed to provide an identifier", id);
-        obj = Supplier.findSupplier(id);
-        obj.remove();
-        obj.flush();
-        Assert.assertNull("Failed to remove 'Supplier' with identifier '" + id + "'", Supplier.findSupplier(id));
-    }
-    
 }

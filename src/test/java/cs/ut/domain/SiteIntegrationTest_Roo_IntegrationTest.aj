@@ -118,16 +118,4 @@ privileged aspect SiteIntegrationTest_Roo_IntegrationTest {
         Assert.assertNotNull("Expected 'Site' identifier to no longer be null", obj.getId());
     }
     
-    @Test
-    public void SiteIntegrationTest.testRemove() {
-        Site obj = dod.getRandomSite();
-        Assert.assertNotNull("Data on demand for 'Site' failed to initialize correctly", obj);
-        Long id = obj.getId();
-        Assert.assertNotNull("Data on demand for 'Site' failed to provide an identifier", id);
-        obj = Site.findSite(id);
-        obj.remove();
-        obj.flush();
-        Assert.assertNull("Failed to remove 'Site' with identifier '" + id + "'", Site.findSite(id));
-    }
-    
 }
