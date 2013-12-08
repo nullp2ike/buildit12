@@ -44,7 +44,7 @@ public class InvoiceIntegrationTest {
 		sup.persist();
 	}
 
-	private long setPlantHireRequest(int plantId, int totalCost, ApprovalStatus status) {
+	private long setPlantHireRequest(int plantId, int totalCost, PHRStatus status) {
 		PlantHireRequest phr = new PlantHireRequest();
 		phr.setEndDate(new Date());
 		phr.setStartDate(new Date());
@@ -61,7 +61,7 @@ public class InvoiceIntegrationTest {
 	
     @Test
     public void testPlantHireRequestFinder() {
-    	long phrId = setPlantHireRequest(7, 77, ApprovalStatus.APPROVED);
+    	long phrId = setPlantHireRequest(7, 77, PHRStatus.APPROVED);
 		Invoice inv = new Invoice();
 		inv.setIsPaid(false);
 		inv.setPurchaseOrderHRef("asd");

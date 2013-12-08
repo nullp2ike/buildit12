@@ -3,8 +3,8 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.Invoice;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -79,11 +79,11 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.supplier = supplier;
     }
     
-    public ApprovalStatus PlantHireRequest.getStatus() {
+    public PHRStatus PlantHireRequest.getStatus() {
         return this.status;
     }
     
-    public void PlantHireRequest.setStatus(ApprovalStatus status) {
+    public void PlantHireRequest.setStatus(PHRStatus status) {
         this.status = status;
     }
     

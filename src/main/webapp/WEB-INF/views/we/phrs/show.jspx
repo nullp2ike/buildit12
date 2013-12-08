@@ -11,8 +11,8 @@
         <field:display field="plantId" id="s_cs_ut_domain_PlantHireRequest_plantId" object="${planthirerequest}" z="Xyu0m8sjnQJrJF2PoBUwgPjN07I="/>
         <field:display field="site" id="s_cs_ut_domain_PlantHireRequest_site" object="${planthirerequest}" z="Ju28sVV2D0lvIw5E1/b85em7ksE="/>
         <field:display field="supplier" id="s_cs_ut_domain_PlantHireRequest_supplier" object="${planthirerequest}" z="WEUGEr3aD7WrZXlOc+6K2lIKhmU="/>
-        <field:display field="status" id="s_cs_ut_domain_PlantHireRequest_status" object="${planthirerequest}" z="yiw7Xih5LiptvAop5XvFqOrLQes="/>
         <field:display field="invoice" id="s_cs_ut_domain_PlantHireRequest_invoice" object="${planthirerequest}" z="MSFh6Ip0fGHSmRfSwz6cc5sZr+s="/>
         <field:display field="worksEngineer" id="s_cs_ut_domain_PlantHireRequest_worksEngineer" object="${planthirerequest}" z="54h/18WS0r8wkun0xzovi7mHbM0="/>
+        <field:display field="status" id="s_cs_ut_domain_PlantHireRequest_status" object="${planthirerequest}" z="yiw7Xih5LiptvAop5XvFqOrLQes="/>
     </page:show>
 </div>

@@ -3,8 +3,8 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.InvoiceDataOnDemand;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.Site;
@@ -98,7 +98,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PlantHireRequestDataOnDemand.setStatus(PlantHireRequest obj, int index) {
-        ApprovalStatus status = ApprovalStatus.class.getEnumConstants()[0];
+        PHRStatus status = PHRStatus.class.getEnumConstants()[0];
         obj.setStatus(status);
     }
     

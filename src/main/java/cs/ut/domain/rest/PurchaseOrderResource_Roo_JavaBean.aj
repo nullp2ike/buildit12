@@ -3,7 +3,7 @@
 
 package cs.ut.domain.rest;
 
-import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import java.math.BigDecimal;
@@ -35,11 +35,11 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.totalCost = totalCost;
     }
     
-    public HireRequestStatus PurchaseOrderResource.getStatus() {
+    public POStatus PurchaseOrderResource.getStatus() {
         return this.status;
     }
     
-    public void PurchaseOrderResource.setStatus(HireRequestStatus status) {
+    public void PurchaseOrderResource.setStatus(POStatus status) {
         this.status = status;
     }
     

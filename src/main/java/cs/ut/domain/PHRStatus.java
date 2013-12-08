@@ -1,0 +1,7 @@
+package cs.ut.domain;
+
+public enum PHRStatus {
+	
+	PENDING_APPROVAL, REJECTED, CANCELED, APPROVED, CANCELLATION_REQUEST_SENT
+
+}

@@ -11,17 +11,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.Invoice;
+import cs.ut.domain.InvoiceStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
 import cs.ut.domain.WorksEngineer;
+import cs.ut.domain.bean.PHRSelectDTO;
 import cs.ut.domain.bean.PlantHireRequestDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PlantResource;
 import cs.ut.domain.rest.PlantResourceList;
+import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.domain.rest.exception.InvalidHirePeriodException;
 import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.repository.SiteEngineerRepository;
@@ -75,6 +79,9 @@ public class PHRSEController {
 	
 	@Autowired
 	SiteEngineerRepository siteEngineerRepository;
+	
+	@Autowired
+	PlantHireRequestRepository repository;
 
 	@RequestMapping(value = "find", method = RequestMethod.GET)
 	public String searchPlants(Model model) {
@@ -164,7 +171,7 @@ public class PHRSEController {
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setEndDate(plant.getEndDate());
 		phrResource.setStartDate(plant.getStartDate());
-		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
+		phrResource.setStatus(PHRStatus.PENDING_APPROVAL);
 		phrResource.setPlantId(plant.getPlant());
 		phrResource.setSite(Site.findSite((long) plant.getSite()));
 		phrResource.setSiteEngineer(se);
@@ -267,7 +274,7 @@ public class PHRSEController {
 	void populateEditForm(Model uiModel, PlantHireRequest plantHireRequest) {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("approvalstatuses", Arrays.asList(ApprovalStatus.values()));
+        uiModel.addAttribute("approvalstatuses", Arrays.asList(PHRStatus.values()));
         uiModel.addAttribute("invoices", Invoice.findAllInvoices());
         uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
@@ -285,4 +292,54 @@ public class PHRSEController {
         } catch (UnsupportedEncodingException uee) {}
         return pathSegment;
     }
+	
+	@RequestMapping(value = "cancel", method = RequestMethod.GET)
+	public String displayPHRThatCanBeCanceled(ModelMap modelMap) {
+		List<PlantHireRequest> phrList = repository.findRequestsThatCanBeCanceled(PHRStatus.CANCELED);
+		PHRSelectDTO phrDTO = new PHRSelectDTO();
+		phrDTO.setPhrList(phrList);
+		modelMap.put("phrDTO", phrDTO);
+		return "se/phrs/cancel";
+	}
+	
+	@RequestMapping(value = "cancel", method = RequestMethod.POST)
+	public String cancelPHR(@Valid PHRSelectDTO phrDTO,
+			ModelMap modelMap, HttpServletRequest request) {
+		String selectedPHR = request.getParameter("radio");
+		long phrId = Long.parseLong(selectedPHR);
+		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(phrId);
+		
+		if(phr.getStatus().equals(PHRStatus.APPROVED)){
+			PurchaseOrderResource poResource = new PurchaseOrderResource();
+			PlantResource pr = new PlantResource();
+			pr.setIdentifier(phr.getPlantId());
+			poResource.setStatus(POStatus.REJECTED);
+			poResource.setEndDate(phr.getEndDate());
+			poResource.setStartDate(phr.getStartDate());
+//			poResource.setPlantHireRequestId(plantHireRequestId);
+			poResource.setPlantResource(pr);
+			poResource.setTotalCost(phr.getTotalCost());
+			long poId = phr.getInvoice().getPurchaseOrderId();
+			String json = RestHelper.resourceToJson(poResource);
+			HttpEntity<String> requestEntity = new HttpEntity<String>(json,
+					RestHelper.getHeaders(rentitUser, rentitUserPassword));
+			RestTemplate template = new RestTemplate();
+			ResponseEntity<PurchaseOrderResource> response = template.exchange(
+					supplierUrl + "/rest/pos/" + poId + "/updates", HttpMethod.POST,
+					requestEntity, PurchaseOrderResource.class);
+			System.out.println("Cancel: " + response);
+			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
+		}
+		else if (phr.getStatus().equals(PHRStatus.CANCELLATION_REQUEST_SENT)){
+			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
+		}
+		else{
+			phr.setStatus(PHRStatus.CANCELED);
+		}
+		
+		List<PlantHireRequest> phrList = repository.findRequestsThatCanBeCanceled(PHRStatus.CANCELED);
+		phrDTO.setPhrList(phrList);
+		modelMap.put("phrDTO", phrDTO);
+		return "se/phrs/cancel";
+	}
 }

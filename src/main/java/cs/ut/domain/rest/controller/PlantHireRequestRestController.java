@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import cs.ut.domain.ApprovalStatus;
-import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.PHRStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.Invoice;
 import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
@@ -89,7 +89,7 @@ public class PlantHireRequestRestController {
 		if(comment != null){
 			phr.setComment(comment);
 		}
-		phr.setStatus(ApprovalStatus.REJECTED);
+		phr.setStatus(PHRStatus.REJECTED);
 		phr.persist();
 		response = new ResponseEntity<>(HttpStatus.OK);
 		return response;
@@ -101,9 +101,7 @@ public class PlantHireRequestRestController {
 			@PathVariable("id") Long id) {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 		ResponseEntity<PurchaseOrderResource> response;
-		if (phr.getStatus().equals(ApprovalStatus.PENDING_APPROVAL)) {
-			phr.setStatus(ApprovalStatus.APPROVED);
-			phr.persist();
+		if (phr.getStatus().equals(PHRStatus.PENDING_APPROVAL)) {
 
 			// Create Automatic Purchase order
 			PlantResource pR = new PlantResource();
@@ -114,7 +112,7 @@ public class PlantHireRequestRestController {
 			poResource.setStartDate(phr.getStartDate());
 			poResource.setPlantResource(pR);
 			poResource.setPlantHireRequestId(phr.getId());
-			poResource.setStatus(HireRequestStatus.PENDING_CONFIRMATION);
+			poResource.setStatus(POStatus.PENDING_CONFIRMATION);
 			poResource.setTotalCost(phr.getTotalCost());
 
 			String url = supplierurl + "/rest/pos/";
@@ -137,7 +135,7 @@ public class PlantHireRequestRestController {
 			invoice.setPurchaseOrderId(purchaseOrderId);
 			invoice.setStatus(InvoiceStatus.NO_INVOICE);
 			invoice.persist();
-			
+			phr.setStatus(PHRStatus.APPROVED);
 			phr.setInvoice(invoice);
 			phr.persist();
 			response = new ResponseEntity<>(after, HttpStatus.OK);
@@ -154,7 +152,7 @@ public class PlantHireRequestRestController {
 		ResponseEntity<PlantHireRequestResource> response;
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 
-		if (phr.getStatus().equals(ApprovalStatus.PENDING_APPROVAL)) {
+		if (phr.getStatus().equals(PHRStatus.PENDING_APPROVAL)) {
 			phr.setEndDate(res.getEndDate());
 			phr.setPlantId(res.getPlantId());
 			phr.setSite(res.getSite());
@@ -186,8 +184,8 @@ public class PlantHireRequestRestController {
 	public ResponseEntity<Void> cancelPHR(@PathVariable Long id) {
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(id);
 		ResponseEntity<Void> response;
-		if (phr.getStatus().equals(ApprovalStatus.PENDING_APPROVAL)) {
-			phr.setStatus(ApprovalStatus.CANCELED);
+		if (phr.getStatus().equals(PHRStatus.PENDING_APPROVAL)) {
+			phr.setStatus(PHRStatus.CANCELED);
 			phr.persist();
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else {

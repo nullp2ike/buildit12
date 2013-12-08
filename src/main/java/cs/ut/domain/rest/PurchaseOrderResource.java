@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.util.ResourceSupport;
 
 @RooJavaBean
@@ -22,7 +22,7 @@ public class PurchaseOrderResource extends ResourceSupport{
 
     private BigDecimal totalCost;
     
-    private HireRequestStatus status;
+    private POStatus status;
     
     private PlantResource plantResource;
     

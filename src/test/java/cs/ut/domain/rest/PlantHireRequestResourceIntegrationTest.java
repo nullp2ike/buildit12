@@ -25,8 +25,8 @@ import org.springframework.roo.addon.test.RooIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import cs.ut.domain.ApprovalStatus;
-import cs.ut.domain.HireRequestStatus;
+import cs.ut.domain.PHRStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -225,7 +225,7 @@ public class PlantHireRequestResourceIntegrationTest {
 	}
 
 	private long setPlantHireRequest(int plantId, int totalCost,
-			ApprovalStatus status, SiteEngineer sE) {
+			PHRStatus status, SiteEngineer sE) {
 		PlantHireRequest phr = new PlantHireRequest();
 		phr.setEndDate(new Date());
 		phr.setStartDate(new Date());
@@ -244,10 +244,6 @@ public class PlantHireRequestResourceIntegrationTest {
 	@Test
 	public void testCreatePHR() {
 
-		// long phrId = setPlantHireRequest(1, 2,
-		// ApprovalStatus.PENDING_APPROVAL, sE2); //Just for testing some other
-		// thing
-
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
 		phrResource.setTotalCost(new BigDecimal(3));
 		phrResource.setSite(s);
@@ -256,7 +252,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		phrResource.setSiteEngineer(sE);
 		phrResource.setStartDate(new Date());
 		phrResource.setSupplier(sup);
-		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
+		phrResource.setStatus(PHRStatus.PENDING_APPROVAL);
 
 		String json = RestHelper.resourceToJson(phrResource);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
@@ -273,13 +269,13 @@ public class PlantHireRequestResourceIntegrationTest {
 				.getName().equals("Create"));
 		assertTrue(clientResponse.getBody().get_links().size() == 4);
 		assertTrue(clientResponse.getBody().getStatus()
-				.equals(ApprovalStatus.PENDING_APPROVAL));
+				.equals(PHRStatus.PENDING_APPROVAL));
 	}
 
 	// OK
 	@Test
 	public void testRejectPHR() {
-		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL,
+		long phrId = setPlantHireRequest(1, 2, PHRStatus.PENDING_APPROVAL,
 				sE);
 		String url = webappurl + "/rest/phr/" + phrId
 				+ "/reject?comment=declined";
@@ -317,7 +313,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		long plantId = pRL.getListOfPlantResources().get(0).getIdentifier();
 
 		long phrId = setPlantHireRequest((int) plantId, 2,
-				ApprovalStatus.PENDING_APPROVAL, sE);
+				PHRStatus.PENDING_APPROVAL, sE);
 
 		HttpEntity<String> requestEntity2 = new HttpEntity<String>(
 				RestHelper.getHeaders(siteEngineerUsername, "password"));
@@ -328,14 +324,14 @@ public class PlantHireRequestResourceIntegrationTest {
 
 		assertTrue(response2.getStatusCode().value() == 200);
 		assertTrue(response2.getBody().getStatus()
-				.equals(HireRequestStatus.PENDING_CONFIRMATION));
+				.equals(POStatus.PENDING_CONFIRMATION));
 
 	}
 
 	// OK
 	@Test
 	public void testUpdatePHR() {
-		long phrId = setPlantHireRequest(1, 2, ApprovalStatus.PENDING_APPROVAL,
+		long phrId = setPlantHireRequest(1, 2, PHRStatus.PENDING_APPROVAL,
 				sE);
 
 		PlantHireRequestResource phrResource = new PlantHireRequestResource();
@@ -346,7 +342,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		phrResource.setSiteEngineer(sE);
 		phrResource.setStartDate(new Date());
 		phrResource.setSupplier(sup);
-		phrResource.setStatus(ApprovalStatus.APPROVED);
+		phrResource.setStatus(PHRStatus.APPROVED);
 
 		String json = RestHelper.resourceToJson(phrResource);
 
@@ -360,14 +356,14 @@ public class PlantHireRequestResourceIntegrationTest {
 		assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getTotalCost()
 				.intValue() == 100);
 		assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus()
-				.equals(ApprovalStatus.PENDING_APPROVAL));
+				.equals(PHRStatus.PENDING_APPROVAL));
 		assertTrue(response.getBody().get_links().size() == 4);
 	}
 
 	@Test
 	public void testCancelPHR() {
 		long phrId = setPlantHireRequest(1, 100,
-				ApprovalStatus.PENDING_APPROVAL, sE);
+				PHRStatus.PENDING_APPROVAL, sE);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
 				RestHelper.getHeaders(siteEngineerUsername, "password"));
 		ResponseEntity<Void> response = template.exchange(webappurl
@@ -376,13 +372,13 @@ public class PlantHireRequestResourceIntegrationTest {
 
 		assertTrue(response.getStatusCode().value() == 200);
 		assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus()
-				.equals(ApprovalStatus.CANCELED));
+				.equals(PHRStatus.CANCELED));
 	}
 
 	@Test
 	public void testGetPHR() {
 		long phrId = setPlantHireRequest(1, 100,
-				ApprovalStatus.PENDING_APPROVAL, sE);
+				PHRStatus.PENDING_APPROVAL, sE);
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
 				RestHelper.getHeaders(siteEngineerUsername, "password"));
 		ResponseEntity<PlantHireRequestResource> response = template.exchange(
@@ -392,7 +388,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		assertTrue(response.getStatusCode().value() == 200);
 		PlantHireRequestResource phrRequestResource = response.getBody();
 		assertTrue(PlantHireRequest.findPlantHireRequest(phrId).getStatus()
-				.equals(ApprovalStatus.PENDING_APPROVAL));
+				.equals(PHRStatus.PENDING_APPROVAL));
 		assertTrue(phrRequestResource.get_links().size() == 4);
 
 	}
@@ -420,7 +416,7 @@ public class PlantHireRequestResourceIntegrationTest {
 		phrResource.setSiteEngineer(sE);
 		phrResource.setStartDate(endDate.toDate());
 		phrResource.setSupplier(sup);
-		phrResource.setStatus(ApprovalStatus.PENDING_APPROVAL);
+		phrResource.setStatus(PHRStatus.PENDING_APPROVAL);
 
 		// Create Plant Hire Request
 		String json = RestHelper.resourceToJson(phrResource);
@@ -449,7 +445,7 @@ public class PlantHireRequestResourceIntegrationTest {
 				PurchaseOrderResource.class);
 		assertTrue(responsePO.getStatusCode().value() == 200);
 		assertTrue(responsePO.getBody().getStatus()
-				.equals(HireRequestStatus.PENDING_CONFIRMATION));
+				.equals(POStatus.PENDING_CONFIRMATION));
 	}
 
 	private long getIdFromLocation(URI location) {

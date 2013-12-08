@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cs.ut.domain.Invoice;
 import cs.ut.domain.InvoiceStatus;
 import cs.ut.domain.PlantHireRequest;
-import cs.ut.domain.bean.InvoiceApproveDTO;
+import cs.ut.domain.bean.PHRSelectDTO;
 import cs.ut.repository.PlantHireRequestRepository;
 
 @RequestMapping("/invoices/approve/**")
@@ -26,14 +26,14 @@ public class InvoiceApproveController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String displayInvoicesThatNeedApproval(ModelMap modelMap) {
 		List<PlantHireRequest> phrList = repository.findRequestsByInvoiceStatus(InvoiceStatus.NEEDS_APPROVAL);
-		InvoiceApproveDTO invDTO = new InvoiceApproveDTO();
+		PHRSelectDTO invDTO = new PHRSelectDTO();
 		invDTO.setPhrList(phrList);
 		modelMap.put("invDTO", invDTO);
 		return "invoices/approve/list";
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.POST)
-	public String createPlantHireRequest(@Valid InvoiceApproveDTO invDTO,
+	public String createPlantHireRequest(@Valid PHRSelectDTO invDTO,
 			ModelMap modelMap, HttpServletRequest request) {
 		String selectedPHR = request.getParameter("radio");
 		long phrId = Long.parseLong(selectedPHR);

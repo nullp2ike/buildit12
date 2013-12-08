@@ -3,7 +3,6 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.ApprovalStatus;
 import cs.ut.domain.Invoice;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestController;
@@ -15,7 +14,6 @@ import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.repository.SiteEngineerRepository;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -125,7 +123,6 @@ privileged aspect PlantHireRequestController_Roo_Controller {
     void PlantHireRequestController.populateEditForm(Model uiModel, PlantHireRequest plantHireRequest) {
         uiModel.addAttribute("plantHireRequest", plantHireRequest);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("approvalstatuses", Arrays.asList(ApprovalStatus.values()));
         uiModel.addAttribute("invoices", Invoice.findAllInvoices());
         uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());

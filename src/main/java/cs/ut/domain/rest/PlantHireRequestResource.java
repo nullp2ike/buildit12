@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
 import cs.ut.domain.Supplier;
@@ -25,6 +25,6 @@ public class PlantHireRequestResource extends ResourceSupport{
     private SiteEngineer siteEngineer;
     private int plantId;
     private Supplier supplier;
-    private ApprovalStatus status;
+    private PHRStatus status;
     private String comment;
 }

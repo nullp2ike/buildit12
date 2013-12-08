@@ -30,7 +30,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.sun.jersey.core.util.Base64;
 
-import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;

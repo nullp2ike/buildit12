@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.bean.PlantHireRequestApproveDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,7 +47,7 @@ public class PHRWEController {
 	@RequestMapping(value = "pending", method = RequestMethod.GET)
 	public String displayInvoicesThatNeedApproval(ModelMap modelMap) {
 		List<PlantHireRequest> phrList = repository
-				.findRequestsByApprovalStatus(ApprovalStatus.PENDING_APPROVAL);
+				.findRequestsByPHRStatus(PHRStatus.PENDING_APPROVAL);
 		PlantHireRequestApproveDTO phrAproveDTO = new PlantHireRequestApproveDTO();
 		phrAproveDTO.setPhrList(phrList);
 		phrAproveDTO.setSupplierUrl(supplierurl);
@@ -72,8 +73,9 @@ public class PHRWEController {
 		if (decision.equals("Approve")) {
 			String acceptUrl = webappurl + "/rest/phr/" + selectedPHR
 					+ "/approve";
-			template.exchange(acceptUrl, HttpMethod.PUT, requestEntity,
-					PurchaseOrderResource.class);
+			ResponseEntity<String> acceptResponse = template.exchange(acceptUrl, HttpMethod.PUT, requestEntity,
+					String.class);
+			System.out.println(acceptResponse);
 		} else if (decision.equals("Reject")) {
 			String rejectUrl = webappurl + "/rest/phr/" + selectedPHR
 					+ "/reject?comment=" + rejectComment;
@@ -84,7 +86,7 @@ public class PHRWEController {
 		}
 
 		List<PlantHireRequest> phrList = repository
-				.findRequestsByApprovalStatus(ApprovalStatus.PENDING_APPROVAL);
+				.findRequestsByPHRStatus(PHRStatus.PENDING_APPROVAL);
 		phrAproveDTO.setPhrList(phrList);
 		phrAproveDTO.setSupplierUrl(supplierurl);
 		modelMap.put("phrApproveDTO", phrAproveDTO);

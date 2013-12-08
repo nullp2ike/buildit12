@@ -7,7 +7,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import cs.ut.domain.PlantHireRequest;
 
 @RooJavaBean
-public class InvoiceApproveDTO {
+public class PHRSelectDTO {
 	
 	private List<PlantHireRequest> phrList;
 	private int radio;

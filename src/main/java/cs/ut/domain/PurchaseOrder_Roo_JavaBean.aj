@@ -3,7 +3,7 @@
 
 package cs.ut.domain;
 
-import cs.ut.domain.ApprovalStatus;
+import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PurchaseOrder;
 import java.math.BigDecimal;
@@ -51,11 +51,11 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.plantHireRequest = plantHireRequest;
     }
     
-    public ApprovalStatus PurchaseOrder.getStatus() {
+    public PHRStatus PurchaseOrder.getStatus() {
         return this.status;
     }
     
-    public void PurchaseOrder.setStatus(ApprovalStatus status) {
+    public void PurchaseOrder.setStatus(PHRStatus status) {
         this.status = status;
     }
     

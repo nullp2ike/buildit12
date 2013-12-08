@@ -24,5 +24,5 @@ public class PurchaseOrder {
     @OneToOne
     private PlantHireRequest plantHireRequest;
     
-    ApprovalStatus status;
+    PHRStatus status;
 }
