@@ -205,7 +205,7 @@ public class PHRSEController {
 		}
 		uiModel.asMap().clear();
 		plantHireRequestRepository.save(plantHireRequest);
-		return "redirect:/se/phrs/"
+		return "redirect:/se/phrs/list"
 				+ encodeUrlPathSegment(plantHireRequest.getId().toString(),
 						httpServletRequest);
 	}
@@ -271,9 +271,7 @@ public class PHRSEController {
 		}
 		uiModel.asMap().clear();
 		plantHireRequestRepository.save(plantHireRequest);
-		return "redirect:/se/phrs/"
-				+ encodeUrlPathSegment(plantHireRequest.getId().toString(),
-						httpServletRequest);
+		return "redirect:/se/phrs/" + plantHireRequest.getId();
 	}
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
