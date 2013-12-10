@@ -11,8 +11,8 @@
         <field:input field="plantId" id="c_cs_ut_domain_PlantHireRequest_plantId" required="true" z="MIoQUsTfO7nSiFZOKvh4RUUDApI="/>
         <field:select field="site" id="c_cs_ut_domain_PlantHireRequest_site" itemValue="id" items="${sites}" path="/sites" required="true" z="F8q8QWI70izxGfn7PE2JeA36pHk="/>
         <field:select field="supplier" id="c_cs_ut_domain_PlantHireRequest_supplier" itemValue="id" items="${suppliers}" path="/suppliers" required="true" z="btsyUKnUdnzzRG+1y/9byi6ruCk="/>
-        <field:select field="invoice" id="c_cs_ut_domain_PlantHireRequest_invoice" itemValue="id" items="${invoices}" path="/invoices" z="Nj424IAv7vJc6xZ4B7FsWpcwlvk="/>
+        <field:display field="invoice" id="c_cs_ut_domain_PlantHireRequest_invoice" object="${plantHireRequest}" z="user-managed"/>
         <field:select field="worksEngineer" id="c_cs_ut_domain_PlantHireRequest_worksEngineer" itemValue="id" items="${worksengineers}" path="/worksengineers" z="aNMxW4EmtWn/aJX553aeDzjx02w="/>
-        <field:select field="status" id="c_cs_ut_domain_PlantHireRequest_status" items="${phrstatuses}" path="phrstatuses" required="true" z="9MpQWsWUEXooUT/MTrIz1Ht7G3U="/>
+        <field:display field="status" id="c_cs_ut_domain_PlantHireRequest_status" object="${plantHireRequest}" z="user-managed"/>
     </form:update>
 </div>

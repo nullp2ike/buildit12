@@ -5,7 +5,8 @@
     <menu:menu id="_menu" z="user-managed">
         <sec:authorize ifAllGranted="ROLE_WORKS_ENGINEER">
             <menu:category id="c_planthirerequest" z="user-managed">
-                <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/we/phrs/pending" z="user-managed"/>
+                <menu:item id="i_planthirerequest_approve_reject" url="/we/phrs/pending" z="user-managed"/>
+                <menu:item id="i_planthirerequest_list_modify" url="/we/phrs/list" z="user-managed"/>
             </menu:category>
         </sec:authorize>
         <sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
@@ -15,7 +16,9 @@
                 <menu:item id="i_planthirerequest_cancel" url="/se/phrs/cancel" z="user-managed"/>
             </menu:category>
             <menu:category id="c_invoice" z="user-managed">
-        	</menu:category>
+                <menu:item id="i_invoice_new" messageCode="global_menu_new" url="/invoices?form" z="QqwPSYJNNoLrSbh5ekf/V1j0eU8="/>
+                <menu:item id="i_invoice_list" messageCode="global_menu_list" url="/invoices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="fGp1lAWegbSUAHpxuhrzXY9RQGI="/>
+            </menu:category>
             <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
                 <menu:item id="i_controller__invoices_approveindex_id" messageCode="global_generic" url="/invoices/approve/list" z="user-managed"/>
             </menu:category>

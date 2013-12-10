@@ -7,12 +7,12 @@
         <field:display date="true" dateTimePattern="${plantHireRequest_enddate_date_format}" field="endDate" id="s_cs_ut_domain_PlantHireRequest_endDate" object="${planthirerequest}" z="TAG8pCAk8NxLWpmkSeCAnH6pdo0="/>
         <field:display field="totalCost" id="s_cs_ut_domain_PlantHireRequest_totalCost" object="${planthirerequest}" z="88Z9UpO26krqXl2vD1NPz1dA+Gc="/>
         <field:display field="siteEngineer" id="s_cs_ut_domain_PlantHireRequest_siteEngineer" object="${planthirerequest}" z="yaLH6FdyNa2juiTHS80nS81j9I4="/>
+        <field:display field="comment" id="s_cs_ut_domain_PlantHireRequest_comment" object="${planthirerequest}" z="0JX4isIwqjPdzXmDJixYEeSJTDA="/>
+        <field:display field="plantId" id="s_cs_ut_domain_PlantHireRequest_plantId" object="${planthirerequest}" z="Xyu0m8sjnQJrJF2PoBUwgPjN07I="/>
         <field:display field="site" id="s_cs_ut_domain_PlantHireRequest_site" object="${planthirerequest}" z="Ju28sVV2D0lvIw5E1/b85em7ksE="/>
         <field:display field="supplier" id="s_cs_ut_domain_PlantHireRequest_supplier" object="${planthirerequest}" z="WEUGEr3aD7WrZXlOc+6K2lIKhmU="/>
-        <field:display field="plantId" id="s_cs_ut_domain_PlantHireRequest_plantId" object="${planthirerequest}" z="Xyu0m8sjnQJrJF2PoBUwgPjN07I="/>
-        <field:display field="comment" id="s_cs_ut_domain_PlantHireRequest_comment" object="${planthirerequest}" z="0JX4isIwqjPdzXmDJixYEeSJTDA="/>
-        <field:display field="id" id="c_cs_ut_domain_PlantHireRequest_id" object="${planthirerequest}"/>
-        <field:display field="worksEngineer" id="s_cs_ut_domain_PlantHireRequest_worksEngineer" object="${planthirerequest}" z="54h/18WS0r8wkun0xzovi7mHbM0="/>
+        <field:display field="status" id="s_cs_ut_domain_PlantHireRequest_status" object="${planthirerequest}" z="yiw7Xih5LiptvAop5XvFqOrLQes="/>
         <field:display field="invoice" id="s_cs_ut_domain_PlantHireRequest_invoice" object="${planthirerequest}" z="MSFh6Ip0fGHSmRfSwz6cc5sZr+s="/>
+        <field:display field="worksEngineer" id="s_cs_ut_domain_PlantHireRequest_worksEngineer" object="${planthirerequest}" z="54h/18WS0r8wkun0xzovi7mHbM0="/>
     </page:show>
 </div>

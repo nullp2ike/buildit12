@@ -66,23 +66,22 @@ public class PHRSEController {
 
 	@Value("${supplierurl}")
 	String supplierUrl;
-	
+
 	@Value("${webappurl}")
 	String webAppUrl;
-	
+
 	@Value("${rentit.role.user}")
 	String rentitUser;
-	
+
 	@Value("${rentit.role.user.password}")
 	String rentitUserPassword;
 
-	
 	@Autowired
 	SiteEngineerRepository siteEngineerRepository;
-	
-	@Autowired
-	PlantHireRequestRepository repository;
 
+	@Autowired
+	PlantHireRequestRepository plantHireRequestRepository;
+	
 	@RequestMapping(value = "find", method = RequestMethod.GET)
 	public String searchPlants(Model model) {
 		addDateTimeFormatPatterns(model);
@@ -93,29 +92,29 @@ public class PHRSEController {
 	}
 
 	@RequestMapping(value = "select", method = RequestMethod.GET)
-	public String displayPlants(@Valid PlantHireRequestDTO plant,
-			Model model) throws InvalidHirePeriodException {
-		
-		if (plant.getEndDate().before(plant.getStartDate())){
-			throw new InvalidHirePeriodException("End date cannot be before start date");
+	public String displayPlants(@Valid PlantHireRequestDTO plant, Model model)
+			throws InvalidHirePeriodException {
+
+		if (plant.getEndDate().before(plant.getStartDate())) {
+			throw new InvalidHirePeriodException(
+					"End date cannot be before start date");
 		}
-		
+
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		String startDate = formatter.format(plant.getStartDate());
 		String endDate = formatter.format(plant.getEndDate());
 
 		String url = supplierUrl + "/rest/plant/" + "?startDate=" + startDate
 				+ "&endDate=" + endDate;
-		
-		System.out.println("Plants url : " + url);
-		
-		HttpEntity<String> requestEntity = new HttpEntity<String>( 
-				RestHelper.getHeaders(rentitUser, rentitUserPassword));		
+
+		HttpEntity<String> requestEntity = new HttpEntity<String>(
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
 
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<PlantResourceList> plantList = restTemplate.exchange(url,HttpMethod.GET,requestEntity,
-				PlantResourceList.class);
-		List<PlantResource> plants = plantList.getBody().getListOfPlantResources();
+		ResponseEntity<PlantResourceList> plantList = restTemplate.exchange(
+				url, HttpMethod.GET, requestEntity, PlantResourceList.class);
+		List<PlantResource> plants = plantList.getBody()
+				.getListOfPlantResources();
 
 		PlantHireRequestDTO p = new PlantHireRequestDTO();
 		p.setEndDate(plant.getEndDate());
@@ -126,17 +125,6 @@ public class PHRSEController {
 		model.addAttribute("plantDTO", p);
 		return "se/phrs/available";
 	}
-	
-	private void addDateTimeFormatPatterns(Model model) {
-	model.addAttribute(
-			"plantHRBean_startr_date_format",
-			DateTimeFormat.patternForStyle(("S-"),
-					LocaleContextHolder.getLocale()));
-	model.addAttribute(
-			"plantHRBean_endr_date_format",
-			DateTimeFormat.patternForStyle(("S-"),
-					LocaleContextHolder.getLocale()));
-}
 
 	@RequestMapping(value = "request", method = RequestMethod.POST)
 	public String createPlantHireRequest(@Valid PlantHireRequestDTO plant,
@@ -145,11 +133,12 @@ public class PHRSEController {
 		String plantRequestUrl = supplierUrl + "/rest/plant/"
 				+ plant.getPlant();
 		RestTemplate template = new RestTemplate();
-		
-		HttpEntity<String> requestEntity = new HttpEntity<String>( 
-				RestHelper.getHeaders(rentitUser, rentitUserPassword));	
-		
-		ResponseEntity<PlantResource> plantResource = template.exchange(plantRequestUrl, HttpMethod.GET, requestEntity,
+
+		HttpEntity<String> requestEntity = new HttpEntity<String>(
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
+
+		ResponseEntity<PlantResource> plantResource = template.exchange(
+				plantRequestUrl, HttpMethod.GET, requestEntity,
 				PlantResource.class);
 
 		DateTime startDate = new DateTime(plant.getStartDate());
@@ -176,8 +165,8 @@ public class PHRSEController {
 		phrResource.setSite(Site.findSite((long) plant.getSite()));
 		phrResource.setSiteEngineer(se);
 		phrResource.setSupplier(Supplier.findAllSuppliers().get(0));
-		phrResource.setTotalCost(plantResource.getBody().getPricePerDay().multiply(
-				new BigDecimal(days)));
+		phrResource.setTotalCost(plantResource.getBody().getPricePerDay()
+				.multiply(new BigDecimal(days)));
 
 		String json = RestHelper.resourceToJson(phrResource);
 		HttpEntity<String> requestEntity2 = new HttpEntity<String>(json,
@@ -198,125 +187,152 @@ public class PHRSEController {
 	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
-    public String show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("planthirerequest", plantHireRequestRepository.findOne(id));
-        uiModel.addAttribute("itemId", id);
-        return "se/phrs/show";
-    }
-
-	@Autowired
-    PlantHireRequestRepository plantHireRequestRepository;
+	public String show(@PathVariable("id") Long id, Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("planthirerequest",
+				plantHireRequestRepository.findOne(id));
+		uiModel.addAttribute("itemId", id);
+		return "se/phrs/show";
+	}
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(@Valid PlantHireRequest plantHireRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, plantHireRequest);
-            return "se/phrs/create";
-        }
-        uiModel.asMap().clear();
-        plantHireRequestRepository.save(plantHireRequest);
-        return "redirect:/se/phrs/" + encodeUrlPathSegment(plantHireRequest.getId().toString(), httpServletRequest);
-    }
+	public String create(@Valid PlantHireRequest plantHireRequest,
+			BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		if (bindingResult.hasErrors()) {
+			populateEditForm(uiModel, plantHireRequest);
+			return "se/phrs/create";
+		}
+		uiModel.asMap().clear();
+		plantHireRequestRepository.save(plantHireRequest);
+		return "redirect:/se/phrs/"
+				+ encodeUrlPathSegment(plantHireRequest.getId().toString(),
+						httpServletRequest);
+	}
 
 	@RequestMapping(params = "form", produces = "text/html")
-    public String createForm(Model uiModel) {
-        populateEditForm(uiModel, new PlantHireRequest());
-        List<String[]> dependencies = new ArrayList<String[]>();
-        if (siteEngineerRepository.count() == 0) {
-            dependencies.add(new String[] { "siteengineer", "siteengineers" });
-        }
-        if (Site.countSites() == 0) {
-            dependencies.add(new String[] { "site", "sites" });
-        }
-        if (Supplier.countSuppliers() == 0) {
-            dependencies.add(new String[] { "supplier", "suppliers" });
-        }
-        uiModel.addAttribute("dependencies", dependencies);
-        return "se/phrs/create";
-    }
+	public String createForm(Model uiModel) {
+		populateEditForm(uiModel, new PlantHireRequest());
+		List<String[]> dependencies = new ArrayList<String[]>();
+		if (siteEngineerRepository.count() == 0) {
+			dependencies.add(new String[] { "siteengineer", "siteengineers" });
+		}
+		if (Site.countSites() == 0) {
+			dependencies.add(new String[] { "site", "sites" });
+		}
+		if (Supplier.countSuppliers() == 0) {
+			dependencies.add(new String[] { "supplier", "suppliers" });
+		}
+		uiModel.addAttribute("dependencies", dependencies);
+		return "se/phrs/create";
+	}
 
-	@RequestMapping(value ="list", method = RequestMethod.GET,produces = "text/html")
-    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("planthirerequests", plantHireRequestRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
-            float nrOfPages = (float) plantHireRequestRepository.count() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-        	Authentication authentication = 
-        			SecurityContextHolder.getContext().getAuthentication();
-        			String name = authentication.getName();
-            uiModel.addAttribute("planthirerequests", plantHireRequestRepository.findRequestsBySiteEngineer(name));
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "se/phrs/list";
-    }
+	@RequestMapping(value = "list", method = RequestMethod.GET, produces = "text/html")
+	public String list(
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size,
+			Model uiModel) {
+		if (page != null || size != null) {
+			int sizeNo = size == null ? 10 : size.intValue();
+			final int firstResult = page == null ? 0 : (page.intValue() - 1)
+					* sizeNo;
+			uiModel.addAttribute(
+					"planthirerequests",
+					plantHireRequestRepository.findAll(
+							new org.springframework.data.domain.PageRequest(
+									firstResult / sizeNo, sizeNo)).getContent());
+			float nrOfPages = (float) plantHireRequestRepository.count()
+					/ sizeNo;
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		} else {
+			Authentication authentication = SecurityContextHolder.getContext()
+					.getAuthentication();
+			String name = authentication.getName();
+			uiModel.addAttribute("planthirerequests",
+					plantHireRequestRepository.findRequestsBySiteEngineer(name));
+		}
+		addDateTimeFormatPatterns(uiModel);
+		return "se/phrs/list";
+	}
+	
+	
+	
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String update(@Valid PlantHireRequest plantHireRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, plantHireRequest);
-            return "se/phrs/update";
-        }
-        uiModel.asMap().clear();
-        plantHireRequestRepository.save(plantHireRequest);
-        return "redirect:/se/phrs/" + encodeUrlPathSegment(plantHireRequest.getId().toString(), httpServletRequest);
-    }
+	public String update(@Valid PlantHireRequest plantHireRequest,
+			BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		if (bindingResult.hasErrors()) {
+			populateEditForm(uiModel, plantHireRequest);
+			return "se/phrs/update";
+		}
+		uiModel.asMap().clear();
+		plantHireRequestRepository.save(plantHireRequest);
+		return "redirect:/se/phrs/"
+				+ encodeUrlPathSegment(plantHireRequest.getId().toString(),
+						httpServletRequest);
+	}
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, plantHireRequestRepository.findOne(id));
-        return "se/phrs/update";
-    }
+	public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+		populateEditForm(uiModel, plantHireRequestRepository.findOne(id));
+		return "se/phrs/update";
+	}
 
 	void populateEditForm(Model uiModel, PlantHireRequest plantHireRequest) {
-        uiModel.addAttribute("plantHireRequest", plantHireRequest);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("approvalstatuses", Arrays.asList(PHRStatus.values()));
-        uiModel.addAttribute("invoices", Invoice.findAllInvoices());
-        uiModel.addAttribute("sites", Site.findAllSites());
-        uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
-        uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());
-        uiModel.addAttribute("worksengineers", WorksEngineer.findAllWorksEngineers());
-    }
+		uiModel.addAttribute("plantHireRequest", plantHireRequest);
+		addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("approvalstatuses",
+				Arrays.asList(PHRStatus.values()));
+		uiModel.addAttribute("invoices", Invoice.findAllInvoices());
+		uiModel.addAttribute("sites", Site.findAllSites());
+		uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
+		uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());
+		uiModel.addAttribute("worksengineers",
+				WorksEngineer.findAllWorksEngineers());
+	}
 
-	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
-        String enc = httpServletRequest.getCharacterEncoding();
-        if (enc == null) {
-            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
-        }
-        try {
-            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-        } catch (UnsupportedEncodingException uee) {}
-        return pathSegment;
-    }
-	
+	String encodeUrlPathSegment(String pathSegment,
+			HttpServletRequest httpServletRequest) {
+		String enc = httpServletRequest.getCharacterEncoding();
+		if (enc == null) {
+			enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
+		}
+		try {
+			pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
+		} catch (UnsupportedEncodingException uee) {
+		}
+		return pathSegment;
+	}
+
 	@RequestMapping(value = "cancel", method = RequestMethod.GET)
 	public String displayPHRThatCanBeCanceled(ModelMap modelMap) {
-		List<PlantHireRequest> phrList = repository.findRequestsThatCanBeCanceled(PHRStatus.CANCELED);
+		List<PlantHireRequest> phrList = plantHireRequestRepository
+				.findRequestsThatCanBeCanceled(PHRStatus.CANCELED);
 		PHRSelectDTO phrDTO = new PHRSelectDTO();
 		phrDTO.setPhrList(phrList);
 		modelMap.put("phrDTO", phrDTO);
 		return "se/phrs/cancel";
 	}
-	
+
 	@RequestMapping(value = "cancel", method = RequestMethod.POST)
-	public String cancelPHR(@Valid PHRSelectDTO phrDTO,
-			ModelMap modelMap, HttpServletRequest request) {
+	public String cancelPHR(@Valid PHRSelectDTO phrDTO, ModelMap modelMap,
+			HttpServletRequest request) {
 		String selectedPHR = request.getParameter("radio");
 		long phrId = Long.parseLong(selectedPHR);
 		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(phrId);
-		
-		if(phr.getStatus().equals(PHRStatus.APPROVED)){
+
+		if (phr.getStatus().equals(PHRStatus.APPROVED)) {
 			PurchaseOrderResource poResource = new PurchaseOrderResource();
 			PlantResource pr = new PlantResource();
 			pr.setIdentifier(phr.getPlantId());
 			poResource.setStatus(POStatus.REJECTED);
 			poResource.setEndDate(phr.getEndDate());
 			poResource.setStartDate(phr.getStartDate());
-//			poResource.setPlantHireRequestId(plantHireRequestId);
+			// poResource.setPlantHireRequestId(plantHireRequestId);
 			poResource.setPlantResource(pr);
 			poResource.setTotalCost(phr.getTotalCost());
 			long poId = phr.getInvoice().getPurchaseOrderId();
@@ -324,22 +340,33 @@ public class PHRSEController {
 			HttpEntity<String> requestEntity = new HttpEntity<String>(json,
 					RestHelper.getHeaders(rentitUser, rentitUserPassword));
 			RestTemplate template = new RestTemplate();
-			ResponseEntity<PurchaseOrderResource> response = template.exchange(
-					supplierUrl + "/rest/pos/" + poId + "/updates", HttpMethod.POST,
-					requestEntity, PurchaseOrderResource.class);
+			ResponseEntity<PurchaseOrderResource> response = template
+					.exchange(supplierUrl + "/rest/pos/" + poId + "/updates",
+							HttpMethod.POST, requestEntity,
+							PurchaseOrderResource.class);
 			System.out.println("Cancel: " + response);
 			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
-		}
-		else if (phr.getStatus().equals(PHRStatus.CANCELLATION_REQUEST_SENT)){
+		} else if (phr.getStatus().equals(PHRStatus.CANCELLATION_REQUEST_SENT)) {
 			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
-		}
-		else{
+		} else {
 			phr.setStatus(PHRStatus.CANCELED);
 		}
-		
-		List<PlantHireRequest> phrList = repository.findRequestsThatCanBeCanceled(PHRStatus.CANCELED);
+
+		List<PlantHireRequest> phrList = plantHireRequestRepository
+				.findRequestsThatCanBeCanceled(PHRStatus.CANCELED);
 		phrDTO.setPhrList(phrList);
 		modelMap.put("phrDTO", phrDTO);
 		return "se/phrs/cancel";
+	}
+
+	private void addDateTimeFormatPatterns(Model model) {
+		model.addAttribute(
+				"plantHRBean_startr_date_format",
+				DateTimeFormat.patternForStyle(("S-"),
+						LocaleContextHolder.getLocale()));
+		model.addAttribute(
+				"plantHRBean_endr_date_format",
+				DateTimeFormat.patternForStyle(("S-"),
+						LocaleContextHolder.getLocale()));
 	}
 }
