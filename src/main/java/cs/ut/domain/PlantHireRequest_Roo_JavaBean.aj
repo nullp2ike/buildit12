@@ -5,6 +5,7 @@ package cs.ut.domain;
 
 import cs.ut.domain.Invoice;
 import cs.ut.domain.PHRStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.SiteEngineer;
@@ -101,6 +102,14 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setWorksEngineer(WorksEngineer worksEngineer) {
         this.worksEngineer = worksEngineer;
+    }
+    
+    public POStatus PlantHireRequest.getPoStatus() {
+        return this.poStatus;
+    }
+    
+    public void PlantHireRequest.setPoStatus(POStatus poStatus) {
+        this.poStatus = poStatus;
     }
     
 }

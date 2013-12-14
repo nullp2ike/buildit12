@@ -24,7 +24,7 @@ public interface PlantHireRequestRepository {
 	@Transactional(readOnly = true)
 	List<PlantHireRequest> findRequestsByInvoiceStatus(@Param("status") InvoiceStatus status);
 	
-	@Query("SELECT phr FROM PlantHireRequest AS phr WHERE phr.status = :status")
+	@Query("SELECT phr FROM PlantHireRequest AS phr WHERE phr.status = :status AND phr.poStatus = null")
 	
 	@Transactional(readOnly = true)
 	List<PlantHireRequest> findRequestsByPHRStatus(@Param("status") PHRStatus status);

@@ -7,6 +7,7 @@
             <menu:category id="c_planthirerequest" z="user-managed">
                 <menu:item id="i_planthirerequest_approve_reject" url="/we/phrs/pending" z="user-managed"/>
                 <menu:item id="i_planthirerequest_list_modify" url="/we/phrs/list" z="user-managed"/>
+                <menu:item id="i_planthirerequest_list_approved" url="/we/phrs/approved" z="user-managed"/>
             </menu:category>
         </sec:authorize>
         <sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
@@ -14,6 +15,8 @@
                 <menu:item id="i_planthirerequest_new" messageCode="global_menu_new" url="/se/phrs/find" z="user-managed"/>
                 <menu:item id="i_planthirerequest_list" messageCode="global_menu_list" url="/se/phrs/list" z="user-managed"/>
                 <menu:item id="i_planthirerequest_cancel" url="/se/phrs/cancel" z="user-managed"/>
+                <menu:item id="i_planthirerequest_list_approved" url="/se/phrs/approved" z="user-managed"/>
+                <menu:item id="i_planthirerequest_request_extension" url="/se/phrs/extension" z="user-managed"/>         
             </menu:category>
             <menu:category id="c_invoice" z="user-managed">
                 <menu:item id="i_invoice_new" messageCode="global_menu_new" url="/invoices?form" z="QqwPSYJNNoLrSbh5ekf/V1j0eU8="/>

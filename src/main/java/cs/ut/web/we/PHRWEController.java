@@ -2,8 +2,10 @@ package cs.ut.web.we;
 
 import java.util.Arrays;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.bean.PlantHireRequestApproveDTO;
@@ -11,6 +13,7 @@ import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.repository.PlantHireRequestRepository;
 import cs.ut.util.RestHelper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -106,4 +109,10 @@ public class PHRWEController {
         addDateTimeFormatPatterns(uiModel);
         return "we/phrs/list";
     }
+	
+	@RequestMapping(value = "approved", method = RequestMethod.GET)
+	public String listApprovedPHR(Model uiModel){
+		uiModel.addAttribute("plantHireRequests", plantHireRequestRepository.findRequestsByPHRStatus(PHRStatus.APPROVED));
+		return "we/phrs/approved";
+	}
 }

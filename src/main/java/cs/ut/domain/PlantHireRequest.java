@@ -72,4 +72,6 @@ public class PlantHireRequest {
      */
     @ManyToOne
     private WorksEngineer worksEngineer;
+    
+    private POStatus poStatus;
 }

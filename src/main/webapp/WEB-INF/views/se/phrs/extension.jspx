@@ -1,0 +1,42 @@
+<div xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<form:form method="PUT" modelAttribute="phrDTO" action="extension">
+		<table>
+			<tr>
+				<td></td>
+				<td>Plant url</td>
+				<td>Total cost</td>
+				<td>Site</td>
+				<td>Start date</td>
+				<td>Current end date</td>
+				<td>New end date</td>
+			</tr>
+			<c:forEach var="hireRequests" items="${phrDTO.phrList}">
+				<fmt:formatDate value="${hireRequests.startDate}"
+					pattern="dd-MM-yyyy" var="newStartDate" />
+				<fmt:formatDate value="${hireRequests.endDate}" pattern="dd-MM-yyyy"
+					var="newEndDate" />
+				<tr>
+					<td><form:radiobutton path="radio" value="${hireRequests.id}" /></td>
+					<td>${phrApproveDTO.supplierUrl}/rest/plant/${hireRequests.plantId}</td>
+					<td>${hireRequests.totalCost}</td>
+					<td>${hireRequests.site.name}</td>
+					<td>${newStartDate}</td>
+					<td>${newEndDate}</td>
+					<td><field:datetime
+						dateTimePattern="${plantHRBean_endr_date_format}" field="endDate"
+						id="end" label="Select date" /></td>
+
+				</tr>
+			</c:forEach>
+		</table>
+		<input type="submit" name="submit" value="Request extension" />
+	</form:form>
+</div>

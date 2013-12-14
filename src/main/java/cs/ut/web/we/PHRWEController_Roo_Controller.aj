@@ -5,6 +5,7 @@ package cs.ut.web.we;
 
 import cs.ut.domain.Invoice;
 import cs.ut.domain.PHRStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.Site;
 import cs.ut.domain.Supplier;
@@ -81,6 +82,7 @@ privileged aspect PHRWEController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("invoices", Invoice.findAllInvoices());
         uiModel.addAttribute("phrstatuses", Arrays.asList(PHRStatus.values()));
+        uiModel.addAttribute("postatuses", Arrays.asList(POStatus.values()));
         uiModel.addAttribute("sites", Site.findAllSites());
         uiModel.addAttribute("siteengineers", siteEngineerRepository.findAll());
         uiModel.addAttribute("suppliers", Supplier.findAllSuppliers());

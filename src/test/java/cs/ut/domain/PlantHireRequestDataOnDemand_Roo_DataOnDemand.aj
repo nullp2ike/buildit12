@@ -5,6 +5,7 @@ package cs.ut.domain;
 
 import cs.ut.domain.InvoiceDataOnDemand;
 import cs.ut.domain.PHRStatus;
+import cs.ut.domain.POStatus;
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.PlantHireRequestDataOnDemand;
 import cs.ut.domain.Site;
@@ -57,6 +58,7 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
         setComment(obj, index);
         setEndDate(obj, index);
         setPlantId(obj, index);
+        setPoStatus(obj, index);
         setSite(obj, index);
         setSiteEngineer(obj, index);
         setStartDate(obj, index);
@@ -80,6 +82,11 @@ privileged aspect PlantHireRequestDataOnDemand_Roo_DataOnDemand {
     public void PlantHireRequestDataOnDemand.setPlantId(PlantHireRequest obj, int index) {
         int plantId = index;
         obj.setPlantId(plantId);
+    }
+    
+    public void PlantHireRequestDataOnDemand.setPoStatus(PlantHireRequest obj, int index) {
+        POStatus poStatus = null;
+        obj.setPoStatus(poStatus);
     }
     
     public void PlantHireRequestDataOnDemand.setSite(PlantHireRequest obj, int index) {

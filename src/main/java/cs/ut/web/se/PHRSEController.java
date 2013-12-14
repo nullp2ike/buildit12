@@ -42,6 +42,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.Authentication;
@@ -87,7 +88,7 @@ public class PHRSEController {
 		addDateTimeFormatPatterns(model);
 		PlantHireRequestDTO phrDTO = new PlantHireRequestDTO();
 		phrDTO.setSiteList(Site.findAllSites());
-		model.addAttribute("plantDTO", phrDTO);
+		model.addAttribute("phrDTO", phrDTO);
 		return "se/phrs/find";
 	}
 
@@ -205,7 +206,7 @@ public class PHRSEController {
 		}
 		uiModel.asMap().clear();
 		plantHireRequestRepository.save(plantHireRequest);
-		return "redirect:/se/phrs/list"
+		return "redirect:/se/phrs/"
 				+ encodeUrlPathSegment(plantHireRequest.getId().toString(),
 						httpServletRequest);
 	}
@@ -258,8 +259,6 @@ public class PHRSEController {
 		return "se/phrs/list";
 	}
 	
-	
-	
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
 	public String update(@Valid PlantHireRequest plantHireRequest,
@@ -271,7 +270,9 @@ public class PHRSEController {
 		}
 		uiModel.asMap().clear();
 		plantHireRequestRepository.save(plantHireRequest);
-		return "redirect:/se/phrs/" + plantHireRequest.getId();
+		return "redirect:/se/phrs/"
+				+ encodeUrlPathSegment(plantHireRequest.getId().toString(),
+						httpServletRequest);
 	}
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
@@ -338,11 +339,10 @@ public class PHRSEController {
 			HttpEntity<String> requestEntity = new HttpEntity<String>(json,
 					RestHelper.getHeaders(rentitUser, rentitUserPassword));
 			RestTemplate template = new RestTemplate();
-			ResponseEntity<PurchaseOrderResource> response = template
+			ResponseEntity<String> response = template
 					.exchange(supplierUrl + "/rest/pos/" + poId + "/updates",
 							HttpMethod.POST, requestEntity,
-							PurchaseOrderResource.class);
-			System.out.println("Cancel: " + response);
+							String.class);
 			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
 		} else if (phr.getStatus().equals(PHRStatus.CANCELLATION_REQUEST_SENT)) {
 			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
@@ -356,6 +356,61 @@ public class PHRSEController {
 		modelMap.put("phrDTO", phrDTO);
 		return "se/phrs/cancel";
 	}
+	
+	@RequestMapping(value = "approved", method = RequestMethod.GET)
+	public String listApprovedPHR(Model uiModel){
+		uiModel.addAttribute("plantHireRequests", plantHireRequestRepository.findRequestsByPHRStatus(PHRStatus.APPROVED));
+		return "se/phrs/approved";
+	}
+	
+	@RequestMapping(value = "extension", method = RequestMethod.GET)
+	public String displayPHRForExtension(Model model) {
+		List<PlantHireRequest> phrList = plantHireRequestRepository
+				.findRequestsByPHRStatus(PHRStatus.APPROVED);
+		PHRSelectDTO phrDTO = new PHRSelectDTO();
+		addDateTimeFormatPatterns(model);
+		phrDTO.setPhrList(phrList);
+		model.addAttribute("phrDTO", phrDTO);
+		return "se/phrs/extension";
+	}
+	
+	@RequestMapping(value = "extension", method = RequestMethod.PUT)
+	public String requestPOExtension(@Valid PHRSelectDTO phrDTO, Model model, HttpServletRequest request) {
+		String selectedPHR = request.getParameter("radio");
+		long phrId = Long.parseLong(selectedPHR);
+		PlantHireRequest phr = PlantHireRequest.findPlantHireRequest(phrId);
+		
+		PurchaseOrderResource poResource = new PurchaseOrderResource();
+		PlantResource pr = new PlantResource();
+		pr.setIdentifier(phr.getPlantId());
+		poResource.setEndDate(phrDTO.getEndDate());
+		poResource.setStartDate(phr.getStartDate());
+		poResource.setPlantResource(pr);
+		poResource.setTotalCost(phr.getTotalCost());
+		long poId = phr.getInvoice().getPurchaseOrderId();
+		String json = RestHelper.resourceToJson(poResource);
+		HttpEntity<String> requestEntity = new HttpEntity<String>(json,
+				RestHelper.getHeaders(rentitUser, rentitUserPassword));
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<PurchaseOrderResource> response = template
+				.exchange(supplierUrl + "/rest/pos/" + poId + "/updates",
+						HttpMethod.POST, requestEntity,
+						PurchaseOrderResource.class);
+		System.out.println("RESPONSE: " + response);
+		
+		if(response.getStatusCode().equals(HttpStatus.OK)){
+			phr.setPoStatus(POStatus.PENDING_UPDATE);
+		}
+
+		List<PlantHireRequest> phrList = plantHireRequestRepository
+				.findRequestsByPHRStatus(PHRStatus.APPROVED);
+		addDateTimeFormatPatterns(model);
+		phrDTO.setPhrList(phrList);
+		model.addAttribute("phrDTO", phrDTO);
+		return "se/phrs/extension";
+	}
+	
+
 
 	private void addDateTimeFormatPatterns(Model model) {
 		model.addAttribute(

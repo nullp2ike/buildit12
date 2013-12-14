@@ -14,5 +14,6 @@
         <field:display field="invoice" id="c_cs_ut_domain_PlantHireRequest_invoice" object="${plantHireRequest}" z="user-managed"/>
         <field:select field="worksEngineer" id="c_cs_ut_domain_PlantHireRequest_worksEngineer" itemValue="id" items="${worksengineers}" path="/worksengineers" z="aNMxW4EmtWn/aJX553aeDzjx02w="/>
         <field:display field="status" id="c_cs_ut_domain_PlantHireRequest_status" object="${plantHireRequest}" z="user-managed"/>
+        <field:select field="poStatus" id="c_cs_ut_domain_PlantHireRequest_poStatus" items="${postatuses}" path="postatuses" z="wdSK98d9l+wGltjydw+Jq7CJ8G0="/>
     </form:update>
 </div>

@@ -5,6 +5,7 @@ package cs.ut.domain.bean;
 
 import cs.ut.domain.PlantHireRequest;
 import cs.ut.domain.bean.PHRSelectDTO;
+import java.util.Date;
 import java.util.List;
 
 privileged aspect PHRSelectDTO_Roo_JavaBean {
@@ -23,6 +24,14 @@ privileged aspect PHRSelectDTO_Roo_JavaBean {
     
     public void PHRSelectDTO.setRadio(int radio) {
         this.radio = radio;
+    }
+    
+    public Date PHRSelectDTO.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void PHRSelectDTO.setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
 }

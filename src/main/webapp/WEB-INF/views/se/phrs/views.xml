@@ -23,4 +23,12 @@
 	<definition extends="default" name="se/phrs/cancel">
 		<put-attribute name="body" value="/WEB-INF/views/se/phrs/cancel.jspx" />
 	</definition>
+	<definition extends="default" name="se/phrs/approved">
+		<put-attribute name="body"
+			value="/WEB-INF/views/se/phrs/approved.jspx" />
+	</definition>
+	<definition extends="default" name="se/phrs/extension">
+		<put-attribute name="body"
+			value="/WEB-INF/views/se/phrs/extension.jspx" />
+	</definition>
 </tiles-definitions>
