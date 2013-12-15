@@ -70,12 +70,11 @@ public class InvoiceAutomaticProcessor {
 		}
 
 		if(phr.getInvoice().getIsPaid() == false){
-			//normally there would be some pay method here
 			Invoice inv = Invoice.findInvoice(phr.getInvoice().getId());
 			inv.setStatus(InvoiceStatus.APPROVED);
-			inv.setIsPaid(true);	
+			inv.setIsPaid(true);				//normally there would be some pay method here
 			inv.merge();
-			mailMessage.setSubject("The payment has been made");
+			mailMessage.setSubject("The payment has been made for PO: " + purchaseOrderId);
 			mailMessage.setText("url: " + urlFromFile + ", total cost: " + totalCostFromFile);
 		}else{
 			mailMessage.setSubject("The plant hire has already been paid for");

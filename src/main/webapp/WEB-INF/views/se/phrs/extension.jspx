@@ -16,7 +16,6 @@
 				<td>Site</td>
 				<td>Start date</td>
 				<td>Current end date</td>
-				<td>New end date</td>
 			</tr>
 			<c:forEach var="hireRequests" items="${phrDTO.phrList}">
 				<fmt:formatDate value="${hireRequests.startDate}"
@@ -30,13 +29,15 @@
 					<td>${hireRequests.site.name}</td>
 					<td>${newStartDate}</td>
 					<td>${newEndDate}</td>
-					<td><field:datetime
-						dateTimePattern="${plantHRBean_endr_date_format}" field="endDate"
-						id="end" label="Select date" /></td>
 
 				</tr>
 			</c:forEach>
 		</table>
+		<div>
+		<field:datetime
+						dateTimePattern="${plantHRBean_endr_date_format}" field="endDate"
+						id="end" label="Select new end date" />
+		</div>
 		<input type="submit" name="submit" value="Request extension" />
 	</form:form>
 </div>

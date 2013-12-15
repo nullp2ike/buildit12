@@ -14,5 +14,6 @@
         <field:display field="status" id="s_cs_ut_domain_PlantHireRequest_status" object="${planthirerequest}" z="yiw7Xih5LiptvAop5XvFqOrLQes="/>
         <field:display field="invoice" id="s_cs_ut_domain_PlantHireRequest_invoice" object="${planthirerequest}" z="MSFh6Ip0fGHSmRfSwz6cc5sZr+s="/>
         <field:display field="worksEngineer" id="s_cs_ut_domain_PlantHireRequest_worksEngineer" object="${planthirerequest}" z="54h/18WS0r8wkun0xzovi7mHbM0="/>
+        <field:display field="poStatus" id="s_cs_ut_domain_PlantHireRequest_poStatus" object="${planthirerequest}" z="vxyS+yhgOMZuYFbhYeyF6/EJuqA="/>
     </page:show>
 </div>

@@ -45,3 +45,5 @@ repository jpa --interface ~.repository.UserRepository --entity ~.security.Users
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-10 21:06:03
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-11 15:47:43
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-14 17:54:09
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-14 21:08:42
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-15 12:57:17

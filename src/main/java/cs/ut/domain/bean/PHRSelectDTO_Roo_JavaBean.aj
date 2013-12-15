@@ -26,6 +26,14 @@ privileged aspect PHRSelectDTO_Roo_JavaBean {
         this.radio = radio;
     }
     
+    public String PHRSelectDTO.getSupplierurl() {
+        return this.supplierurl;
+    }
+    
+    public void PHRSelectDTO.setSupplierurl(String supplierurl) {
+        this.supplierurl = supplierurl;
+    }
+    
     public Date PHRSelectDTO.getEndDate() {
         return this.endDate;
     }

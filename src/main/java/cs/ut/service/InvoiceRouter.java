@@ -10,15 +10,19 @@ public class InvoiceRouter {
 	// Comparing invoice's total with its corresponding po's total
 	public String analyzeInvoice(Document invoice)
 			throws XPathExpressionException {
+		System.out.println("Analyze");
 		String destinationChannel = null;
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		xPath.evaluate("//purchaseOrderHRef", invoice);
 		Float total = Float.valueOf(xPath.evaluate("//total", invoice));
 
-		if (total <= 1000)
+		if (total <= 1000){
 			destinationChannel = "MINOR";
-		else
+		}
+		else{
 			destinationChannel = "MAJOR";
+		}
+			
 		return destinationChannel;
 	}
 }

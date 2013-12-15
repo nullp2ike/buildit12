@@ -66,7 +66,7 @@ import org.springframework.web.util.WebUtils;
 public class PHRSEController {
 
 	@Value("${supplierurl}")
-	String supplierUrl;
+	String supplierurl;
 
 	@Value("${webappurl}")
 	String webAppUrl;
@@ -105,7 +105,7 @@ public class PHRSEController {
 		String startDate = formatter.format(plant.getStartDate());
 		String endDate = formatter.format(plant.getEndDate());
 
-		String url = supplierUrl + "/rest/plant/" + "?startDate=" + startDate
+		String url = supplierurl + "/rest/plant/" + "?startDate=" + startDate
 				+ "&endDate=" + endDate;
 
 		HttpEntity<String> requestEntity = new HttpEntity<String>(
@@ -131,7 +131,7 @@ public class PHRSEController {
 	public String createPlantHireRequest(@Valid PlantHireRequestDTO plant,
 			ModelMap modelMap) {
 
-		String plantRequestUrl = supplierUrl + "/rest/plant/"
+		String plantRequestUrl = supplierurl + "/rest/plant/"
 				+ plant.getPlant();
 		RestTemplate template = new RestTemplate();
 
@@ -340,7 +340,7 @@ public class PHRSEController {
 					RestHelper.getHeaders(rentitUser, rentitUserPassword));
 			RestTemplate template = new RestTemplate();
 			ResponseEntity<String> response = template
-					.exchange(supplierUrl + "/rest/pos/" + poId + "/updates",
+					.exchange(supplierurl + "/rest/pos/" + poId + "/updates",
 							HttpMethod.POST, requestEntity,
 							String.class);
 			phr.setStatus(PHRStatus.CANCELLATION_REQUEST_SENT);
@@ -359,7 +359,10 @@ public class PHRSEController {
 	
 	@RequestMapping(value = "approved", method = RequestMethod.GET)
 	public String listApprovedPHR(Model uiModel){
-		uiModel.addAttribute("plantHireRequests", plantHireRequestRepository.findRequestsByPHRStatus(PHRStatus.APPROVED));
+		PHRSelectDTO phrDTO = new PHRSelectDTO();
+		phrDTO.setPhrList(plantHireRequestRepository.findRequestsByPHRStatus(PHRStatus.APPROVED));
+		phrDTO.setSupplierurl(supplierurl);
+		uiModel.addAttribute("phrDTO", phrDTO);
 		return "se/phrs/approved";
 	}
 	
@@ -393,7 +396,7 @@ public class PHRSEController {
 				RestHelper.getHeaders(rentitUser, rentitUserPassword));
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<PurchaseOrderResource> response = template
-				.exchange(supplierUrl + "/rest/pos/" + poId + "/updates",
+				.exchange(supplierurl + "/rest/pos/" + poId + "/updates",
 						HttpMethod.POST, requestEntity,
 						PurchaseOrderResource.class);
 		System.out.println("RESPONSE: " + response);

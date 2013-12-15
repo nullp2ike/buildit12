@@ -8,7 +8,7 @@ import javax.validation.Valid;
 
 import cs.ut.domain.PHRStatus;
 import cs.ut.domain.PlantHireRequest;
-import cs.ut.domain.bean.PlantHireRequestApproveDTO;
+import cs.ut.domain.bean.PHRSelectDTO;
 import cs.ut.domain.rest.PlantHireRequestResource;
 import cs.ut.domain.rest.PurchaseOrderResource;
 import cs.ut.repository.PlantHireRequestRepository;
@@ -50,16 +50,16 @@ public class PHRWEController {
 	public String displayInvoicesThatNeedApproval(ModelMap modelMap) {
 		List<PlantHireRequest> phrList = repository
 				.findRequestsByPHRStatus(PHRStatus.PENDING_APPROVAL);
-		PlantHireRequestApproveDTO phrAproveDTO = new PlantHireRequestApproveDTO();
-		phrAproveDTO.setPhrList(phrList);
-		phrAproveDTO.setSupplierUrl(supplierurl);
-		modelMap.put("phrApproveDTO", phrAproveDTO);
+		PHRSelectDTO phrDTO = new PHRSelectDTO();
+		phrDTO.setPhrList(phrList);
+		phrDTO.setSupplierurl(supplierurl);
+		modelMap.put("phrApproveDTO", phrDTO);
 		return "we/phrs/pending";
 	}
 
 	@RequestMapping(value = "pending", method = RequestMethod.POST)
 	public String acceptOrRejectPO(
-			@Valid PlantHireRequestApproveDTO phrAproveDTO,
+			@Valid PHRSelectDTO phrDTO,
 			HttpServletRequest request, ModelMap modelMap) {
 		String selectedPHR = request.getParameter("radio");
 		String rejectComment = request.getParameter("rejectionReason");
@@ -89,9 +89,9 @@ public class PHRWEController {
 
 		List<PlantHireRequest> phrList = repository
 				.findRequestsByPHRStatus(PHRStatus.PENDING_APPROVAL);
-		phrAproveDTO.setPhrList(phrList);
-		phrAproveDTO.setSupplierUrl(supplierurl);
-		modelMap.put("phrApproveDTO", phrAproveDTO);
+		phrDTO.setPhrList(phrList);
+		phrDTO.setSupplierurl(supplierurl);
+		modelMap.put("phrApproveDTO", phrDTO);
 		return "redirect:/we/phrs/pending";
 	}
 
@@ -112,7 +112,10 @@ public class PHRWEController {
 	
 	@RequestMapping(value = "approved", method = RequestMethod.GET)
 	public String listApprovedPHR(Model uiModel){
-		uiModel.addAttribute("plantHireRequests", plantHireRequestRepository.findRequestsByPHRStatus(PHRStatus.APPROVED));
+		PHRSelectDTO phrDTO = new PHRSelectDTO();
+		phrDTO.setPhrList(plantHireRequestRepository.findRequestsByPHRStatus(PHRStatus.APPROVED));
+		phrDTO.setSupplierurl(supplierurl);
+		uiModel.addAttribute("phrDTO", phrDTO);
 		return "we/phrs/approved";
 	}
 }

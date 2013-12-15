@@ -18,6 +18,8 @@ public class PHRSelectDTO {
 	
 	private int radio;
 	
+	private String supplierurl;
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(style = "S-")
 	private Date endDate;

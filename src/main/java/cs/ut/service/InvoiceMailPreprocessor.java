@@ -20,6 +20,7 @@ public class InvoiceMailPreprocessor {
 	@ServiceActivator
 	public Document process(Message msg) throws MessagingException,
 			IOException, ParserConfigurationException, SAXException {
+		System.out.println("Pre proc");
 		Document invoiceXML = null;
 		Object _content = msg.getContent();
 		if (_content instanceof Multipart) {
