@@ -1,14 +1,10 @@
 package cs.ut.web;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,27 +19,25 @@ import cs.ut.repository.PlantHireRequestRepository;
 @RequestMapping("/invoices/approve/**")
 @Controller
 public class InvoiceApproveController {
-	
-	@Autowired
-	JavaMailSenderImpl sender;
+
 
 	@Autowired
 	PlantHireRequestRepository repository;
 	
-	@Value("${email.rentit}")
-	String rentitEmail;
-	
-	@Value("${email.username}")
-	String builditEmail;
-	
-	@Value("${email.port}")
-	String emailPort;
-	
-	@Value("${email.host}")
-	String emailHost;
-	
-	@Value("${email.password}")
-	String emailPassword;
+//	@Value("${email.rentit}")
+//	String rentitEmail;
+//	
+//	@Value("${email.username}")
+//	String builditEmail;
+//	
+//	@Value("${email.port}")
+//	String emailPort;
+//	
+//	@Value("${email.host}")
+//	String emailHost;
+//	
+//	@Value("${email.password}")
+//	String emailPassword;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String displayInvoicesThatNeedApproval(ModelMap modelMap) {
@@ -65,17 +59,17 @@ public class InvoiceApproveController {
 		inv.setIsPaid(true);			//normally there would be some pay method here
 		inv.merge();
 		
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setFrom(builditEmail);
-		mailMessage.setTo(rentitEmail);
-		mailMessage.setSentDate(new Date());
-		mailMessage.setSubject("The payment has been made for PO: " + inv.getPurchaseOrderId());
-		mailMessage.setText("url: " + inv.getPurchaseOrderHRef() + ", total cost: " + phr.getTotalCost());
-		sender.setPort(Integer.parseInt(emailPort));
-		sender.setHost(emailHost);
-		sender.setPassword(emailPassword);
-		sender.setUsername(builditEmail);
-		sender.send(mailMessage);
+//		SimpleMailMessage mailMessage = new SimpleMailMessage();
+//		mailMessage.setFrom(builditEmail);
+//		mailMessage.setTo(rentitEmail);
+//		mailMessage.setSentDate(new Date());
+//		mailMessage.setSubject("The payment has been made for PO: " + inv.getPurchaseOrderId());
+//		mailMessage.setText("url: " + inv.getPurchaseOrderHRef() + ", total cost: " + phr.getTotalCost());
+//		sender.setPort(Integer.parseInt(emailPort));
+//		sender.setHost(emailHost);
+//		sender.setPassword(emailPassword);
+//		sender.setUsername(builditEmail);
+//		sender.send(mailMessage);
 
 		List<PlantHireRequest> phrList = repository.findRequestsByInvoiceStatus(InvoiceStatus.NEEDS_APPROVAL);
 

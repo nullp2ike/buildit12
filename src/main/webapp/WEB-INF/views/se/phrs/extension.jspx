@@ -24,7 +24,7 @@
 					var="newEndDate" />
 				<tr>
 					<td><form:radiobutton path="radio" value="${hireRequests.id}" /></td>
-					<td>${phrApproveDTO.supplierUrl}/rest/plant/${hireRequests.plantId}</td>
+					<td>${phrDTO.supplierurl}/rest/plant/${hireRequests.plantId}</td>
 					<td>${hireRequests.totalCost}</td>
 					<td>${hireRequests.site.name}</td>
 					<td>${newStartDate}</td>

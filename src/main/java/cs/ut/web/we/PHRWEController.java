@@ -53,7 +53,7 @@ public class PHRWEController {
 		PHRSelectDTO phrDTO = new PHRSelectDTO();
 		phrDTO.setPhrList(phrList);
 		phrDTO.setSupplierurl(supplierurl);
-		modelMap.put("phrApproveDTO", phrDTO);
+		modelMap.put("phrDTO", phrDTO);
 		return "we/phrs/pending";
 	}
 
@@ -91,7 +91,7 @@ public class PHRWEController {
 				.findRequestsByPHRStatus(PHRStatus.PENDING_APPROVAL);
 		phrDTO.setPhrList(phrList);
 		phrDTO.setSupplierurl(supplierurl);
-		modelMap.put("phrApproveDTO", phrDTO);
+		modelMap.put("phrDTO", phrDTO);
 		return "redirect:/we/phrs/pending";
 	}
 

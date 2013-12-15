@@ -7,7 +7,7 @@
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	<form:form method="POST" modelAttribute="phrApproveDTO" action="pending">
+	<form:form method="POST" modelAttribute="phrDTO" action="pending">
 		<table>
 			<tr>
 				<td></td>
@@ -18,14 +18,14 @@
 				<td>End date</td>
 				<td>Site engineer</td>
 			</tr>
-			<c:forEach var="hireRequests" items="${phrApproveDTO.phrList}">
+			<c:forEach var="hireRequests" items="${phrDTO.phrList}">
 				<fmt:formatDate value="${hireRequests.startDate}"
 					pattern="dd-MM-yyyy" var="newStartDate" />
 				<fmt:formatDate value="${hireRequests.endDate}" pattern="dd-MM-yyyy"
 					var="newEndDate" />
 				<tr>
 					<td><form:radiobutton path="radio" value="${hireRequests.id}" /></td>
-					<td>${phrApproveDTO.supplierUrl}/rest/plant/${hireRequests.plantId}</td>
+					<td>${phrDTO.supplierurl}/rest/plant/${hireRequests.plantId}</td>
 					<td>${hireRequests.totalCost}</td>
 					<td>${hireRequests.site.name}</td>
 					<td>${newStartDate}</td>
